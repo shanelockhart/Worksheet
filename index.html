@@ -2,23 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Shane's Custom Wheels & Fitment</title>
-    <meta name="description" content="Internal tool for Shane's sales team. Quick access to wheel and tire fitment data, package deals, and distributor information.">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Fitment Expert | Operators Logic</title>
+    <meta name="description" content="Fitment Expert by Operators Logic: vehicle wheel fitment reference, wheel vendor directory, and an AI fitment assistant.">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563eb'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23fff' stroke-width='2.2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23fff'/%3E%3Cpath d='M16 7v6M16 19v6M7 16h6M19 16h6' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* Fitment Expert by Operators Logic — restrained blue/slate technical theme */
 :root {
-    --black-primary: #0F0F0F;
-    --black-secondary: #1A1A1A;
-    --black-tertiary: #2C2C2C;
-    --black-card: #1F1F1F;
-    --black-hover: #383838;
-    --text-primary: #EAEAEA;
-    --text-secondary: #B0B0B0;
-    --accent-red: #D92525;
-    --accent-red-hover: #F04040;
-    --overlay-dark: rgba(0, 0, 0, 0.65);
-    --spacing-unit: 1rem;
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface-2: #273449;
+    --border: #334155;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #3b82f6;
+    --accent-strong: #2563eb;
+    --accent-strong-hover: #1d4ed8;
+    --accent-text: #60a5fa;
+    --accent-soft: rgba(59, 130, 246, 0.12);
+    --radius: 10px;
+    --nav-h: 64px;
+    --font: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
 }
 
 * {
@@ -28,949 +36,805 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
-    background-color: var(--black-primary);
-    color: var(--text-primary);
-    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 16px;
     line-height: 1.6;
-    font-size: 18px;
-    padding-bottom: 120px; /* Increased for bigger nav */
     min-height: 100vh;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: calc(var(--nav-h) + 1px + env(safe-area-inset-bottom, 0px));
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 2px;
 }
 
 .container {
     width: 92%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--spacing-unit);
 }
 
-/* --- Enhanced Mobile Navigation --- */
+.icon {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* --- Top bar / brand --- */
 .app-nav {
-    display: none;
-    background: linear-gradient(to right, var(--black-primary), var(--black-secondary));
-    padding: var(--spacing-unit) 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     position: sticky;
     top: 0;
     z-index: 1000;
+    background: rgba(15, 23, 42, 0.94);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
 }
 .app-nav .container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    min-height: 60px;
 }
-.nav-logo {
-    font-size: calc(var(--spacing-unit) * 1.6);
-    font-weight: 700;
-    color: var(--text-primary);
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--text);
     text-decoration: none;
 }
-.nav-logo span {
-    color: var(--accent-red);
+.brand-mark {
+    width: 34px;
+    height: 34px;
+    flex: none;
 }
-.nav-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    margin-left: calc(var(--spacing-unit) * 1.2);
-    font-weight: 500;
-    padding-bottom: 0.25rem;
-    transition: color 0.3s ease, border-color 0.3s ease;
-    border-bottom: 2px solid transparent;
-    font-size: calc(var(--spacing-unit) * 1);
-}
-.nav-links a:hover, .nav-links a.active-nav-link {
-    color: var(--text-primary);
-    border-bottom: 2px solid var(--accent-red);
-}
-
-/* Enhanced Mobile Bottom Navigation */
-.mobile-bottom-nav {
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    background-color: var(--black-secondary) !important;
-    box-shadow: 0 -2px 15px rgba(0,0,0,0.4);
-    display: flex !important;
-    justify-content: space-around;
-    padding: 0.8rem 0;
-    z-index: 1000 !important;
-    width: 100% !important;
-}
-
-/* Force mobile nav on smaller screens */
-@media (max-width: 1023px) {
-    .mobile-bottom-nav {
-        display: flex !important;
-        padding: 1.4rem 0.5rem 1.8rem 0.5rem !important; /* Even bigger on mobile */
-    }
-    .mobile-bottom-nav a {
-        min-height: 80px !important; /* Bigger touch targets */
-    }
-    .mobile-bottom-nav a svg {
-        width: 36px !important; /* Even bigger icons on phones */
-        height: 36px !important;
-    }
-    .app-nav {
-        display: none !important;
-    }
-}
-.mobile-bottom-nav a {
-    flex-grow: 1;
-    text-align: center;
-    padding: 0.8rem 0.2rem;
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.75rem;
+.brand-text {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    transition: color 0.2s ease, transform 0.2s ease;
+    line-height: 1.15;
+}
+.brand-product {
+    font-size: 1rem;
+    font-weight: 700;
+}
+.brand-parent {
+    font-size: 0.68rem;
     font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
 }
-.mobile-bottom-nav a svg {
-    width: 28px;
-    height: 28px;
-    margin-bottom: 0.3rem;
-    fill: currentColor;
-}
-.mobile-bottom-nav a.active-nav-link {
-    color: var(--accent-red);
-    transform: translateY(-2px);
-}
-.mobile-bottom-nav a:active {
-    transform: scale(0.95);
-}
-
-/* --- Page Content Wrappers --- */
-.page-content {
+.nav-links {
     display: none;
-    animation: fadeInPage 0.5s ease-out;
 }
-.page-content.active-page {
-    display: block;
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.9rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
 }
-@keyframes fadeInPage {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.nav-links a:hover {
+    color: var(--text);
 }
-
-/* --- Enhanced Page Headers --- */
-.page-header-generic {
-    padding: calc(var(--spacing-unit) * 2.5) 0 calc(var(--spacing-unit) * 2);
-    text-align: center;
-    background-color: var(--black-secondary);
-    border-bottom: 1px solid var(--black-tertiary);
-}
-.page-header-generic h1 {
-    font-size: calc(var(--spacing-unit) * 2);
-    font-weight: 600;
-    margin-bottom: calc(var(--spacing-unit) * 0.8);
-    line-height: 1.2;
-}
-.page-header-generic h1 span { 
-    color: var(--accent-red); 
-}
-.page-header-generic p {
-    font-size: calc(var(--spacing-unit) * 1.1);
-    color: var(--text-secondary);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.5;
+.nav-links a[aria-current="page"] {
+    color: var(--text);
+    border-bottom-color: var(--accent);
 }
 
-/* --- Home Page --- */
-.hero-section {
-    background: var(--overlay-dark);
-    color: var(--text-primary);
-    text-align: center;
-    padding: calc(var(--spacing-unit) * 4) var(--spacing-unit) calc(var(--spacing-unit) * 5);
-    position: relative;
+/* --- Bottom navigation (phones and tablets) --- */
+.mobile-bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.mobile-bottom-nav a {
+    flex: 1;
+    min-height: var(--nav-h);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 0.2rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 500;
 }
-.hero-content { 
-    position: relative; 
-    z-index: 2; 
-    max-width: 600px; 
+.mobile-bottom-nav a svg {
+    width: 24px;
+    height: 24px;
+}
+.mobile-bottom-nav a[aria-current="page"] {
+    color: var(--accent-text);
+}
+
+/* --- Pages --- */
+.page-content {
+    display: none;
+}
+.page-content.active-page {
+    display: block;
+    margin-bottom: 2rem;
+    animation: fadeInPage 0.25s ease-out;
+}
+@keyframes fadeInPage {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.page-header-generic {
+    padding: 2rem 0 1.5rem;
+    text-align: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+.page-header-generic h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+}
+.page-header-generic h1 span {
+    color: var(--accent-text);
+}
+.page-header-generic p {
+    color: var(--text-muted);
+    max-width: 38rem;
+    margin: 0 auto;
+}
+
+/* --- Home --- */
+.hero-section {
+    text-align: center;
+    padding: 3rem 1rem 2.75rem;
+    background: linear-gradient(180deg, #14213d 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+}
+.hero-content {
+    max-width: 40rem;
+    margin: 0 auto;
+}
+.hero-eyebrow {
+    color: var(--accent-text);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
 }
 .hero-title {
-    font-size: calc(var(--spacing-unit) * 2.2);
-    font-weight: 300; 
-    margin-bottom: calc(var(--spacing-unit) * 1.2);
-    letter-spacing: 1px; 
-    line-height: 1.2;
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1rem;
 }
-.hero-title span { 
-    font-weight: 700; 
-    color: var(--accent-red); 
+.hero-title span {
+    color: var(--accent-text);
 }
 .hero-subtitle {
-    font-size: calc(var(--spacing-unit) * 1.1);
-    margin-bottom: calc(var(--spacing-unit) * 2);
-    color: var(--text-secondary); 
-    font-weight: 300;
-    line-height: 1.4;
+    color: var(--text-muted);
+    max-width: 32rem;
+    margin: 0 auto 1.75rem;
 }
 .hero-cta-group {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--spacing-unit) * 1.2);
-    margin-top: calc(var(--spacing-unit) * 1.5);
-    align-items: center; 
+    align-items: center;
+    gap: 0.75rem;
 }
 .hero-cta-button {
-    background-color: var(--accent-red); 
-    color: var(--text-primary);
-    padding: calc(var(--spacing-unit) * 1.1) calc(var(--spacing-unit) * 2.2);
-    text-decoration: none; 
-    border-radius: 6px;
-    font-size: calc(var(--spacing-unit) * 1.1);
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
-    min-width: 250px;
-    min-height: 52px;
+    min-width: 230px;
+    min-height: 48px;
+    padding: 0.7rem 1.5rem;
+    border: 1px solid var(--accent-strong);
+    border-radius: 8px;
+    background: var(--accent-strong);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
-.hero-cta-button:hover { 
-    background-color: var(--accent-red-hover); 
-    transform: translateY(-2px); 
+.hero-cta-button:hover {
+    background: var(--accent-strong-hover);
+    border-color: var(--accent-strong-hover);
 }
 .hero-cta-button-alt {
-    background-color: transparent;
-    border: 2px solid var(--accent-red);
-    color: var(--accent-red);
+    background: transparent;
+    border-color: var(--border);
+    color: var(--text);
 }
 .hero-cta-button-alt:hover {
-    background-color: var(--accent-red);
-    color: var(--text-primary);
+    background: var(--accent-soft);
+    border-color: var(--accent);
 }
 
 .home-section {
-    padding: calc(var(--spacing-unit) * 3) 0;
-    background-color: var(--black-primary);
+    padding: 2.5rem 0;
 }
-.home-section:nth-child(even) { 
-    background-color: var(--black-secondary); 
+.home-section + .home-section {
+    border-top: 1px solid var(--border);
 }
-
 .home-section-title {
     text-align: center;
-    font-size: calc(var(--spacing-unit) * 1.8);
-    font-weight: 300;
-    margin-bottom: calc(var(--spacing-unit) * 0.8); 
-    color: var(--text-primary);
-    letter-spacing: 1px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
 }
-.home-section-title span { 
-    color: var(--accent-red); 
-    font-weight: 600; 
+.home-section-title span {
+    color: var(--accent-text);
 }
 .home-section-subtitle {
-    text-align: center; 
-    font-size: calc(var(--spacing-unit) * 1);
-    color: var(--text-secondary); 
-    max-width: 700px;
-    margin: 0 auto calc(var(--spacing-unit) * 2.5) auto; 
-    line-height: 1.5;
+    text-align: center;
+    color: var(--text-muted);
+    max-width: 44rem;
+    margin: 0 auto 1.75rem;
 }
 
-/* Home Page Quick Links Cards Section */
 .home-cards-container {
     display: grid;
-    grid-template-columns: 1fr; 
-    gap: calc(var(--spacing-unit) * 1.2);
-    margin-top: calc(var(--spacing-unit) * 1.5);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 1.5rem;
 }
 .home-feature-card {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background-color: var(--black-card);
-    padding: calc(var(--spacing-unit) * 1.5);
-    border-radius: 10px;
+    align-items: flex-start;
+    min-height: 130px;
+    padding: 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
     text-decoration: none;
-    color: var(--text-primary);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 4px solid var(--accent-red); 
-    min-height: 140px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
 }
 .home-feature-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    border-color: var(--accent);
+    transform: translateY(-2px);
 }
 .home-card-icon {
-    margin-bottom: calc(var(--spacing-unit) * 1); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.75rem;
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent-text);
 }
 .home-card-icon svg {
-    width: 42px;
-    height: 42px;
-    fill: var(--accent-red);
+    width: 22px;
+    height: 22px;
 }
 .home-feature-card h3 {
-    font-size: calc(var(--spacing-unit) * 1.15);
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: calc(var(--spacing-unit) * 0.4);
     line-height: 1.3;
+    margin-bottom: 0.25rem;
 }
 .home-feature-card p {
-    font-size: calc(var(--spacing-unit) * 0.95);
-    color: var(--text-secondary);
+    font-size: 0.85rem;
+    color: var(--text-muted);
     line-height: 1.4;
 }
 
-/* --- Mobile-First Package Deals Cards --- */
+/* --- Package deals --- */
 .package-deals-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: calc(var(--spacing-unit) * 1);
-    margin-top: calc(var(--spacing-unit) * 1.5);
+    gap: 0.75rem;
 }
-
 .package-deal-card {
-    background-color: var(--black-card);
-    border-radius: 8px;
-    padding: calc(var(--spacing-unit) * 1.2);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    border-left: 4px solid var(--accent-red);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
 }
-
-.package-deal-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-}
-
 .package-deal-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: calc(var(--spacing-unit) * 0.8);
-    padding-bottom: calc(var(--spacing-unit) * 0.5);
-    border-bottom: 1px solid var(--black-tertiary);
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
 }
-
 .package-size {
-    font-size: calc(var(--spacing-unit) * 1.3);
+    font-size: 1.2rem;
     font-weight: 700;
-    color: var(--accent-red);
+    color: var(--accent-text);
 }
-
 .weekly-rate {
-    font-size: calc(var(--spacing-unit) * 0.9);
-    color: var(--text-secondary);
+    font-size: 0.8rem;
+    color: var(--text-muted);
     text-align: right;
 }
-
 .weekly-rate-amount {
     display: block;
-    font-size: calc(var(--spacing-unit) * 1.1);
+    font-size: 1.05rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
 }
-
 .package-purchase {
     text-align: center;
 }
-
 .package-purchase-label {
-    font-size: calc(var(--spacing-unit) * 0.85);
-    color: var(--text-secondary);
-    margin-bottom: calc(var(--spacing-unit) * 0.3);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
 }
-
 .package-purchase-amount {
-    font-size: calc(var(--spacing-unit) * 1.4);
+    font-size: 1.4rem;
     font-weight: 700;
-    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
 }
 
-/* --- Mobile-First Vendor Cards --- */
+/* --- Wheel vendors --- */
 .vendor-cards-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: calc(var(--spacing-unit) * 1);
-    margin-top: calc(var(--spacing-unit) * 1.5);
+    gap: 0.75rem;
 }
-
 .vendor-card {
-    background-color: var(--black-card);
-    border-radius: 8px;
-    padding: calc(var(--spacing-unit) * 1.2);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    border-left: 4px solid var(--accent-red);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
 }
-
-.vendor-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-}
-
 .vendor-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: calc(var(--spacing-unit) * 0.8);
     flex-wrap: wrap;
-    gap: calc(var(--spacing-unit) * 0.5);
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.9rem;
 }
-
 .vendor-name {
-    font-size: calc(var(--spacing-unit) * 1.1);
+    flex: 1 1 12rem;
+    font-size: 1.05rem;
     font-weight: 600;
-    color: var(--text-primary);
-    flex: 1;
-    min-width: 200px;
 }
-
 .vendor-phone {
-    font-size: calc(var(--spacing-unit) * 0.95);
-    font-weight: 500;
-    color: var(--accent-red);
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent-text);
+    font-size: 0.9rem;
+    font-weight: 600;
     text-decoration: none;
-    padding: calc(var(--spacing-unit) * 0.3) calc(var(--spacing-unit) * 0.8);
-    background-color: rgba(217, 37, 37, 0.1);
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
+    transition: border-color 0.2s ease;
 }
-
 .vendor-phone:hover {
-    background-color: rgba(217, 37, 37, 0.2);
+    border-color: var(--accent);
 }
-
 .vendor-brands-label {
-    font-size: calc(var(--spacing-unit) * 0.8);
-    color: var(--text-secondary);
-    margin-bottom: calc(var(--spacing-unit) * 0.4);
+    margin-bottom: 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 500;
+    color: var(--text-muted);
 }
-
 .vendor-brands {
-    font-size: calc(var(--spacing-unit) * 0.9);
-    color: var(--text-primary);
-    line-height: 1.5;
+    font-size: 0.9rem;
+    line-height: 1.55;
     word-break: break-word;
 }
 
-/* --- AI Interface Enhancement --- */
+/* --- AI assistant --- */
+.content-section {
+    padding: 1.75rem 0;
+}
+.ai-intro {
+    margin-bottom: 1rem;
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-align: center;
+}
+.ai-intro h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+.ai-intro p {
+    color: var(--text-muted);
+}
+.ai-intro .ai-note {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+}
 .ai-interface-container {
     width: 100%;
-    height: 80vh;
-    min-height: 600px;
-    background-color: var(--black-card);
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    margin: calc(var(--spacing-unit) * 2) 0;
+    height: 70vh;
+    min-height: 480px;
     overflow: hidden;
-    border: 2px solid var(--black-tertiary);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
 }
-
+@supports (height: 1dvh) {
+    .ai-interface-container {
+        height: 70dvh;
+    }
+}
 .ai-interface-container iframe {
+    display: block;
     width: 100%;
     height: 100%;
-    border: none;
-    border-radius: 10px;
+    border: 0;
 }
 
-.ai-intro {
-    text-align: center;
-    padding: calc(var(--spacing-unit) * 2);
-    background-color: var(--black-secondary);
-    margin-bottom: calc(var(--spacing-unit) * 1);
-    border-radius: 8px;
-}
-
-.ai-intro h2 {
-    font-size: calc(var(--spacing-unit) * 1.4);
-    margin-bottom: calc(var(--spacing-unit) * 0.8);
-    color: var(--accent-red);
-}
-
-.ai-intro p {
-    font-size: calc(var(--spacing-unit) * 1);
-    color: var(--text-secondary);
-    line-height: 1.5;
-}
-
-/* --- Fitment Database --- */
+/* --- Fitment database --- */
 .fitment-search-container {
-    margin: calc(var(--spacing-unit) * 1.5) auto calc(var(--spacing-unit) * 2); 
-    max-width: 500px; 
-    padding: 0 var(--spacing-unit);
+    width: 92%;
+    max-width: 520px;
+    margin: 1.5rem auto 1.25rem;
 }
 .fitment-search-container input[type="text"] {
     width: 100%;
-    padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 1.2);
-    background-color: var(--black-tertiary);
-    border: 2px solid var(--black-card);
+    min-height: 50px;
+    padding: 0.8rem 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 8px;
-    color: var(--text-primary);
-    font-size: calc(var(--spacing-unit) * 1);
-    outline: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    min-height: 52px;
+    color: var(--text);
+    font: inherit;
+    transition: border-color 0.2s ease;
 }
 .fitment-search-container input[type="text"]:focus {
-    border-color: var(--accent-red);
-    box-shadow: 0 4px 15px rgba(217, 37, 37, 0.2);
+    border-color: var(--accent);
+    outline: none;
 }
-.fitment-search-container input[type="text"]::placeholder { 
-    color: var(--text-secondary); 
+.fitment-search-container input[type="text"]::placeholder {
+    color: var(--text-muted);
 }
 
 .manufacturer-cards-container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 1rem;
     display: grid;
-    grid-template-columns: 1fr; 
-    gap: calc(var(--spacing-unit) * 1.2);
-    padding: 0 var(--spacing-unit) var(--spacing-unit);
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
 }
 .manufacturer-card {
-    background-color: var(--black-card);
-    border-radius: 8px;
-    padding: calc(var(--spacing-unit) * 1.4);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-    border-left: 4px solid var(--accent-red);
+    display: block;
+    width: 100%;
+    min-height: 110px;
+    padding: 1.1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    color: var(--text);
+    font: inherit;
+    text-align: left;
     cursor: pointer;
-    min-height: 120px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
 }
 .manufacturer-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    border-color: var(--accent);
+    transform: translateY(-2px);
 }
 .manufacturer-card-title {
-    font-size: calc(var(--spacing-unit) * 1.3);
-    font-weight: 600; 
-    margin-bottom: calc(var(--spacing-unit) * 0.4);
+    font-size: 1.15rem;
+    font-weight: 600;
     line-height: 1.3;
+    margin-bottom: 0.25rem;
 }
 .manufacturer-card-desc {
-    font-size: calc(var(--spacing-unit) * 0.95);
-    color: var(--text-secondary);
-    margin-bottom: calc(var(--spacing-unit) * 0.8);
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
     line-height: 1.4;
 }
 .manufacturer-card-tag {
-    display: inline-block; 
-    background-color: rgba(217, 37, 37, 0.1);
-    color: var(--accent-red); 
-    padding: 0.4rem 1rem;
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
     border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: 500; 
+    background: var(--accent-soft);
+    color: var(--accent-text);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
-.manufacturer-card.hidden-card { 
-    display: none !important; 
+.manufacturer-card.hidden-card {
+    display: none !important;
+}
+.empty-state {
+    width: 92%;
+    max-width: 520px;
+    margin: 1rem auto;
+    text-align: center;
+    color: var(--text-muted);
 }
 
-/* Fitment Detail View */
 .fitment-detail-view {
-    padding: calc(var(--spacing-unit) * 1.5) 0; 
-    background-color: var(--black-primary);
+    padding: 1.5rem 0 1rem;
 }
 .fitment-detail-header {
     display: flex;
     align-items: center;
-    margin-bottom: calc(var(--spacing-unit) * 2);
-    padding: 0 var(--spacing-unit); 
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
 }
 .back-to-list-btn {
-    background: none; 
-    border: none; 
-    color: var(--accent-red);
-    font-size: calc(var(--spacing-unit) * 1.8);
-    padding: calc(var(--spacing-unit) * 0.8);
-    margin-right: calc(var(--spacing-unit) * 0.8); 
-    cursor: pointer;
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
     justify-content: center;
+    flex: none;
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: 1px solid var(--border);
     border-radius: 50%;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    min-width: 48px;
-    min-height: 48px;
+    color: var(--accent-text);
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 .back-to-list-btn:hover {
-    background-color: rgba(217, 37, 37, 0.1);
-    transform: scale(1.1);
+    background: var(--accent-soft);
+    border-color: var(--accent);
 }
 .back-to-list-btn svg {
-    width: 28px;
-    height: 28px;
-    fill: currentColor;
+    width: 24px;
+    height: 24px;
 }
 .fitment-detail-title {
-    font-size: calc(var(--spacing-unit) * 1.6);
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 700;
     line-height: 1.3;
 }
-.fitment-detail-title span { 
-    color: var(--accent-red); 
+.fitment-detail-title span {
+    color: var(--accent-text);
 }
-
-/* --- Mobile-First Fitment Table Cards --- */
 .fitment-table-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: calc(var(--spacing-unit) * 1);
-    padding: 0 var(--spacing-unit);
+    gap: 0.75rem;
 }
-
 .fitment-vehicle-card {
-    background-color: var(--black-card);
-    border-radius: 8px;
-    padding: calc(var(--spacing-unit) * 1.2);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    border-left: 4px solid var(--accent-red);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
 }
-
-.fitment-vehicle-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-}
-
 .fitment-vehicle-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: calc(var(--spacing-unit) * 0.8);
     flex-wrap: wrap;
-    gap: calc(var(--spacing-unit) * 0.5);
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.9rem;
 }
-
 .fitment-vehicle-name {
-    font-size: calc(var(--spacing-unit) * 1.2);
-    font-weight: 600;
-    color: var(--text-primary);
     flex: 1;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
-
 .fitment-vehicle-years {
-    font-size: calc(var(--spacing-unit) * 0.9);
-    color: var(--accent-red);
-    background-color: rgba(217, 37, 37, 0.1);
-    padding: calc(var(--spacing-unit) * 0.2) calc(var(--spacing-unit) * 0.6);
+    padding: 0.15rem 0.6rem;
     border-radius: 4px;
-    font-weight: 500;
+    background: var(--accent-soft);
+    color: var(--accent-text);
+    font-size: 0.8rem;
+    font-weight: 600;
 }
-
 .fitment-specs-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: calc(var(--spacing-unit) * 0.8);
-    margin-bottom: calc(var(--spacing-unit) * 0.8);
+    gap: 0.75rem;
 }
-
 .fitment-spec-item {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
-
-.fitment-spec-label {
-    font-size: calc(var(--spacing-unit) * 0.75);
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 500;
-    margin-bottom: calc(var(--spacing-unit) * 0.2);
-}
-
-.fitment-spec-value {
-    font-size: calc(var(--spacing-unit) * 0.9);
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-.fitment-notes {
-    margin-top: calc(var(--spacing-unit) * 0.8);
-    padding-top: calc(var(--spacing-unit) * 0.8);
-    border-top: 1px solid var(--black-tertiary);
-}
-
+.fitment-spec-label,
 .fitment-notes-label {
-    font-size: calc(var(--spacing-unit) * 0.75);
-    color: var(--text-secondary);
+    margin-bottom: 0.15rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 500;
-    margin-bottom: calc(var(--spacing-unit) * 0.3);
+    color: var(--text-muted);
 }
-
+.fitment-spec-value {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    overflow-wrap: anywhere;
+}
+.fitment-notes {
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--border);
+}
 .fitment-notes-text {
-    font-size: calc(var(--spacing-unit) * 0.85);
-    color: var(--text-primary);
-    line-height: 1.4;
-    font-style: italic;
+    font-size: 0.85rem;
+    line-height: 1.45;
 }
 
-/* --- Service Page --- */
-.content-section { 
-    padding: calc(var(--spacing-unit) * 2) 0;
+/* --- Service info --- */
+.service-note {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
 }
 .service-requirements {
-    background-color: var(--black-card);
-    padding: calc(var(--spacing-unit) * 2);
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
 }
 .service-requirements h2 {
-    font-size: calc(var(--spacing-unit) * 1.5);
-    color: var(--accent-red);
-    margin-bottom: calc(var(--spacing-unit) * 1.2);
-    border-bottom: 2px solid var(--black-tertiary);
-    padding-bottom: calc(var(--spacing-unit) * 0.8);
-}
-.service-requirements ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin-bottom: calc(var(--spacing-unit) * 1.2);
-}
-.service-requirements ul li {
-    margin-bottom: calc(var(--spacing-unit) * 1);
-    font-size: calc(var(--spacing-unit) * 1.05);
-    line-height: 1.6;
-    padding-left: 2em;
-    position: relative;
-}
-.service-requirements ul li::before {
-    content: '•';
-    color: var(--accent-red);
-    font-weight: bold;
-    font-size: calc(var(--spacing-unit) * 1.2);
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-.service-requirements ul ul {
-    list-style-type: none;
-    padding-left: calc(var(--spacing-unit) * 1.5);
-    margin-top: calc(var(--spacing-unit) * 0.8);
-}
-.service-requirements ul ul li::before {
-    content: '-';
-    color: var(--text-secondary);
-}
-.service-requirements strong {
-    color: var(--text-primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 1.3rem;
     font-weight: 600;
 }
-.handwritten-note-header { 
-    font-family: 'Comic Sans MS', 'Chalkduster', 'cursive';
-    color: #FFD700; 
-    font-style: italic;
-    font-size: calc(var(--spacing-unit) * 0.95) !important;
-    margin-top: calc(var(--spacing-unit) * 0.4);
+.service-requirements ul {
+    list-style: none;
+    margin-bottom: 1rem;
 }
-.handwritten-note { 
-    font-family: 'Comic Sans MS', 'Chalkduster', 'cursive';
-    color: #FFD700;
-    font-style: italic;
-    font-size: calc(var(--spacing-unit) * 1.05);
+.service-requirements ul li {
+    position: relative;
+    margin-bottom: 0.9rem;
+    padding-left: 1.4rem;
+    line-height: 1.6;
+}
+.service-requirements ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+.service-requirements ul ul {
+    margin: 0.6rem 0 0;
+}
+.service-requirements ul ul li::before {
+    background: var(--text-muted);
+}
+.service-requirements strong {
+    font-weight: 600;
+    color: #fff;
 }
 .important-note {
-    margin-top: calc(var(--spacing-unit) * 1.5);
-    padding: calc(var(--spacing-unit) * 1.5);
-    background-color: rgba(217, 37, 37, 0.1);
-    border-left: 4px solid var(--accent-red);
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
     border-radius: 6px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-/* Footer */
+/* --- Footer --- */
 footer {
-    background-color: var(--black-tertiary); 
-    color: var(--text-secondary);
-    padding: calc(var(--spacing-unit) * 3) 0; /* Increased padding since no distributor section */
+    margin-top: auto;
+    padding: 1.75rem 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
     text-align: center;
-    font-size: 0.9rem;
-    border-top: 1px solid var(--black-primary);
-    line-height: 1.5;
-    margin-top: calc(var(--spacing-unit) * 2); /* Add some top margin */
+    font-size: 0.85rem;
+    color: var(--text-muted);
 }
-footer strong { 
-    color: var(--text-primary); 
-    font-weight: 500; 
+footer strong {
+    font-weight: 600;
+    color: var(--text);
 }
 
-/* --- Tablet/Medium Screen Adjustments (768px to 1023px) --- */
-@media (min-width: 768px) and (max-width: 1023px) {
-    body {
-        font-size: 17px;
-        padding-bottom: 130px; /* Account for bigger nav */
-    }
-    .hero-title { 
-        font-size: calc(var(--spacing-unit) * 2.8); 
-    }
-    .hero-subtitle { 
-        font-size: calc(var(--spacing-unit) * 1.15); 
-    }
-    .home-cards-container { 
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-        gap: calc(var(--spacing-unit) * 1.3); 
-    }
+/* --- 600px and up --- */
+@media (min-width: 600px) {
     .package-deals-container {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: calc(var(--spacing-unit) * 1.3);
-    }
-    .vendor-cards-container {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: calc(var(--spacing-unit) * 1.3);
-    }
-    .manufacturer-cards-container {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-        gap: calc(var(--spacing-unit) * 1.3);
-    }
-    .fitment-table-container {
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: calc(var(--spacing-unit) * 1.3);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* --- Desktop Overrides (min-width: 1024px) --- */
+/* --- Tablet (768px and up) --- */
+@media (min-width: 768px) {
+    .page-header-generic h1 { font-size: 2rem; }
+    .hero-title { font-size: 2.9rem; }
+    .hero-cta-group { flex-direction: row; justify-content: center; }
+    .home-cards-container { grid-template-columns: repeat(4, 1fr); }
+    .vendor-cards-container { grid-template-columns: repeat(2, 1fr); }
+    .manufacturer-cards-container { grid-template-columns: repeat(2, 1fr); }
+    .fitment-table-container { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- Desktop (1024px and up) --- */
 @media (min-width: 1024px) {
-    body {
-        padding-bottom: 0; 
-        font-size: 16px;
-    }
-    .mobile-bottom-nav {
-        display: none !important; 
-    }
-    .app-nav {
-        display: block !important; 
-    }
-    .nav-links a { 
-        font-size: calc(var(--spacing-unit) * 0.95); 
-        margin-left: calc(var(--spacing-unit) * 1.5); 
-    }
+    body { padding-bottom: 0; }
+    .mobile-bottom-nav { display: none; }
+    .nav-links { display: flex; gap: 0.25rem; }
+    .package-deals-container { grid-template-columns: repeat(3, 1fr); }
+    .manufacturer-cards-container { grid-template-columns: repeat(3, 1fr); }
+    .ai-interface-container { height: 75vh; min-height: 600px; }
+}
 
-    .hero-title { 
-        font-size: calc(var(--spacing-unit) * 3.5); 
-    }
-    .hero-subtitle { 
-        font-size: calc(var(--spacing-unit) * 1.2); 
-    }
-    .hero-cta-group { 
-        flex-direction: row; 
-        justify-content: center; 
-    }
-    .hero-cta-button { 
-        padding: calc(var(--spacing-unit) * 0.9) calc(var(--spacing-unit) * 2.2); 
-        font-size: calc(var(--spacing-unit) * 1.05); 
-        min-width: 220px;
-        min-height: auto;
-    }
-    .hero-cta-button + .hero-cta-button { 
-        margin-left: var(--spacing-unit); 
-        margin-top: 0; 
-    }
-
-    .home-section { 
-        padding: calc(var(--spacing-unit) * 4) 0; 
-    } 
-    .home-section-title { 
-        font-size: calc(var(--spacing-unit) * 2); 
-    } 
-    .home-section-subtitle { 
-        font-size: calc(var(--spacing-unit) * 1); 
-    } 
-    .home-cards-container { 
-        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); 
-        gap: calc(var(--spacing-unit) * 1.5); 
-    }
-    .home-feature-card h3 {
-        font-size: calc(var(--spacing-unit) * 1.2);
-    }
-    .home-feature-card p {
-        font-size: calc(var(--spacing-unit) * 0.9);
-    }
-
-    .package-deals-container {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: calc(var(--spacing-unit) * 1.5);
-    }
-
-    .vendor-cards-container {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: calc(var(--spacing-unit) * 1.5);
-    }
-
-    .page-header-generic h1 { 
-        font-size: calc(var(--spacing-unit) * 2.5); 
-    }
-
-    .manufacturer-cards-container {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-        gap: calc(var(--spacing-unit) * 1.5);
-    }
-    .manufacturer-card { 
-        padding: calc(var(--spacing-unit) * 1.5); 
-    }
-
-    .fitment-table-container {
-        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-        gap: calc(var(--spacing-unit) * 1.5);
-    }
-
-    .service-requirements h2 { 
-        font-size: calc(var(--spacing-unit) * 1.8); 
-    }
-    .service-requirements ul li { 
-        font-size: calc(var(--spacing-unit) * 1); 
-    }
-
-    .ai-interface-container {
-        height: 85vh;
-        min-height: 700px;
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
     }
 }
 </style>
 </head>
 <body>
 
-    <!-- Top Navigation (Desktop) -->
-    <nav class="app-nav">
+    <!-- Top bar -->
+    <nav class="app-nav" aria-label="Primary">
         <div class="container">
-            <a href="#" class="nav-logo" data-page="home-page">Shane's <span>Fitment</span></a>
+            <a href="#/home" class="brand" data-route="home" aria-label="Fitment Expert by Operators Logic, home">
+                <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#2563eb"/><circle cx="16" cy="16" r="9" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="16" cy="16" r="3" fill="#fff"/><path d="M16 7v6M16 19v6M7 16h6M19 16h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                <span class="brand-text">
+                    <span class="brand-product">Fitment Expert</span>
+                    <span class="brand-parent">by Operators Logic</span>
+                </span>
+            </a>
             <div class="nav-links">
-                <a href="#" data-page="home-page" class="active-nav-link">Home</a>
-                <a href="#" data-page="fitment-page">Fitment Database</a>
-                <a href="#" data-page="vendors-page">Wheel Vendors</a>
-                <a href="#" data-page="ai-page">Fitment AI</a>
-                <a href="#" data-page="service-page">Service Info</a>
+                <a href="#/home" data-route="home">Home</a>
+                <a href="#/fitment" data-route="fitment">Fitment Database</a>
+                <a href="#/vendors" data-route="vendors">Wheel Vendors</a>
+                <a href="#/ai" data-route="ai">AI Assistant</a>
+                <a href="#/service" data-route="service">Service Info</a>
             </div>
         </div>
     </nav>
 
-    <!-- Home Page Content -->
+    <!-- Home -->
     <div id="home-page" class="page-content active-page">
         <section class="hero-section">
             <div class="hero-content">
-                <h1 class="hero-title">Perfect Fit, <span>Premium Style</span></h1>
-                <p class="hero-subtitle">Shane's internal sales tool for custom wheels, tire packages, and expert vehicle fitment information.</p>
+                <p class="hero-eyebrow">Operators Logic</p>
+                <h1 class="hero-title">Fitment <span>Expert</span></h1>
+                <p class="hero-subtitle">Wheel and tire fitment reference, wheel vendor contacts, and an AI fitment assistant.</p>
                 <div class="hero-cta-group">
-                    <a href="#" class="hero-cta-button" data-page="fitment-page">Explore Fitment Database</a>
-                    <a href="#" class="hero-cta-button hero-cta-button-alt" data-page="ai-page">Ask Fitment AI</a>
+                    <a href="#/fitment" class="hero-cta-button" data-route="fitment">Explore Fitment Database</a>
+                    <a href="#/ai" class="hero-cta-button hero-cta-button-alt" data-route="ai">Ask the AI Assistant</a>
                 </div>
             </div>
         </section>
@@ -979,33 +843,23 @@ footer strong {
             <div class="container">
                 <h2 class="home-section-title">Quick <span>Access</span></h2>
                 <div class="home-cards-container">
-                    <a href="#" data-page="fitment-page" class="home-feature-card">
-                        <div class="home-card-icon">
-                            <svg viewBox="0 0 24 24"><path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V21h4.5c0-1.71 1.29-3.14 3-3.43V19h3v-1.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V19h3.5v-1.82A2.73 2.73 0 0020.5 11zM11 5H9V3.5c0-.28.22-.5.5-.5s.5.22.5.5V5zm5 0h-2V3.5c0-.28.22-.5.5-.5s.5.22.5.5V5z"/></svg>
-                        </div>
+                    <a href="#/fitment" data-route="fitment" class="home-feature-card">
+                        <div class="home-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg></div>
                         <h3>Fitment Database</h3>
                         <p>Detailed vehicle fitment specs.</p>
                     </a>
-                    <a href="#" data-page="ai-page" class="home-feature-card">
-                        <div class="home-card-icon">
-                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M12 2a2.5 2.5 0 00-2.5 2.5V6H8a1 1 0 000 2h1.5v1H8a1 1 0 000 2h1.5v1H8a1 1 0 000 2h1.5v1.5a2.5 2.5 0 005 0V16H16a1 1 0 000-2h-1.5v-1H16a1 1 0 000-2h-1.5V8H16a1 1 0 000-2h-1.5V4.5A2.5 2.5 0 0012 2zm0 13.5a1 1 0 110-2 1 1 0 010 2zm0-4a1 1 0 110-2 1 1 0 010 2zm0-4a1 1 0 110-2 1 1 0 010 2z"/>
-                            </svg>
-                        </div>
-                        <h3>Fitment Master AI</h3>
+                    <a href="#/ai" data-route="ai" class="home-feature-card">
+                        <div class="home-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></div>
+                        <h3>AI Assistant</h3>
                         <p>Get instant AI-powered fitment advice.</p>
                     </a>
-                    <a href="#" data-page="vendors-page" class="home-feature-card">
-                         <div class="home-card-icon">
-                             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
-                        </div>
+                    <a href="#/vendors" data-route="vendors" class="home-feature-card">
+                        <div class="home-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h12a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2V4z"/><path d="M8 8h6M8 12h6M8 16h4"/></svg></div>
                         <h3>Wheel Vendors</h3>
                         <p>Vendor contacts and brands.</p>
                     </a>
-                     <a href="#" data-page="service-page" class="home-feature-card">
-                         <div class="home-card-icon">
-                             <svg viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17-.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19-.15-.24-.42-.12-.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69-.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61.22l2-3.46c.12-.22-.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
-                        </div>
+                    <a href="#/service" data-route="service" class="home-feature-card">
+                        <div class="home-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9 14l2 2 4-4"/></svg></div>
                         <h3>Service Info</h3>
                         <p>Claim requirements and procedures.</p>
                     </a>
@@ -1101,24 +955,25 @@ footer strong {
         </section>
     </div>
 
-    <!-- Fitment AI Page Content -->
+    <!-- AI Assistant -->
     <div id="ai-page" class="page-content">
         <header class="page-header-generic">
             <div class="container">
-                <h1>Fitment Master <span>AI</span></h1>
+                <h1>Fitment Expert <span>AI Assistant</span></h1>
                 <p>Get instant, expert wheel and tire fitment advice powered by AI</p>
             </div>
         </header>
         <div class="container content-section">
             <div class="ai-intro">
-                <h2>Ask Shane's Fitment Expert AI</h2>
+                <h2>Ask the Fitment Expert Assistant</h2>
                 <p>Get instant answers about wheel fitment, tire sizes, offset recommendations, and compatibility questions. Simply type your question below!</p>
+                <p class="ai-note">Answers are AI-generated. Confirm specifications before ordering.</p>
             </div>
             <div class="ai-interface-container">
-                <iframe 
-                    src="https://embed.pickaxeproject.com/axe?id=Shane_s_AI_Fitment_Specialist_9GY64&mode=embed_gold&host=beta&theme=custom&opacity=100&font_family=Montserrat&font_color=%23EAEAEA&background_color=%23191919&input_background_color=%232C2C2C&input_font_color=%23EAEAEA&button_background_color=%23D92525&button_font_color=%23FFFFFF&chat_bubble_background_color=%231F1F1F&chat_bubble_font_color=%23EAEAEA"
-                    frameborder="0"
-                    style="overflow: hidden; transition: height 0.5s ease;"
+                <iframe
+                    title="Fitment Expert AI Assistant"
+                    loading="lazy"
+                    src="https://embed.pickaxeproject.com/axe?id=Shane_s_AI_Fitment_Specialist_9GY64&mode=embed_gold&host=beta&theme=custom&opacity=100&font_family=Montserrat&font_color=%23E2E8F0&background_color=%231E293B&input_background_color=%23273449&input_font_color=%23E2E8F0&button_background_color=%232563EB&button_font_color=%23FFFFFF&chat_bubble_background_color=%23273449&chat_bubble_font_color=%23E2E8F0"
                     width="100%"
                     height="100%">
                 </iframe>
@@ -1126,7 +981,7 @@ footer strong {
         </div>
     </div>
 
-    <!-- Fitment Page Content -->
+    <!-- Fitment Database -->
     <div id="fitment-page" class="page-content">
         <header class="page-header-generic fitment-page-header">
             <div class="container">
@@ -1135,27 +990,28 @@ footer strong {
             </div>
         </header>
         <div class="fitment-search-container">
-            <input type="text" id="manufacturer-search-input" placeholder="Search Manufacturers (e.g., Ford)...">
+            <input type="text" id="manufacturer-search-input" placeholder="Search Manufacturers (e.g., Ford)..." aria-label="Search manufacturers" autocomplete="off">
         </div>
         <div class="manufacturer-cards-container" id="manufacturer-cards-list">
-            <!-- Manufacturer cards will be dynamically inserted here by JavaScript -->
+            <!-- Manufacturer cards are inserted by JavaScript -->
         </div>
-        <div id="fitment-detail-section-wrapper" class="page-content" style="display: none;"> 
+        <p class="empty-state" id="manufacturer-empty" hidden>No manufacturers match your search.</p>
+        <div id="fitment-detail-section-wrapper" hidden>
             <div class="container fitment-detail-view">
                 <header class="fitment-detail-header">
-                    <button class="back-to-list-btn" id="back-to-mfg-list-btn" aria-label="Back to manufacturer list">
-                        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                    <button type="button" class="back-to-list-btn" id="back-to-mfg-list-btn" aria-label="Back to manufacturer list">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
                     </button>
                     <h2 class="fitment-detail-title" id="fitment-detail-manufacturer-name"><span>Manufacturer</span> Fitment</h2>
                 </header>
                 <div class="fitment-table-container" id="fitment-detail-table-container">
-                    <!-- Fitment cards will be dynamically inserted here -->
+                    <!-- Fitment cards are inserted by JavaScript -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Wheel Vendors Page Content -->
+    <!-- Wheel Vendors -->
     <div id="vendors-page" class="page-content">
         <header class="page-header-generic">
             <div class="container">
@@ -1165,17 +1021,17 @@ footer strong {
         </header>
         <div class="container content-section">
             <div class="vendor-cards-container" id="vendor-cards-container">
-                <!-- Vendor cards will be dynamically inserted here by JavaScript -->
+                <!-- Vendor cards are inserted by JavaScript -->
             </div>
         </div>
     </div>
 
-    <!-- Service Page Content -->
+    <!-- Service Info -->
     <div id="service-page" class="page-content">
         <header class="page-header-generic">
             <div class="container">
                 <h1>BMS <span>Claim Requirements</span></h1>
-                <p class="handwritten-note-header">(BMS Requires: 2 Written Forms, one Payment History). Send Email to Logan/Heather.</p>
+                <p class="service-note">(BMS Requires: 2 Written Forms, one Payment History). Send Email to Logan/Heather.</p>
             </div>
         </header>
         <div class="container content-section">
@@ -1202,38 +1058,23 @@ footer strong {
                         <ul><li>IF WE ARE CLAIMING MORE THAN ONE THEY ALL HAVE TO BE IN A PICTURE TOGETHER</li></ul>
                     </li>
                 </ul>
-                <p class="important-note handwritten-note"><strong>Important: CHECK PAYMENT HISTORY FIRST!</strong></p>
+                <p class="important-note"><strong>Important: CHECK PAYMENT HISTORY FIRST!</strong></p>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Navigation (Mobile) -->
-    <nav class="mobile-bottom-nav">
-        <a href="#" data-page="home-page" class="active-nav-link">
-            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-            Home
-        </a>
-        <a href="#" data-page="fitment-page">
-            <svg viewBox="0 0 24 24"><path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V21h4.5c0-1.71 1.29-3.14 3-3.43V19h3v-1.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V19h3.5v-1.82A2.73 2.73 0 0020.5 11zM11 5H9V3.5c0-.28.22-.5.5-.5s.5.22.5.5V5zm5 0h-2V3.5c0-.28.22-.5.5-.5s.5.22.5.5V5z"/></svg>
-            Fitment
-        </a>
-         <a href="#" data-page="vendors-page">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
-            Vendors
-        </a>
-         <a href="#" data-page="ai-page">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a2.5 2.5 0 00-2.5 2.5V6H8a1 1 0 000 2h1.5v1H8a1 1 0 000 2h1.5v1H8a1 1 0 000 2h1.5v1.5a2.5 2.5 0 005 0V16H16a1 1 0 000-2h-1.5v-1H16a1 1 0 000-2h-1.5V8H16a1 1 0 000-2h-1.5V4.5A2.5 2.5 0 0012 2zm0 13.5a1 1 0 110-2 1 1 0 010 2zm0-4a1 1 0 110-2 1 1 0 010 2zm0-4a1 1 0 110-2 1 1 0 010 2z"/></svg>
-            AI
-        </a>
-        <a href="#" data-page="service-page">
-             <svg viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17-.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19-.15-.24-.42-.12-.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69-.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61.22l2-3.46c.12-.22-.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
-            Service
-        </a>
+    <!-- Bottom navigation (phones and tablets) -->
+    <nav class="mobile-bottom-nav" aria-label="Primary">
+        <a href="#/home" data-route="home"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Home</a>
+        <a href="#/fitment" data-route="fitment"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg>Fitment</a>
+        <a href="#/vendors" data-route="vendors"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h12a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2V4z"/><path d="M8 8h6M8 12h6M8 16h4"/></svg>Vendors</a>
+        <a href="#/ai" data-route="ai"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>Assistant</a>
+        <a href="#/service" data-route="service"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9 14l2 2 4-4"/></svg>Service</a>
     </nav>
 
     <footer>
         <div class="container">
-            <p>© <span id="current-year"></span> Shane's Custom Wheels & Fitment. Internal Sales Tool. <strong>Developed by intelliaipro.com</strong></p>
+            <p>&copy; <span id="current-year"></span> <strong>Operators Logic</strong> &middot; Fitment Expert</p>
         </div>
     </footer>
 
@@ -1316,11 +1157,23 @@ document.addEventListener('DOMContentLoaded', () => {
         { vendor: "Wholesale Wheels", number: "469-289-2300", brands: "LFF, LUX, LUXXX HD, Replica, Venom" }
     ];
 
+
+    const SITE_NAME = 'Fitment Expert | Operators Logic';
+    const routes = {
+        home:    { id: 'home-page',    title: null },
+        fitment: { id: 'fitment-page', title: 'Fitment Database' },
+        vendors: { id: 'vendors-page', title: 'Wheel Vendors' },
+        ai:      { id: 'ai-page',      title: 'AI Assistant' },
+        service: { id: 'service-page', title: 'Service Info' }
+    };
+
     // DOM Elements
     const pages = document.querySelectorAll('.page-content');
-    const navLinks = document.querySelectorAll('.app-nav a[data-page], .mobile-bottom-nav a[data-page], .hero-cta-button[data-page], .home-feature-card[data-page]');
+    const routeLinks = document.querySelectorAll('a[data-route]');
     const manufacturerCardsList = document.getElementById('manufacturer-cards-list');
     const manufacturerSearchInput = document.getElementById('manufacturer-search-input');
+    const manufacturerEmpty = document.getElementById('manufacturer-empty');
+    const fitmentSearchContainer = document.querySelector('.fitment-search-container');
     const fitmentDetailSectionWrapper = document.getElementById('fitment-detail-section-wrapper');
     const fitmentDetailManufacturerName = document.getElementById('fitment-detail-manufacturer-name');
     const fitmentDetailTableContainer = document.getElementById('fitment-detail-table-container');
@@ -1328,71 +1181,59 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentYearSpan = document.getElementById('current-year');
     const vendorCardsContainer = document.getElementById('vendor-cards-container');
 
-    // Functions
-    const setActivePage = (pageId) => {
-        if (!pageId) return;
-
-        pages.forEach(page => {
-            if (page.id === pageId) {
-                page.classList.add('active-page');
+    // Page switching
+    const setActivePage = (routeKey) => {
+        const pageId = routes[routeKey].id;
+        pages.forEach(page => page.classList.toggle('active-page', page.id === pageId));
+        routeLinks.forEach(link => {
+            if (link.dataset.route === routeKey) {
+                link.setAttribute('aria-current', 'page');
             } else {
-                page.classList.remove('active-page');
+                link.removeAttribute('aria-current');
             }
         });
-
-        navLinks.forEach(link => {
-            if (link.dataset.page) { 
-                if (link.dataset.page === pageId) {
-                    link.classList.add('active-nav-link');
-                } else {
-                    link.classList.remove('active-nav-link');
-                }
-            }
-        });
-        window.scrollTo(0, 0);
     };
 
+    // Manufacturer list
     const createManufacturerCard = (mfgKey, mfgData) => {
-        const card = document.createElement('div');
+        const card = document.createElement('button');
+        card.type = 'button';
         card.className = 'manufacturer-card';
         card.dataset.mfgKey = mfgKey;
         card.dataset.searchTerms = mfgData.searchTerms ? mfgData.searchTerms.toLowerCase() : '';
-        
         card.innerHTML = `
             <h3 class="manufacturer-card-title">${mfgData.name || 'N/A'}</h3>
             <p class="manufacturer-card-desc">${mfgData.description || ''}</p>
             <span class="manufacturer-card-tag">${mfgData.tag || ''}</span>
         `;
-        card.addEventListener('click', () => showFitmentDetail(mfgKey));
+        card.addEventListener('click', () => { location.hash = '#/fitment/' + mfgKey; });
         return card;
     };
 
     const populateManufacturerCards = () => {
         if (!manufacturerCardsList) return;
-        manufacturerCardsList.innerHTML = ''; 
+        manufacturerCardsList.innerHTML = '';
         Object.keys(fitmentData).forEach(key => {
-            const card = createManufacturerCard(key, fitmentData[key]);
-            manufacturerCardsList.appendChild(card);
+            manufacturerCardsList.appendChild(createManufacturerCard(key, fitmentData[key]));
         });
     };
 
     const filterManufacturerCards = () => {
         if (!manufacturerSearchInput || !manufacturerCardsList) return;
-        const searchTerm = manufacturerSearchInput.value.toLowerCase();
-        const cards = manufacturerCardsList.querySelectorAll('.manufacturer-card');
-        cards.forEach(card => {
-            const searchTerms = card.dataset.searchTerms || "";
-            if (searchTerms.includes(searchTerm)) {
-                card.classList.remove('hidden-card'); 
-            } else {
-                card.classList.add('hidden-card');
-            }
+        const searchTerm = manufacturerSearchInput.value.trim().toLowerCase();
+        let visible = 0;
+        manufacturerCardsList.querySelectorAll('.manufacturer-card').forEach(card => {
+            const match = (card.dataset.searchTerms || '').includes(searchTerm);
+            card.classList.toggle('hidden-card', !match);
+            if (match) visible++;
         });
+        if (manufacturerEmpty) manufacturerEmpty.hidden = visible > 0;
     };
 
+    // Manufacturer detail
     const createFitmentCards = (vehicles) => {
         if (!vehicles || vehicles.length === 0) return '<p>No vehicle data available.</p>';
-        
+
         return vehicles.map(vehicle => `
             <div class="fitment-vehicle-card">
                 <div class="fitment-vehicle-header">
@@ -1426,84 +1267,80 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
     };
-    
+
     const showFitmentDetail = (mfgKey) => {
         const mfg = fitmentData[mfgKey];
-        if (!mfg || !fitmentDetailSectionWrapper || !fitmentDetailTableContainer || !fitmentDetailManufacturerName) {
-            return;
-        }
-
+        if (!mfg) return false;
         fitmentDetailManufacturerName.innerHTML = `<span>${mfg.name}</span> Fitment`;
         fitmentDetailTableContainer.innerHTML = createFitmentCards(mfg.vehicles);
-        
-        const fitmentPage = document.getElementById('fitment-page');
-        if (fitmentPage) {
-            const fitmentSearchContainer = fitmentPage.querySelector('.fitment-search-container');
-            if(fitmentSearchContainer) fitmentSearchContainer.style.display = 'none';
-        }
-        if(manufacturerCardsList) manufacturerCardsList.style.display = 'none';
-        fitmentDetailSectionWrapper.style.display = 'block';
-        window.scrollTo(0,0);
+        fitmentSearchContainer.hidden = true;
+        manufacturerCardsList.hidden = true;
+        manufacturerEmpty.hidden = true;
+        fitmentDetailSectionWrapper.hidden = false;
+        return true;
     };
 
     const hideFitmentDetail = () => {
-        if (!fitmentDetailSectionWrapper) return;
-        fitmentDetailSectionWrapper.style.display = 'none';
-        
-        const fitmentPage = document.getElementById('fitment-page');
-         if (fitmentPage) {
-            const fitmentSearchContainer = fitmentPage.querySelector('.fitment-search-container');
-            if(fitmentSearchContainer) fitmentSearchContainer.style.display = 'block';
-        }
-        if(manufacturerCardsList) manufacturerCardsList.style.display = 'grid'; 
-        if (manufacturerSearchInput) manufacturerSearchInput.value = ''; 
-        filterManufacturerCards(); 
+        fitmentDetailSectionWrapper.hidden = true;
+        fitmentSearchContainer.hidden = false;
+        manufacturerCardsList.hidden = false;
+        manufacturerSearchInput.value = '';
+        filterManufacturerCards();
     };
 
-    const createVendorCard = (vendor) => {
-        return `
-            <div class="vendor-card">
-                <div class="vendor-header">
-                    <div class="vendor-name">${vendor.vendor}</div>
-                    <a href="tel:${vendor.number.replace(/[^\d]/g, '')}" class="vendor-phone">${vendor.number}</a>
-                </div>
-                <div class="vendor-brands-label">Brands Carried</div>
-                <div class="vendor-brands">${vendor.brands}</div>
-            </div>
-        `;
+    // Wheel vendors
+    const phoneHref = (number) => {
+        // "813-673-8393 ext 115" -> tel:8136738393,115 (comma = dial pause before the extension)
+        const parts = number.split(/\s*ext\.?\s*/i);
+        const digits = parts[0].replace(/[^\d]/g, '');
+        const ext = parts[1] ? parts[1].replace(/[^\d]/g, '') : '';
+        return 'tel:' + digits + (ext ? ',' + ext : '');
     };
+
+    const createVendorCard = (vendor) => `
+        <div class="vendor-card">
+            <div class="vendor-header">
+                <div class="vendor-name">${vendor.vendor}</div>
+                <a href="${phoneHref(vendor.number)}" class="vendor-phone">${vendor.number}</a>
+            </div>
+            <div class="vendor-brands-label">Brands Carried</div>
+            <div class="vendor-brands">${vendor.brands}</div>
+        </div>
+    `;
 
     const populateVendorCards = () => {
         if (!vendorCardsContainer) return;
-        vendorCardsContainer.innerHTML = wheelVendorsData.map(vendor => createVendorCard(vendor)).join('');
+        vendorCardsContainer.innerHTML = wheelVendorsData.map(createVendorCard).join('');
     };
 
-    // Event Listeners
-    navLinks.forEach(link => { 
-        link.addEventListener('click', (e) => {
-            if (link.dataset.page) { 
-                e.preventDefault();
-                const pageId = link.dataset.page;
-                setActivePage(pageId);
-                if (pageId === 'fitment-page') { 
-                    hideFitmentDetail(); 
-                }
-            }
-        });
-    });
+    // Routing: #/home, #/fitment, #/fitment/<manufacturer>, #/vendors, #/ai, #/service
+    const render = () => {
+        const [rawRoute = 'home', sub = ''] = location.hash.replace(/^#\/?/, '').split('/');
+        const routeKey = routes[rawRoute] ? rawRoute : 'home';
+        let title = routes[routeKey].title;
 
-    if (manufacturerSearchInput) {
-        manufacturerSearchInput.addEventListener('input', filterManufacturerCards);
-    }
-    if (backToMfgListBtn) {
-        backToMfgListBtn.addEventListener('click', hideFitmentDetail);
-    }
+        setActivePage(routeKey);
+        if (routeKey === 'fitment') {
+            if (sub && showFitmentDetail(sub)) {
+                title = fitmentData[sub].name + ' Fitment';
+            } else {
+                hideFitmentDetail();
+            }
+        }
+        document.title = title ? title + ' | ' + SITE_NAME : SITE_NAME;
+        window.scrollTo(0, 0);
+    };
+
+    // Event listeners
+    window.addEventListener('hashchange', render);
+    if (manufacturerSearchInput) manufacturerSearchInput.addEventListener('input', filterManufacturerCards);
+    if (backToMfgListBtn) backToMfgListBtn.addEventListener('click', () => { location.hash = '#/fitment'; });
 
     // Initialization
-    if(currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
+    if (currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
     populateManufacturerCards();
     populateVendorCards();
-    setActivePage('home-page');
+    render();
 });
 </script>
 </body>

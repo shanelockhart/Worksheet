@@ -2,772 +2,175 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shane's Fitment Expert AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Fitment Expert Assistant | Operators Logic</title>
+    <meta name="description" content="AI fitment assistant for Fitment Expert by Operators Logic.">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563eb'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23fff' stroke-width='2.2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23fff'/%3E%3Cpath d='M16 7v6M16 19v6M7 16h6M19 16h6' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Global Styles - Mobile First */
+        :root {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --border: #334155;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --accent-text: #60a5fa;
+            --font: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Orbitron', 'Montserrat', Arial, sans-serif;
-        }
-
-        :root {
-            --primary-red: #ff0040;
-            --secondary-red: #cc0033;
-            --accent-orange: #ff6600;
-            --dark-bg: #0a0a0a;
-            --darker-bg: #050505;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --border-glow: rgba(255, 0, 64, 0.6);
-            --text-primary: #ffffff;
-            --text-secondary: #cccccc;
-            --vh: 1vh;
         }
 
         html, body {
             height: 100%;
-            height: calc(var(--vh, 1vh) * 100);
-            overflow: hidden;
-            position: relative;
-            background: var(--dark-bg);
-            color: var(--text-primary);
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
         }
 
-        /* Enhanced Animated Background */
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 0, 64, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 102, 0, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(204, 0, 51, 0.2) 0%, transparent 50%),
-                linear-gradient(135deg, #000000 0%, #1a0000 50%, #000000 100%);
-            animation: backgroundShift 20s ease-in-out infinite;
-        }
-
-        @keyframes backgroundShift {
-            0%, 100% { filter: hue-rotate(0deg); }
-            50% { filter: hue-rotate(15deg); }
-        }
-
-        /* Floating Particles */
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--primary-red);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-            opacity: 0;
-        }
-
-        .particle:nth-child(odd) {
-            background: var(--accent-orange);
-            animation-duration: 20s;
-        }
-
-        .particle:nth-child(3n) {
-            width: 1px;
-            height: 1px;
-            animation-duration: 25s;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) translateX(0px);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) translateX(100px);
-                opacity: 0;
-            }
-        }
-
-        /* Dynamic Grid Lines */
-        .grid-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 0, 64, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 0, 64, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 30s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        /* Scan Lines */
-        .scan-lines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .scan-line {
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--primary-red) 20%, 
-                var(--accent-orange) 50%, 
-                var(--primary-red) 80%, 
-                transparent 100%);
-            animation: scan 8s ease-in-out infinite;
-            opacity: 0;
-        }
-
-        .scan-line:nth-child(1) { animation-delay: 0s; }
-        .scan-line:nth-child(2) { animation-delay: 2s; }
-        .scan-line:nth-child(3) { animation-delay: 4s; }
-
-        @keyframes scan {
-            0%, 10% {
-                top: -2px;
-                opacity: 0;
-                transform: scaleX(0);
-            }
-            20% {
-                opacity: 1;
-                transform: scaleX(1);
-            }
-            80% {
-                opacity: 1;
-                transform: scaleX(1);
-            }
-            90%, 100% {
-                top: 100%;
-                opacity: 0;
-                transform: scaleX(0);
-            }
-        }
-
-        /* Main Container */
-        .container {
+        .app {
             display: flex;
             flex-direction: column;
-            height: 100%;
-            height: calc(var(--vh, 1vh) * 100);
-            position: relative;
-            z-index: 1;
+            height: 100vh;
+            padding-top: env(safe-area-inset-top, 0px);
+        }
+        @supports (height: 1dvh) {
+            .app { height: 100dvh; }
         }
 
-        /* Enhanced Header */
-        .header {
+        /* Header */
+        .topbar {
+            flex: none;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 8px 12px;
-            background: 
-                linear-gradient(135deg, 
-                rgba(255, 0, 64, 0.2) 0%, 
-                rgba(0, 0, 0, 0.8) 50%, 
-                rgba(255, 102, 0, 0.2) 100%);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-glow);
-            box-shadow: 
-                0 0 20px rgba(255, 0, 64, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
+            padding: 10px 16px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
         }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: headerShine 3s ease-in-out infinite;
-        }
-
-        @keyframes headerShine {
-            0% { left: -100%; }
-            50% { left: 100%; }
-            100% { left: 100%; }
-        }
-
-        .logo {
+        .brand {
             display: flex;
             align-items: center;
-            z-index: 2;
+            gap: 10px;
         }
-
-        .logo-icon {
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, var(--primary-red), var(--accent-orange));
-            border-radius: 50%;
+        .brand-mark {
+            width: 32px;
+            height: 32px;
+            flex: none;
+        }
+        .brand-text {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 8px;
-            box-shadow: 
-                0 0 15px var(--primary-red),
-                inset 0 2px 4px rgba(255, 255, 255, 0.2);
-            animation: iconPulse 2s ease-in-out infinite;
-            position: relative;
+            flex-direction: column;
+            line-height: 1.15;
         }
-
-        .logo-icon::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--primary-red), transparent, var(--accent-orange));
-            border-radius: 50%;
-            z-index: -1;
-            animation: iconRotate 4s linear infinite;
-        }
-
-        @keyframes iconPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        @keyframes iconRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .logo-icon svg {
-            width: 16px;
-            height: 16px;
-            fill: #ffffff;
-            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
-        }
-
-        .logo-text {
-            font-size: 14px;
+        .brand-product {
+            font-size: 16px;
             font-weight: 700;
-            letter-spacing: 1px;
+        }
+        .brand-parent {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--primary-red), var(--accent-orange), var(--primary-red));
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: textGlow 3s ease-in-out infinite;
+            color: var(--text-muted);
         }
 
-        @keyframes textGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Bot Header Enhancement */
-        .content {
+        /* Assistant */
+        .assistant {
             flex: 1;
+            min-height: 0;
             display: flex;
             flex-direction: column;
-            position: relative;
-            overflow: hidden;
         }
-
-        .bot-header {
-            padding: 6px 12px;
-            background: 
-                linear-gradient(90deg, 
-                rgba(26, 0, 0, 0.9) 0%, 
-                rgba(255, 0, 64, 0.8) 20%, 
-                rgba(255, 102, 0, 0.8) 80%, 
-                rgba(26, 0, 0, 0.9) 100%);
-            backdrop-filter: blur(5px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-glow);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .bot-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
-            animation: borderPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes borderPulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        .bot-title {
-            display: flex;
-            align-items: center;
-        }
-
-        .bot-icon {
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(135deg, #ffffff, #f0f0f0);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 6px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            animation: botIconSpin 10s linear infinite;
-        }
-
-        @keyframes botIconSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .bot-icon svg {
-            width: 12px;
-            height: 12px;
-            fill: var(--primary-red);
-        }
-
-        .bot-name {
-            font-size: 12px;
+        .assistant-header {
+            flex: none;
+            padding: 8px 16px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
             font-weight: 600;
-            text-shadow: 0 0 10px var(--primary-red);
-            letter-spacing: 0.5px;
         }
-
-        .bot-status {
+        .chat-frame {
+            position: relative;
+            flex: 1;
+            min-height: 0;
+            background: var(--surface);
+        }
+        .chat-status {
+            position: absolute;
+            inset: 0;
             display: flex;
             align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-muted);
         }
-
-        .status-indicator {
-            width: 6px;
-            height: 6px;
-            background-color: #00ff88;
-            border-radius: 50%;
-            margin-right: 4px;
-            position: relative;
-            box-shadow: 0 0 8px #00ff88;
+        .chat-status[hidden] {
+            display: none;
         }
-
-        .status-indicator::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background-color: #00ff88;
-            animation: statusPulse 1.5s infinite;
-        }
-
-        @keyframes statusPulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.8;
-            }
-            70% {
-                transform: scale(2.5);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(3);
-                opacity: 0;
-            }
-        }
-
-        .status-text {
-            font-size: 10px;
-            color: #00ff88;
-            text-shadow: 0 0 5px #00ff88;
-            font-weight: 500;
-        }
-
-        /* Enhanced Chat Container */
-        .chat-container {
-            flex: 1;
-            background: 
-                linear-gradient(135deg, 
-                rgba(15, 15, 15, 0.95) 0%, 
-                rgba(20, 0, 5, 0.9) 50%, 
-                rgba(15, 15, 15, 0.95) 100%);
-            backdrop-filter: blur(10px);
-            position: relative;
-            border-left: 1px solid var(--border-glow);
-            border-right: 1px solid var(--border-glow);
-            box-shadow: 
-                inset 0 0 50px rgba(255, 0, 64, 0.1),
-                0 0 30px rgba(255, 0, 64, 0.2);
-            overflow: hidden;
-            min-height: 0; /* Allow flex shrinking */
-        }
-
-        /* Mobile-specific chat container sizing */
-        @media (max-width: 767px) {
-            .chat-container {
-                min-height: calc(100vh - 140px); /* Ensure minimum height on mobile */
-            }
-            
-            .container {
-                min-height: 100vh;
-                min-height: calc(var(--vh, 1vh) * 100);
-            }
-        }
-
-        .chat-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 30% 20%, rgba(255, 0, 64, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 80%, rgba(255, 102, 0, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 1;
-        }
-
         .pickaxe-container {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
+            inset: 0;
+        }
+        .pickaxe-container > *,
+        .pickaxe-container iframe {
+            width: 100% !important;
+            height: 100% !important;
+            max-width: none !important;
+            max-height: none !important;
+            border: 0;
         }
 
-        /* Enhanced Footer */
+        /* Footer */
         .footer {
-            padding: 4px 8px;
-            background: 
-                linear-gradient(135deg, 
-                rgba(0, 0, 0, 0.9) 0%, 
-                rgba(26, 0, 0, 0.8) 50%, 
-                rgba(0, 0, 0, 0.9) 100%);
-            backdrop-filter: blur(5px);
+            flex: none;
+            padding: 8px 16px calc(8px + env(safe-area-inset-bottom, 0px));
+            background: var(--bg);
+            border-top: 1px solid var(--border);
             text-align: center;
-            border-top: 1px solid var(--border-glow);
-            font-size: 8px;
-            color: var(--text-secondary);
-            position: relative;
+            font-size: 12px;
+            color: var(--text-muted);
         }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
-        }
-
-        .footer-brand {
-            color: var(--primary-red);
+        .footer strong {
             font-weight: 600;
-            text-shadow: 0 0 5px var(--primary-red);
+            color: var(--text);
         }
 
-        /* Enhanced Loading Animation */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: 
-                radial-gradient(circle, rgba(255, 0, 64, 0.1) 0%, rgba(0, 0, 0, 0.95) 70%),
-                linear-gradient(135deg, #000000, #1a0000);
-            z-index: 1000;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        .loading-animation {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-top: 2px solid var(--primary-red);
-            border-right: 2px solid var(--accent-orange);
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
-            box-shadow: 0 0 20px var(--primary-red);
-            position: relative;
-        }
-
-        .spinner::before {
-            content: '';
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            border-radius: 50%;
-            border: 1px solid transparent;
-            border-top: 1px solid rgba(255, 0, 64, 0.5);
-            animation: spin 2s linear infinite reverse;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            font-size: 14px;
-            color: var(--text-primary);
-            text-align: center;
-            text-shadow: 0 0 10px var(--primary-red);
-            animation: textPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes textPulse {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
-        }
-
-        .hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        /* Tablet Styles (768px and up) */
         @media (min-width: 768px) {
-            .header {
-                padding: 12px 20px;
-            }
-
-            .logo-icon {
-                width: 36px;
-                height: 36px;
-            }
-
-            .logo-icon svg {
-                width: 20px;
-                height: 20px;
-            }
-
-            .logo-text {
-                font-size: 18px;
-            }
-
-            .bot-header {
-                padding: 10px 20px;
-            }
-
-            .bot-icon {
-                width: 28px;
-                height: 28px;
-            }
-
-            .bot-icon svg {
-                width: 16px;
-                height: 16px;
-            }
-
-            .bot-name {
-                font-size: 16px;
-            }
-
-            .status-indicator {
-                width: 8px;
-                height: 8px;
-            }
-
-            .status-text {
-                font-size: 12px;
-            }
-
-            .footer {
-                font-size: 10px;
-                padding: 8px 0;
-            }
-
-            .spinner {
-                width: 60px;
-                height: 60px;
-            }
-
-            .loading-text {
-                font-size: 16px;
-            }
-        }
-
-        /* Desktop Styles (1024px and up) */
-        @media (min-width: 1024px) {
-            .header {
-                padding: 15px 30px;
-            }
-
-            .logo-icon {
-                width: 44px;
-                height: 44px;
-            }
-
-            .logo-icon svg {
-                width: 24px;
-                height: 24px;
-            }
-
-            .logo-text {
-                font-size: 22px;
-            }
-
-            .bot-header {
-                padding: 12px 30px;
-            }
-
-            .bot-icon {
-                width: 32px;
-                height: 32px;
-            }
-
-            .bot-icon svg {
-                width: 18px;
-                height: 18px;
-            }
-
-            .bot-name {
-                font-size: 18px;
-            }
-
-            .footer {
-                font-size: 12px;
-                padding: 10px 0;
-            }
-
-            .spinner {
-                width: 70px;
-                height: 70px;
-            }
-
-            .loading-text {
-                font-size: 18px;
-            }
-
-            /* Desktop-only hover effects */
-            .chat-container:hover {
-                box-shadow: 
-                    inset 0 0 50px rgba(255, 0, 64, 0.2),
-                    0 0 50px rgba(255, 0, 64, 0.3);
-                transition: box-shadow 0.3s ease;
-            }
-
-            .logo-icon:hover {
-                transform: scale(1.1) rotate(180deg);
-                transition: transform 0.3s ease;
-            }
-        }
-
-        /* Large Desktop (1440px and up) */
-        @media (min-width: 1440px) {
-            .grid-overlay {
-                background-size: 75px 75px;
-            }
-
-            .particle {
-                width: 3px;
-                height: 3px;
-            }
+            .topbar { padding: 12px 24px; }
+            .assistant-header { padding: 10px 24px; font-size: 15px; }
+            .footer { font-size: 13px; }
         }
     </style>
-    <!-- Enhanced Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Enhanced Loading Animation -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-animation">
-            <div class="spinner"></div>
-            <div class="loading-text">
-                Initializing Shane's Fitment Expert<br>
-                <span style="font-size: 12px; color: var(--accent-orange); font-weight: 500;">Advanced AI Fitment Technology</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Enhanced Background Effects -->
-    <div class="background">
-        <div class="grid-overlay"></div>
-        <div class="particles" id="particles"></div>
-        <div class="scan-lines">
-            <div class="scan-line"></div>
-            <div class="scan-line"></div>
-            <div class="scan-line"></div>
-        </div>
-    </div>
-
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Enhanced Header -->
-        <header class="header">
-            <div class="logo">
-                <div class="logo-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
-                    </svg>
+    <div class="app">
+        <header class="topbar">
+            <div class="brand">
+                <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+                    <rect width="32" height="32" rx="8" fill="#2563eb"/>
+                    <circle cx="16" cy="16" r="9" fill="none" stroke="#fff" stroke-width="2.2"/>
+                    <circle cx="16" cy="16" r="3" fill="#fff"/>
+                    <path d="M16 7v6M16 19v6M7 16h6M19 16h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div class="brand-text">
+                    <span class="brand-product">Fitment Expert</span>
+                    <span class="brand-parent">by Operators Logic</span>
                 </div>
-                <div class="logo-text">Shane's Fitment Expert</div>
             </div>
         </header>
 
-        <!-- Main Content -->
-        <main class="content">
-            <div class="bot-header">
-                <div class="bot-title">
-                    <div class="bot-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm0 3a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/>
-                        </svg>
-                    </div>
-                    <div class="bot-name">Shane's AI Fitment Specialist</div>
-                </div>
-                <div class="bot-status">
-                    <div class="status-indicator"></div>
-                    <span class="status-text">Active</span>
-                </div>
-            </div>
-
-            <div class="chat-container">
+        <main class="assistant">
+            <div class="assistant-header">Fitment Expert AI Assistant</div>
+            <div class="chat-frame">
+                <p class="chat-status" id="chat-status" role="status">Loading assistant&hellip;</p>
                 <div class="pickaxe-container">
                     <!-- Pickaxe Bot Deployment -->
                     <div id="deployment-008cf251-6683-4ad7-a748-9b5de60ee594"></div>
@@ -775,145 +178,27 @@
             </div>
         </main>
 
-        <!-- Enhanced Footer -->
         <footer class="footer">
-            <div class="footer-text">© 2025 <span class="footer-brand">Shane's Fitment Expert</span> • Powered by Advanced AI</div>
+            &copy; <span id="current-year"></span> <strong>Operators Logic</strong> &middot; Fitment Expert
         </footer>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://studio.pickaxe.co/api/embed/bundle.js" defer></script>
+    <script src="https://studio.pickaxe.co/api/embed/bundle.js" defer
+            onerror="var s=document.getElementById('chat-status');s.hidden=false;s.textContent='The assistant could not be loaded. Check your connection and reload the page.';"></script>
     <script>
-        // Enhanced viewport height handling for mobile
-        function setViewportHeight() {
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
+        document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        window.addEventListener('resize', setViewportHeight);
-        window.addEventListener('orientationchange', setViewportHeight);
-        setViewportHeight();
-
-        // Enhanced loading screen with multiple phases
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loadingOverlay').classList.add('hidden');
-            }, 2000);
-        });
-
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = window.innerWidth < 768 ? 15 : 25;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Enhanced chat container interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            
-            const chatContainer = document.querySelector('.chat-container');
-            
-            // Force Pickaxe bot to fill container after it loads
-            const observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    if (mutation.addedNodes.length) {
-                        const pickaxeElements = document.querySelectorAll('#deployment-008cf251-6683-4ad7-a748-9b5de60ee594 > *');
-                        pickaxeElements.forEach(function(el) {
-                            el.style.width = '100%';
-                            el.style.height = '100%';
-                            el.style.maxWidth = 'none';
-                            el.style.maxHeight = 'none';
-                        });
-                        
-                        const iframes = document.querySelectorAll('.pickaxe-container iframe');
-                        iframes.forEach(function(iframe) {
-                            iframe.style.width = '100%';
-                            iframe.style.height = '100%';
-                            iframe.style.minHeight = '400px'; // Minimum height for mobile
-                        });
-                    }
-                });
-            });
-            
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
-            
-            // Mobile-friendly touch interactions
-            chatContainer.addEventListener('touchstart', function(e) {
-                this.style.boxShadow = `
-                    inset 0 0 50px rgba(255, 0, 64, 0.15),
-                    0 0 40px rgba(255, 0, 64, 0.25)
-                `;
-            });
-            
-            chatContainer.addEventListener('touchend', function() {
-                this.style.boxShadow = `
-                    inset 0 0 50px rgba(255, 0, 64, 0.1),
-                    0 0 30px rgba(255, 0, 64, 0.2)
-                `;
-            });
-            
-            // Desktop hover effects
-            if (window.innerWidth > 1024) {
-                chatContainer.addEventListener('mousemove', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const x = (e.clientX - rect.left) / rect.width;
-                    const y = (e.clientY - rect.top) / rect.height;
-                    
-                    this.style.background = `
-                        radial-gradient(circle at ${x * 100}% ${y * 100}%, 
-                        rgba(255, 0, 64, 0.2) 0%, 
-                        rgba(15, 15, 15, 0.95) 50%),
-                        linear-gradient(135deg, 
-                        rgba(15, 15, 15, 0.95) 0%, 
-                        rgba(20, 0, 5, 0.9) 50%, 
-                        rgba(15, 15, 15, 0.95) 100%)
-                    `;
-                });
-                
-                chatContainer.addEventListener('mouseleave', function() {
-                    this.style.background = `
-                        linear-gradient(135deg, 
-                        rgba(15, 15, 15, 0.95) 0%, 
-                        rgba(20, 0, 5, 0.9) 50%, 
-                        rgba(15, 15, 15, 0.95) 100%)
-                    `;
-                });
-            }
-        });
-
-        // Performance optimization for mobile
-        function optimizeForMobile() {
-            if (window.innerWidth < 768) {
-                // Reduce animation intensity on mobile
-                document.documentElement.style.setProperty('--animation-speed', '0.5');
-                
-                // Disable some heavy effects on older mobile devices
-                if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
-                    const gridOverlay = document.querySelector('.grid-overlay');
-                    if (gridOverlay) gridOverlay.style.display = 'none';
+        // Hide the loading note as soon as the Pickaxe embed renders something
+        (function () {
+            var deployment = document.getElementById('deployment-008cf251-6683-4ad7-a748-9b5de60ee594');
+            var status = document.getElementById('chat-status');
+            new MutationObserver(function (_, observer) {
+                if (deployment.childNodes.length) {
+                    status.hidden = true;
+                    observer.disconnect();
                 }
-            }
-        }
-
-        optimizeForMobile();
-        window.addEventListener('resize', optimizeForMobile);
-
-        // Enhanced error handling
-        window.addEventListener('error', function(e) {
-            console.warn('Shane\'s Fitment Expert: Non-critical error handled gracefully');
-        });
+            }).observe(deployment, { childList: true });
+        })();
     </script>
 </body>
 </html>

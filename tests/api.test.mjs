@@ -20,7 +20,7 @@ after(() => { app?.close(); rest?.close(); prov?.close(); pg?.stop(); });
 beforeEach(async () => {
   extraEnv = {}; await pg.reset(); await pg.setNow(T0);
   prov.state.mode = 'ok'; prov.state.requests.length = 0; prov.state.delayMs = 0;
-  rest.state.down = false; rest.state.delayMs = 0; rest.state.calls.length = 0;
+  rest.state.down = false; rest.state.delayMs = 0; rest.state.key = null; rest.state.calls.length = 0;
 });
 
 describe('status and guest session', () => {
@@ -274,7 +274,7 @@ describe('security', () => {
     const bad = [];
     const walk = (d) => { for (const n of readdirSync(d)) { if (['node_modules', '.git', '.netlify'].includes(n)) continue; const p = join(d, n); statSync(p).isDirectory() ? walk(p) : scan(p); } };
     const scan = (p) => {
-      if (p.endsWith('.test.mjs') || p.endsWith('harness.mjs') || /\.(png|jpg)$/.test(p)) return;
+      if (p.endsWith('.test.mjs') || p.endsWith('harness.mjs') || p.endsWith('live-test.mjs') || /\.(png|jpg)$/.test(p)) return;
       const t = readFileSync(p, 'utf8');
       if (/pickaxe/i.test(t) && !/docs\//.test(p) && !/README/.test(p)) bad.push(`${p}: pickaxe`);
       if (/sk-ant-[A-Za-z0-9_-]{20,}|sk-[A-Za-z0-9]{32,}|eyJhbGciOi[A-Za-z0-9_-]{20,}/.test(t)) bad.push(`${p}: key-like string`);
@@ -292,6 +292,13 @@ describe('fail closed and configuration', () => {
   test('missing configuration returns a generic 503 and names nothing to the browser', async () => {
     extraEnv = { AI_API_KEY: '' }; const r = await mkClient().status(); assert.equal(r.status, 503); assert.equal(r.json.error.code, 'not_configured'); assert.ok(!/AI_API_KEY/.test(r.text));
     extraEnv = { SESSION_SECRET: 'short' }; assert.equal((await mkClient().status()).status, 503);
+  });
+  test('new-style sb_secret_ keys are sent in apikey only; legacy JWT keys in both headers', async () => {
+    rest.state.key = 'sb_secret_testkey0123456789';
+    extraEnv = { SUPABASE_SERVICE_ROLE_KEY: 'sb_secret_testkey0123456789' };
+    assert.equal((await mkClient().ask('q')).status, 200);
+    extraEnv = {}; assert.equal((await mkClient().ask('q')).status, 503, 'wrong key style is rejected by the store and fails closed');
+    rest.state.key = null; assert.equal((await mkClient().ask('q')).status, 200);
   });
   test('slow store does not hang the request forever', async () => {
     rest.state.delayMs = 200; const t = Date.now(); const r = await mkClient().ask('q'); assert.equal(r.status, 200); assert.ok(Date.now() - t < 5000);

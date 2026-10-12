@@ -68,7 +68,7 @@ const lit = (v, t) => {
 };
 
 export function startRest(pg) {
-  const state = { down: false, calls: [], authUsers: {}, delayMs: 0 };
+  const state = { down: false, calls: [], authUsers: {}, delayMs: 0, key: null };
   const server = createServer(async (req, res) => {
     let body = '';
     for await (const c of req) body += c;
@@ -82,7 +82,9 @@ export function startRest(pg) {
     }
     const m = req.url.match(/^\/rest\/v1\/rpc\/(\w+)$/);
     if (!m || !SIG[m[1]]) return send(404, {});
-    if (req.headers.apikey !== SERVICE_KEY || req.headers.authorization !== `Bearer ${SERVICE_KEY}`) return send(401, { message: 'bad key' });
+    const key = state.key || SERVICE_KEY;
+    const bearerOk = key.startsWith('sb_') ? req.headers.authorization === undefined : req.headers.authorization === `Bearer ${key}`; // new-style keys must NOT be sent as Bearer
+    if (req.headers.apikey !== key || !bearerOk) return send(401, { message: 'bad key' });
     try {
       const a = JSON.parse(body);
       const call = SIG[m[1]].map(([n, t]) => `${n} := ${lit(a[n], t)}`).join(', ');

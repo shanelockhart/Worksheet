@@ -6,3 +6,6 @@ node_modules/
 *.log
 tests/node_modules/
 tests/.out/
+smoke-report.json
+live-out/
+.live-profile/

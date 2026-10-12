@@ -13,7 +13,7 @@ tests/                 API, rate-limit and browser tests
 docs/CHAT_SETUP.md     setup, env vars, limits, costs, operations
 ```
 
-Setup and operations: **[docs/CHAT_SETUP.md](docs/CHAT_SETUP.md)**.
+Setup and operations: **[docs/CHAT_SETUP.md](docs/CHAT_SETUP.md)**. Private deploy and live-test walkthrough: **[docs/DEPLOY_PRIVATE.md](docs/DEPLOY_PRIVATE.md)**.
 
 Run the tests (needs Node 22, PostgreSQL 16 binaries, and Playwright with Chromium):
 `npm test` for API + rate-limit tests, `node --test tests/ui.test.mjs` for the browser tests.

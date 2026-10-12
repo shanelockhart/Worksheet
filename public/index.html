@@ -527,7 +527,7 @@ body.kbd-open #ai-page .content-section { padding-top: 0.25rem; }
 .msg.err { align-self: flex-start; background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.45); border-bottom-left-radius: 4px; }
 .msg.err button { margin-top: 0.5rem; }
 .tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 0.05rem 0.45rem; border-radius: 6px; margin-right: 0.4rem; vertical-align: 1px; }
-.tag-db { background: rgba(34,197,94,.15); color: #86efac; border: 1px solid rgba(34,197,94,.4); }
+.tag-db { background: rgba(148,163,184,.14); color: #cbd5e1; border: 1px solid rgba(148,163,184,.45); }
 .tag-unv { background: rgba(245,158,11,.14); color: #fcd34d; border: 1px solid rgba(245,158,11,.4); }
 .tag-gen { background: var(--accent-soft); color: var(--accent-text); border: 1px solid rgba(96,165,250,.4); }
 .msg .trunc { display: block; margin-top: 0.5rem; font-size: 0.78rem; color: var(--text-muted); }
@@ -1032,7 +1032,7 @@ footer strong {
         <header class="page-header-generic">
             <div class="container">
                 <h1>Fitment Expert <span>AI Assistant</span></h1>
-                <p>Ask about wheel and tire fitment. Answers show what is verified and what is not.</p>
+                <p>Ask about wheel and tire fitment. Every spec is labeled by source. Nothing here is independently verified.</p>
             </div>
         </header>
         <div class="container content-section">
@@ -1062,7 +1062,7 @@ footer strong {
                     <div class="chat-meta"><span id="chat-hint">Enter to send, Shift+Enter for a new line</span><span class="chat-count" id="chat-count">0 / 600</span></div>
                 </form>
             </section>
-            <p class="chat-disclaimer">AI-generated. Not a guarantee of fit, price or availability. Confirm specifications with the shop before ordering.</p>
+            <p class="chat-disclaimer">AI-generated. Database values have no recorded source and are not independently verified. Not a guarantee of fit, price or availability. Confirm with the owner's manual or wheel maker and the shop before ordering.</p>
         </div>
     </div>
 
@@ -1071,7 +1071,7 @@ footer strong {
         <header class="page-header-generic fitment-page-header">
             <div class="container">
                 <h1>Vehicle <span>Fitment</span> Database</h1>
-                <p>Quick reference for sales. Select a manufacturer.</p>
+                <p>Quick reference for sales. Select a manufacturer. Values are unsourced reference data, not independently verified; confirm before ordering.</p>
             </div>
         </header>
         <div class="fitment-search-container">
@@ -1443,8 +1443,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---------- rendering ----------
     var TAGS = [
-        [/^From our database:\s*/i, 'tag-db', 'Database'],
-        [/^Unverified:\s*/i, 'tag-unv', 'Unverified'],
+        [/^From our database(?:\s*\(unsourced\))?:\s*/i, 'tag-db', 'Database \u00b7 unsourced'],
+        [/^Unverified(?:\s+archive)?:\s*/i, 'tag-unv', 'Archive \u00b7 unverified'],
         [/^General guidance:\s*/i, 'tag-gen', 'General']
     ];
     function lineInto(el, text) {

@@ -96,13 +96,17 @@ export function startRest(pg) {
 
 // ---------- Mock AI provider ----------
 export function startProvider() {
-  const state = { mode: 'ok', requests: [], reply: 'From our database: lug pattern 6x139.7.', delayMs: 0, tokens: [1200, 80] };
+  const state = { mode: 'ok', requests: [], reply: 'From our database (unsourced): lug pattern 6x139.7.', delayMs: 0, tokens: [1200, 80] };
   const server = createServer(async (req, res) => {
     let body = '';
     for await (const c of req) body += c;
     state.requests.push({ url: req.url, headers: req.headers, body: JSON.parse(body || '{}') });
     const send = (code, obj) => { res.writeHead(code, { 'content-type': 'application/json' }); res.end(JSON.stringify(obj)); };
     if (state.mode === 'hang') return; // never answer
+    if (state.mode === 'stall_body') { // send status + headers + a partial body, then go silent
+      res.writeHead(200, { 'content-type': 'application/json' }); res.write('{"content":[{"type":"te'); return;
+    }
+    if (state.mode === 'stall_headers_only') { res.writeHead(200, { 'content-type': 'application/json', 'transfer-encoding': 'chunked' }); res.flushHeaders(); return; }
     if (state.delayMs) await new Promise((r) => setTimeout(r, state.delayMs));
     if (state.mode === '429') return send(429, { error: { message: 'secret provider detail rate limit' } });
     if (state.mode === '500') return send(500, { error: { message: 'secret provider detail internal' } });
@@ -156,7 +160,7 @@ export class Client {
     if (origin) h.origin = origin;
     if (cookie && this.cookie) h.cookie = this.cookie;
     if (body !== undefined) h['content-type'] = 'application/json';
-    const res = await fetch(this.base + path, { method, headers: h, body: body === undefined ? undefined : JSON.stringify(body) });
+    const res = await fetch(this.base + path, { method, headers: h, body: body === undefined ? undefined : JSON.stringify(body), signal: AbortSignal.timeout(10000) });
     const sc = res.headers.getSetCookie?.() || [];
     for (const c of sc) this.cookie = c.split(';')[0];
     this.lastSetCookie = sc;

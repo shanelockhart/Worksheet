@@ -7,19 +7,32 @@ export class ProviderError extends Error {
 
 const mapStatus = (s) => (s === 429 || s === 529 || s === 503 ? 'busy' : s === 401 || s === 403 ? 'auth' : s === 400 || s === 404 || s === 422 ? 'bad_request' : s >= 500 ? 'server' : 'server');
 
+// One deadline covers the whole exchange: connecting, headers AND reading the body.
+// (A provider that sends headers and then stalls must not hold the request, and its reservation, open.)
 async function post(url, headers, body, timeoutMs) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), timeoutMs);
-  let res;
   try {
-    res = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json', ...headers }, body: JSON.stringify(body), signal: ctrl.signal });
-  } catch (e) {
-    throw new ProviderError(e.name === 'AbortError' ? 'timeout' : 'network', e.name);
+    let res;
+    try {
+      res = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json', ...headers }, body: JSON.stringify(body), signal: ctrl.signal });
+    } catch (e) {
+      throw new ProviderError(e.name === 'AbortError' ? 'timeout' : 'network', e.name);
+    }
+    if (!res.ok) {
+      res.body?.cancel().catch(() => {});
+      throw new ProviderError(mapStatus(res.status), `HTTP ${res.status}`);
+    }
+    let text;
+    try {
+      text = await res.text();
+    } catch (e) {
+      throw new ProviderError(ctrl.signal.aborted ? 'timeout' : 'network', 'body read');
+    }
+    try { return JSON.parse(text); } catch { throw new ProviderError('empty', 'invalid JSON'); }
   } finally {
     clearTimeout(timer);
   }
-  if (!res.ok) throw new ProviderError(mapStatus(res.status), `HTTP ${res.status}`);
-  try { return await res.json(); } catch { throw new ProviderError('empty', 'invalid JSON'); }
 }
 
 async function anthropic({ cfg, system, messages }) {

@@ -36,7 +36,7 @@ before(async () => {
   browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell' });
 });
 after(async () => { await browser?.close(); site?.close(); rest?.close(); prov?.close(); pg?.stop(); });
-beforeEach(async () => { extraEnv = {}; await pg.reset(); await pg.setNow(null); prov.state.mode = 'ok'; prov.state.requests.length = 0; prov.state.delayMs = 0; prov.state.reply = 'From our database: lug pattern 6x139.7, center bore 78.1mm.\n\nUnverified: offset may differ by trim.\n\n- Confirm year and trim\n- Check brake clearance'; });
+beforeEach(async () => { extraEnv = {}; await pg.reset(); await pg.setNow(null); prov.state.mode = 'ok'; prov.state.requests.length = 0; prov.state.delayMs = 0; prov.state.reply = 'From our database (unsourced): lug pattern 6x139.7, center bore 78.1mm.\n\nUnverified archive: offset may differ by trim.\n\n- Confirm year and trim\n- Check brake clearance'; });
 
 const VIEWS = { phone: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 }, desktop: { viewport: { width: 1280, height: 800 } } };
 async function open(view, { clock = false } = {}) {
@@ -66,7 +66,7 @@ for (const view of ['phone', 'desktop']) {
     test('ask, labeled answer, count drops, survives reload', async () => {
       const { ctx, page } = await open(view);
       await page.fill('#chat-input', '2019 Silverado 1500 lug pattern?'); await page.click('#chat-send');
-      await page.waitForSelector('.msg.bot .tag-db');
+      await page.waitForSelector('.msg.bot .tag-db'); assert.equal(await page.locator('.msg.bot .tag-db').innerText(), 'DATABASE \u00b7 UNSOURCED'); assert.ok(!/verified/i.test((await page.locator('.msg.bot .tag-db').innerText()).replace(/unverified/i,'')), 'database badge never says verified');
       assert.equal(await page.locator('.msg.bot .tag-unv').count(), 1);
       assert.equal(await page.locator('.msg.bot li').count(), 2);
       assert.equal(await allow(page), '4 of 5 questions left');

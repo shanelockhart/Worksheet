@@ -115,6 +115,15 @@ describe('failed provider requests do not consume the allowance', () => {
     extraEnv = { AI_TIMEOUT_MS: '1000' }; const c = mkClient(); prov.state.mode = 'hang';
     const r = await c.ask('q'); assert.equal(r.status, 502); assert.equal(r.json.error.code, 'provider_timeout'); assert.equal(r.json.limit.remaining, 5);
   });
+  for (const mode of ['stall_body', 'stall_headers_only']) {
+    test(`provider sends headers then stalls (${mode}): total deadline applies, question refunded`, async () => {
+      extraEnv = { AI_TIMEOUT_MS: '1000' }; const c = mkClient(); prov.state.mode = mode;
+      const t = Date.now(); const r = await c.ask('q'); const took = Date.now() - t;
+      assert.equal(r.status, 502); assert.equal(r.json.error.code, 'provider_timeout'); assert.equal(r.json.limit.remaining, 5);
+      assert.ok(took < 2500, `took ${took} ms, deadline is 1000 ms`);
+      assert.equal(await pg.run(`select count(*) from fx_usage where scope in ('session','ip','global')`), '0', 'reservation released');
+    });
+  }
   test('truncated replies are flagged', async () => {
     prov.state.mode = 'truncated'; const r = await mkClient().ask('q'); assert.equal(r.status, 200); assert.equal(r.json.truncated, true);
   });
@@ -222,7 +231,7 @@ describe('input, context and cost controls', () => {
 describe('system prompt and knowledge', () => {
   test('carries the instructions, evidence labels, database and archive; excludes internal store procedures', async () => {
     await mkClient().ask('q'); const sys = prov.state.requests[0].body.system;
-    for (const s of ['From our database:', 'Unverified:', 'General guidance:', 'Never invent', 'Collect the vehicle first', 'Silverado 1500', 'UNVERIFIED ARCHIVE', 'WHEEL VENDOR DIRECTORY', 'Wheel Pros']) assert.ok(sys.includes(s), s);
+    for (const s of ['From our database (unsourced):', 'Unverified archive:', 'General guidance:', 'NEVER call any value "verified"', 'Never invent', 'Collect the vehicle first', 'Silverado 1500', 'UNVERIFIED ARCHIVE', 'WHEEL VENDOR DIRECTORY', 'Wheel Pros']) assert.ok(sys.includes(s), s);
     for (const s of ['BMS', 'Rental Purchase', 'Guarantee Form', '800-903-0014', '904-739-1920']) assert.ok(!sys.includes(s), `must not include ${s}`);
     assert.ok(sys.length < 60000, `system prompt ${sys.length} chars`);
   });

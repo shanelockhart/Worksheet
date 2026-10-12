@@ -70,8 +70,8 @@ Built from files in this repo by `scripts/sync-knowledge.mjs` (runs on every Net
 
 | Tier | Source | How the assistant labels it |
 |---|---|---|
-| Database | `fitmentData` in `public/index.html` (30 vehicles) | "From our database:" |
-| Unverified archive | `knowledge/fitment-history.json`: records recovered from git history (60 extra vehicles; 4 vehicles whose old records disagree on a value) | "Unverified:" |
+| Database | `fitmentData` in `public/index.html` (30 vehicles). **No record has a cited source; none is independently verified** | "From our database (unsourced):", grey "Database · unsourced" badge |
+| Unverified archive | `knowledge/fitment-history.json`: records recovered from git history (60 extra vehicles; 4 vehicles whose old records disagree on a value) | "Unverified archive:", amber badge |
 | General | `knowledge/glossary.md` formulas and definitions | "General guidance:" |
 | Vendor directory | `wheelVendorsData` (names and brands only, no phone numbers) | distributor directory, not inventory |
 

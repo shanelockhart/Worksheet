@@ -462,45 +462,117 @@ input:focus-visible {
 .content-section {
     padding: 1.75rem 0;
 }
-.ai-intro {
-    margin-bottom: 1rem;
-    padding: 1.25rem;
+/* --- AI chat --- */
+body.kbd-open .mobile-bottom-nav { display: none; }
+body.kbd-open { padding-bottom: 0; }
+body.kbd-open .chat-card { min-height: 0; }
+body.kbd-open .chat-meta { display: none; }
+body.kbd-open #ai-page .content-section { padding-top: 0.25rem; }
+.chat-card {
+    --chat-h: 72vh;
+    scroll-margin-top: calc(var(--nav-h) + 0.5rem);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    height: var(--chat-h);
+    min-height: 460px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    text-align: center;
-}
-.ai-intro h2 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-.ai-intro p {
-    color: var(--text-muted);
-}
-.ai-intro .ai-note {
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-}
-.ai-interface-container {
-    width: 100%;
-    height: 70vh;
-    min-height: 480px;
     overflow: hidden;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
 }
-@supports (height: 1dvh) {
-    .ai-interface-container {
-        height: 70dvh;
-    }
+@supports (height: 1dvh) { .chat-card { --chat-h: 72dvh; } }
+.chat-top {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
 }
-.ai-interface-container iframe {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: 0;
+.chat-title { font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.chat-title .icon { width: 18px; height: 18px; color: var(--accent-text); flex: none; }
+.chat-allowance { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
+.chat-dots { display: inline-flex; gap: 4px; }
+.chat-dots i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--accent); background: transparent; display: block; }
+.chat-dots i.on { background: var(--accent); }
+.chat-newbtn {
+    flex: none; background: transparent; color: var(--text-muted); border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.3rem 0.65rem; font: inherit; font-size: 0.75rem; cursor: pointer; min-height: 32px;
+}
+.chat-newbtn:hover { color: var(--text); border-color: var(--accent); }
+.chat-log {
+    flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+    padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; scroll-behavior: auto;
+}
+.chat-empty { margin: auto; max-width: 560px; text-align: center; padding: 0.5rem; }
+.chat-empty h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.4rem; }
+.chat-empty p { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 0.9rem; }
+.chat-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+.chat-chip {
+    background: var(--accent-soft); color: var(--accent-text); border: 1px solid var(--border);
+    border-radius: 999px; padding: 0.5rem 0.9rem; font: inherit; font-size: 0.82rem; cursor: pointer; min-height: 40px; text-align: left;
+}
+.chat-chip:hover { border-color: var(--accent); }
+.msg { max-width: 88%; padding: 0.65rem 0.9rem; border-radius: 14px; font-size: 0.92rem; line-height: 1.5; overflow-wrap: anywhere; }
+.msg p + p, .msg p + ul, .msg ul + p { margin-top: 0.55rem; }
+.msg ul { padding-left: 1.15rem; }
+.msg li + li { margin-top: 0.2rem; }
+.msg.user { align-self: flex-end; background: var(--accent-strong); color: #fff; border-bottom-right-radius: 4px; white-space: pre-wrap; }
+.msg.bot, .msg.pending { align-self: flex-start; background: var(--surface-2); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+.msg.err { align-self: flex-start; background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.45); border-bottom-left-radius: 4px; }
+.msg.err button { margin-top: 0.5rem; }
+.tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 0.05rem 0.45rem; border-radius: 6px; margin-right: 0.4rem; vertical-align: 1px; }
+.tag-db { background: rgba(34,197,94,.15); color: #86efac; border: 1px solid rgba(34,197,94,.4); }
+.tag-unv { background: rgba(245,158,11,.14); color: #fcd34d; border: 1px solid rgba(245,158,11,.4); }
+.tag-gen { background: var(--accent-soft); color: var(--accent-text); border: 1px solid rgba(96,165,250,.4); }
+.msg .trunc { display: block; margin-top: 0.5rem; font-size: 0.78rem; color: var(--text-muted); }
+.typing { display: inline-flex; gap: 5px; align-items: center; height: 1.2em; }
+.typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--text-muted); animation: fxdot 1.2s infinite ease-in-out; }
+.typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes fxdot { 0%, 80%, 100% { opacity: .25; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+.chat-notice {
+    flex: none; margin: 0 1rem 0.5rem; padding: 0.55rem 0.8rem; border-radius: 8px; font-size: 0.83rem;
+    background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.45); color: var(--text);
+}
+.chat-notice[hidden] { display: none; }
+.chat-notice strong { font-weight: 600; }
+.chat-form { flex: none; padding: 0.65rem 1rem calc(0.65rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--border); background: var(--surface); }
+.chat-row { display: flex; gap: 0.5rem; align-items: flex-end; }
+.chat-input {
+    flex: 1; min-width: 0; resize: none; max-height: 9.5rem; min-height: 48px; padding: 0.7rem 0.9rem;
+    font: inherit; font-size: 16px; line-height: 1.4; /* 16px prevents iOS zoom-on-focus */
+    color: var(--text); background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px;
+}
+.chat-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+.chat-input:disabled { opacity: .6; }
+.chat-send {
+    flex: none; min-width: 48px; min-height: 48px; padding: 0 1rem; border: 0; border-radius: 10px; cursor: pointer;
+    background: var(--accent-strong); color: #fff; font: inherit; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+}
+.chat-send:hover:not(:disabled) { background: var(--accent-strong-hover); }
+.chat-send:disabled { opacity: .5; cursor: not-allowed; }
+.chat-send .icon { width: 18px; height: 18px; }
+.chat-meta { display: flex; justify-content: space-between; gap: 0.75rem; margin-top: 0.4rem; font-size: 0.72rem; color: var(--text-muted); }
+.chat-count.over { color: #fca5a5; }
+.chat-retry { background: var(--accent-strong); color: #fff; border: 0; border-radius: 8px; padding: 0.45rem 0.9rem; font: inherit; font-size: 0.82rem; font-weight: 600; cursor: pointer; min-height: 36px; }
+.chat-disclaimer { max-width: 860px; margin: 0.75rem auto 0; font-size: 0.78rem; color: var(--text-muted); text-align: center; }
+@media (max-width: 600px) {
+    #ai-page .page-header-generic { display: none; }
+    #ai-page .content-section { padding-top: 0.75rem; padding-bottom: 0; }
+    .chat-card { --chat-h: calc(100vh - var(--nav-h) * 2 - 1.5rem - env(safe-area-inset-bottom, 0px)); border-radius: 8px; min-height: 380px; }
+    @supports (height: 1dvh) { .chat-card { --chat-h: calc(100dvh - var(--nav-h) * 2 - 1.5rem - env(safe-area-inset-bottom, 0px)); } }
+    .chat-disclaimer { margin-bottom: 1rem; }
+    .chat-top { flex-wrap: wrap; padding: 0.5rem 0.75rem; }
+    .chat-log { padding: 0.75rem; }
+    .msg { max-width: 94%; }
+    .chat-form { padding-left: 0.75rem; padding-right: 0.75rem; }
+    .chat-notice { margin-left: 0.75rem; margin-right: 0.75rem; }
+    .chat-send span { display: none; }
 }
 
 /* --- Fitment database --- */
@@ -791,7 +863,7 @@ footer strong {
     .nav-links { display: flex; gap: 0.25rem; }
     .package-deals-container { grid-template-columns: repeat(3, 1fr); }
     .manufacturer-cards-container { grid-template-columns: repeat(3, 1fr); }
-    .ai-interface-container { height: 75vh; min-height: 600px; }
+    .chat-card { --chat-h: 74vh; min-height: 560px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -960,24 +1032,37 @@ footer strong {
         <header class="page-header-generic">
             <div class="container">
                 <h1>Fitment Expert <span>AI Assistant</span></h1>
-                <p>Get instant, expert wheel and tire fitment advice powered by AI</p>
+                <p>Ask about wheel and tire fitment. Answers show what is verified and what is not.</p>
             </div>
         </header>
         <div class="container content-section">
-            <div class="ai-intro">
-                <h2>Ask the Fitment Expert Assistant</h2>
-                <p>Get instant answers about wheel fitment, tire sizes, offset recommendations, and compatibility questions. Simply type your question below!</p>
-                <p class="ai-note">Answers are AI-generated. Confirm specifications before ordering.</p>
-            </div>
-            <div class="ai-interface-container">
-                <iframe
-                    title="Fitment Expert AI Assistant"
-                    loading="lazy"
-                    src="https://embed.pickaxeproject.com/axe?id=Shane_s_AI_Fitment_Specialist_9GY64&mode=embed_gold&host=beta&theme=custom&opacity=100&font_family=Montserrat&font_color=%23E2E8F0&background_color=%231E293B&input_background_color=%23273449&input_font_color=%23E2E8F0&button_background_color=%232563EB&button_font_color=%23FFFFFF&chat_bubble_background_color=%23273449&chat_bubble_font_color=%23E2E8F0"
-                    width="100%"
-                    height="100%">
-                </iframe>
-            </div>
+            <section class="chat-card" id="chat-card" aria-label="Fitment Expert AI Assistant">
+                <div class="chat-top">
+                    <div class="chat-title"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z"/></svg><span>Fitment Expert Assistant</span></div>
+                    <div class="chat-allowance" id="chat-allowance" aria-live="polite"><span class="chat-dots" id="chat-dots" aria-hidden="true"></span><span id="chat-allowance-text">Checking&hellip;</span></div>
+                    <button type="button" class="chat-newbtn" id="chat-new" hidden>New chat</button>
+                </div>
+                <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-label="Conversation">
+                    <div class="chat-empty" id="chat-empty">
+                        <h3>What are you fitting?</h3>
+                        <p>Start with the year, make, model and trim. Add your current wheel or tire size if you know it.</p>
+                        <div class="chat-chips" id="chat-chips">
+                            <button type="button" class="chat-chip">What bolt pattern and center bore does a 2019 Silverado 1500 use?</button>
+                            <button type="button" class="chat-chip">Compare 265/70R17 with 285/70R17</button>
+                            <button type="button" class="chat-chip">What do I need to know before going wider on a Tacoma?</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-notice" id="chat-notice" role="status" hidden></div>
+                <form class="chat-form" id="chat-form" autocomplete="off">
+                    <div class="chat-row">
+                        <textarea class="chat-input" id="chat-input" rows="1" aria-label="Your question" placeholder="Year, make, model, trim, and your question" enterkeyhint="send"></textarea>
+                        <button type="submit" class="chat-send" id="chat-send" aria-label="Send question"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg><span>Send</span></button>
+                    </div>
+                    <div class="chat-meta"><span id="chat-hint">Enter to send, Shift+Enter for a new line</span><span class="chat-count" id="chat-count">0 / 600</span></div>
+                </form>
+            </section>
+            <p class="chat-disclaimer">AI-generated. Not a guarantee of fit, price or availability. Confirm specifications with the shop before ordering.</p>
         </div>
     </div>
 
@@ -1343,5 +1428,204 @@ document.addEventListener('DOMContentLoaded', () => {
     render();
 });
 </script>
+<script>
+// Fitment Expert chat. Talks only to this site's /api endpoints; no keys or provider details live in the browser.
+(function () {
+    'use strict';
+    var $ = function (id) { return document.getElementById(id); };
+    var card = $('chat-card'); if (!card) return;
+    var log = $('chat-log'), emptyEl = $('chat-empty'), form = $('chat-form'), input = $('chat-input'), send = $('chat-send');
+    var notice = $('chat-notice'), dots = $('chat-dots'), allowText = $('chat-allowance-text'), countEl = $('chat-count'), newBtn = $('chat-new');
+    var STORE_KEY = 'fx_chat_v1';
+    var maxChars = 600, limit = 5, remaining = null, nextAt = null, busy = false, blocked = false, timer = null, history = [], statusLoaded = false;
+
+    function store(op, k, v) { try { if (op === 'get') return window.sessionStorage.getItem(k); if (op === 'set') window.sessionStorage.setItem(k, v); else window.sessionStorage.removeItem(k); } catch (e) { return null; } }
+
+    // ---------- rendering ----------
+    var TAGS = [
+        [/^From our database:\s*/i, 'tag-db', 'Database'],
+        [/^Unverified:\s*/i, 'tag-unv', 'Unverified'],
+        [/^General guidance:\s*/i, 'tag-gen', 'General']
+    ];
+    function lineInto(el, text) {
+        for (var i = 0; i < TAGS.length; i++) {
+            var m = text.match(TAGS[i][0]);
+            if (m) { var t = document.createElement('span'); t.className = 'tag ' + TAGS[i][1]; t.textContent = TAGS[i][2]; el.appendChild(t); text = text.slice(m[0].length); break; }
+        }
+        el.appendChild(document.createTextNode(text));
+    }
+    function renderBot(el, text) {
+        var blocks = text.replace(/\*\*/g, '').replace(/^#+\s*/gm, '').split(/\n{2,}/);
+        blocks.forEach(function (b) {
+            var lines = b.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+            if (!lines.length) return;
+            var bullets = lines.filter(function (l) { return /^[-*•]\s+/.test(l); });
+            if (bullets.length === lines.length) {
+                var ul = document.createElement('ul');
+                lines.forEach(function (l) { var li = document.createElement('li'); lineInto(li, l.replace(/^[-*•]\s+/, '')); ul.appendChild(li); });
+                el.appendChild(ul);
+            } else {
+                lines.forEach(function (l) { var isB = /^[-*•]\s+/.test(l); var p = document.createElement('p'); lineInto(p, isB ? '• ' + l.replace(/^[-*•]\s+/, '') : l); el.appendChild(p); });
+            }
+        });
+    }
+    function scrollDown() { log.scrollTop = log.scrollHeight; }
+    function hideEmpty() { if (emptyEl && emptyEl.parentNode) emptyEl.parentNode.removeChild(emptyEl); newBtn.hidden = false; }
+    function addMsg(kind, text, opts) {
+        hideEmpty();
+        var el = document.createElement('div'); el.className = 'msg ' + kind;
+        if (kind === 'bot') { renderBot(el, text); if (opts && opts.truncated) { var n = document.createElement('span'); n.className = 'trunc'; n.textContent = 'This answer was cut short. Ask a follow-up to continue.'; el.appendChild(n); } }
+        else el.textContent = text;
+        log.appendChild(el); scrollDown(); return el;
+    }
+    function typingBubble() {
+        hideEmpty();
+        var el = document.createElement('div'); el.className = 'msg pending'; el.setAttribute('aria-label', 'Assistant is typing');
+        var t = document.createElement('span'); t.className = 'typing'; t.innerHTML = '<i></i><i></i><i></i>'; el.appendChild(t);
+        log.appendChild(el); scrollDown(); return el;
+    }
+
+    // ---------- allowance ----------
+    function fmtTime(iso) { var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
+    function fmtWait(ms) {
+        var s = Math.max(0, Math.ceil(ms / 1000)), m = Math.floor(s / 60), h = Math.floor(m / 60);
+        if (h) return h + ' h ' + (m % 60) + ' min';
+        return m ? m + ' min ' + (s % 60) + ' s' : s + ' s';
+    }
+    function drawDots() {
+        dots.textContent = '';
+        for (var i = 0; i < limit; i++) { var d = document.createElement('i'); if (remaining !== null && i < remaining) d.className = 'on'; dots.appendChild(d); }
+    }
+    function setNotice(html) { if (!html) { notice.hidden = true; notice.textContent = ''; return; } notice.hidden = false; notice.textContent = ''; notice.appendChild(html); }
+    function noticeText(strong, rest) { var f = document.createDocumentFragment(); var s = document.createElement('strong'); s.textContent = strong; f.appendChild(s); f.appendChild(document.createTextNode(rest ? ' ' + rest : '')); return f; }
+
+    function applyLimit(l) {
+        if (!l) return;
+        limit = l.limit || limit; remaining = l.remaining; nextAt = l.next_at ? Date.parse(l.next_at) : null;
+        if (l.daily_cap_reached) blocked = 'daily'; else if (blocked === 'daily') blocked = false;
+        drawDots(); tick();
+    }
+    function tick() {
+        clearTimeout(timer);
+        if (blocked === 'down') { allowText.textContent = 'Unavailable'; return; }
+        if (remaining === null) return;
+        if (remaining > 0) {
+            allowText.textContent = remaining + ' of ' + limit + ' question' + (limit === 1 ? '' : 's') + ' left';
+            if (!blocked || blocked === 'limit' || blocked === 'daily') { blocked = false; setNotice(null); }
+            refreshControls(); return;
+        }
+        if (nextAt) {
+            var ms = nextAt - Date.now();
+            if (ms <= 0) { loadStatus(); return; }
+            allowText.textContent = 'No questions left';
+            if (blocked !== 'daily') blocked = 'limit';
+            var msg = blocked === 'daily'
+                ? noticeText('The assistant has reached its daily limit.', 'It opens again at ' + fmtTime(nextAt) + ' (in ' + fmtWait(ms) + ').')
+                : noticeText('You have used all ' + limit + ' questions for this hour.', 'The next one is available at ' + fmtTime(nextAt) + ' (in ' + fmtWait(ms) + ').');
+            setNotice(msg); refreshControls();
+            timer = setTimeout(tick, ms > 60000 ? 1000 : 1000);
+        } else { allowText.textContent = 'No questions left'; refreshControls(); }
+    }
+    function refreshControls() {
+        var off = busy || blocked === 'limit' || blocked === 'daily' || blocked === 'down';
+        input.disabled = blocked === 'down' || blocked === 'limit' || blocked === 'daily';
+        send.disabled = off || !input.value.trim() || input.value.length > maxChars;
+    }
+
+    function loadStatus() {
+        return fetch('/api/status', { credentials: 'same-origin', headers: { accept: 'application/json' } })
+            .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { r: r, j: j }; }); })
+            .then(function (x) {
+                statusLoaded = true;
+                if (x.r.ok && x.j.ok) { maxChars = x.j.input_max_chars || maxChars; input.disabled = false; if (blocked === 'down') blocked = false; applyLimit(x.j); updateCount(); return; }
+                if (x.r.status === 429 && x.j.error) { allowText.textContent = 'Busy'; blocked = 'down'; setNotice(noticeText(x.j.error.message, x.j.error.retry_at ? 'Try again after ' + fmtTime(x.j.error.retry_at) + '.' : '')); refreshControls(); return; }
+                down('The assistant is not available right now. Please try again later.');
+            })
+            .catch(function () { down('Cannot reach the assistant. Check your connection, then reload this page.'); });
+    }
+    function down(msg) { blocked = 'down'; remaining = null; dots.textContent = ''; allowText.textContent = 'Unavailable'; setNotice(noticeText(msg)); refreshControls(); }
+
+    // ---------- sending ----------
+    function persist() { store('set', STORE_KEY, JSON.stringify(history.slice(-30))); }
+    function ask(text, retryEl) {
+        if (busy || blocked === 'limit' || blocked === 'daily' || blocked === 'down') return;
+        text = text.trim(); if (!text || text.length > maxChars) return;
+        busy = true; refreshControls();
+        if (retryEl && retryEl.parentNode) retryEl.parentNode.removeChild(retryEl); else addMsg('user', text);
+        var wait = typingBubble();
+        var payload = history.concat([{ role: 'user', content: text }]).slice(-12);
+        var ctl = new AbortController(), to = setTimeout(function () { ctl.abort(); }, 45000);
+        fetch('/api/chat', { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ messages: payload }), signal: ctl.signal })
+            .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { r: r, j: j }; }); })
+            .then(function (x) {
+                clearTimeout(to); wait.remove();
+                if (x.r.ok && x.j.ok) {
+                    history.push({ role: 'user', content: text }, { role: 'assistant', content: x.j.reply }); persist();
+                    addMsg('bot', x.j.reply, { truncated: x.j.truncated }); applyLimit(x.j.limit); return;
+                }
+                var err = x.j.error || {}; if (x.j.limit) applyLimit(x.j.limit);
+                if (x.r.status === 429) { addErr(err.message || 'You have reached a limit.', null); if (!x.j.limit) { remaining = 0; nextAt = err.retry_at ? Date.parse(err.retry_at) : null; blocked = err.code === 'daily_cap' ? 'daily' : 'limit'; tick(); } return; }
+                if (x.r.status === 400) { addErr(err.message || 'That question could not be sent.', null); return; }
+                if (x.r.status === 403 || x.r.status === 401) { addErr('Your session expired. Reload the page and try again.', null); return; }
+                addErr(err.message || 'Something went wrong. Your question was not counted.', text);
+            })
+            .catch(function (e) {
+                clearTimeout(to); wait.remove();
+                addErr(e && e.name === 'AbortError' ? 'The assistant took too long to answer. Your question was not counted.' : 'Cannot reach the assistant. Check your connection. If it did go through, it will show in the count above.', text);
+                loadStatus();
+            })
+            .then(function () { busy = false; refreshControls(); scrollDown(); });
+    }
+    function addErr(message, retryText) {
+        var el = document.createElement('div'); el.className = 'msg err'; el.setAttribute('role', 'alert');
+        var p = document.createElement('p'); p.textContent = message; el.appendChild(p);
+        if (retryText) { var b = document.createElement('button'); b.type = 'button'; b.className = 'chat-retry'; b.textContent = 'Try again'; b.addEventListener('click', function () { ask(retryText, el); }); el.appendChild(b); }
+        log.appendChild(el); scrollDown();
+    }
+
+    // ---------- input ----------
+    function updateCount() {
+        countEl.textContent = input.value.length + ' / ' + maxChars; countEl.classList.toggle('over', input.value.length > maxChars);
+        input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 152) + 'px'; refreshControls();
+    }
+    input.addEventListener('input', updateCount);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); form.requestSubmit(); } });
+    form.addEventListener('submit', function (e) { e.preventDefault(); var t = input.value; if (!t.trim()) return; input.value = ''; updateCount(); ask(t); });
+    document.getElementById('chat-chips').addEventListener('click', function (e) { var c = e.target.closest('.chat-chip'); if (c && !busy) { ask(c.textContent); } });
+    newBtn.addEventListener('click', function () {
+        history = []; store('del', STORE_KEY); log.textContent = ''; log.appendChild(emptyEl); newBtn.hidden = true; input.focus();
+    });
+
+    // Mobile keyboards: keep the chat card inside the visible area.
+    if (window.visualViewport) {
+        var fit = function () {
+            var vv = window.visualViewport;
+            var kbd = document.activeElement === input && (vv.height < 560 || vv.height < window.innerHeight - 120);
+            document.body.classList.toggle('kbd-open', kbd);
+            if (kbd) {
+                card.style.removeProperty('--chat-h');
+                card.scrollIntoView({ block: 'start' });          // honours scroll-margin-top, so the card sits just under the header
+                var top = Math.max(card.getBoundingClientRect().top, 0);
+                card.style.setProperty('--chat-h', Math.max(240, vv.offsetTop + vv.height - top - 8) + 'px');
+                scrollDown();
+            } else card.style.removeProperty('--chat-h');
+        };
+        window.visualViewport.addEventListener('resize', fit);
+        input.addEventListener('focus', function () { setTimeout(fit, 120); setTimeout(fit, 400); });
+        input.addEventListener('blur', function () { card.style.removeProperty('--chat-h'); document.body.classList.remove('kbd-open'); });
+        window.addEventListener('resize', fit);
+    }
+
+    // ---------- start ----------
+    try {
+        var saved = JSON.parse(store('get', STORE_KEY) || '[]');
+        if (Array.isArray(saved) && saved.length) { history = saved; saved.forEach(function (m) { addMsg(m.role === 'user' ? 'user' : 'bot', m.content); }); }
+    } catch (e) { /* ignore */ }
+    function onRoute() { if (/^#\/?ai/.test(location.hash) && (!statusLoaded || blocked === 'down')) { loadStatus(); } else if (/^#\/?ai/.test(location.hash)) { tick(); } }
+    window.addEventListener('hashchange', onRoute); onRoute();
+    drawDots(); updateCount();
+})();
+</script>
+
 </body>
 </html>

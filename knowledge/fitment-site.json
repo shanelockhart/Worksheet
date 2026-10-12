@@ -1,0 +1,327 @@
+{
+ "source": "public/index.html fitmentData",
+ "vehicles": [
+  {
+   "group": "Chevrolet",
+   "vehicle": "Silverado 1500",
+   "years": "Recent",
+   "lugPattern": "6x139.7",
+   "centerBore": "78.1mm",
+   "thread": "M14x1.5",
+   "offset": "+18 to +31",
+   "notes": "Verify year for changes."
+  },
+  {
+   "group": "Chevrolet",
+   "vehicle": "Tahoe",
+   "years": "Recent",
+   "lugPattern": "6x139.7",
+   "centerBore": "78.1mm",
+   "thread": "M14x1.5",
+   "offset": "+20 to +30",
+   "notes": ""
+  },
+  {
+   "group": "Chevrolet",
+   "vehicle": "Equinox",
+   "years": "2018+",
+   "lugPattern": "5x115",
+   "centerBore": "70.3mm",
+   "thread": "M12x1.5",
+   "offset": "+40 to +50",
+   "notes": "Older 5x120/5x105"
+  },
+  {
+   "group": "Chevrolet",
+   "vehicle": "Suburban",
+   "years": "Recent",
+   "lugPattern": "6x139.7",
+   "centerBore": "78.1mm",
+   "thread": "M14x1.5",
+   "offset": "+20 to +30",
+   "notes": ""
+  },
+  {
+   "group": "Chevrolet",
+   "vehicle": "Colorado",
+   "years": "2015+",
+   "lugPattern": "6x120",
+   "centerBore": "66.9mm",
+   "thread": "M12x1.5",
+   "offset": "+28 to +33",
+   "notes": ""
+  },
+  {
+   "group": "Ford",
+   "vehicle": "F-150",
+   "years": "2015+",
+   "lugPattern": "6x135",
+   "centerBore": "87.1mm",
+   "thread": "M14x1.5",
+   "offset": "+30 to +44",
+   "notes": "Raptor different"
+  },
+  {
+   "group": "Ford",
+   "vehicle": "Explorer",
+   "years": "2020+",
+   "lugPattern": "5x114.3",
+   "centerBore": "67.1mm",
+   "thread": "M14x1.5",
+   "offset": "+40 to +50",
+   "notes": "Older can be 5x114.3 w/ 70.5mm CB"
+  },
+  {
+   "group": "Ford",
+   "vehicle": "Mustang",
+   "years": "2015+",
+   "lugPattern": "5x114.3",
+   "centerBore": "70.5mm",
+   "thread": "M14x1.5",
+   "offset": "Varies",
+   "notes": "Check specific model"
+  },
+  {
+   "group": "Ford",
+   "vehicle": "Expedition",
+   "years": "2018+",
+   "lugPattern": "6x135",
+   "centerBore": "87.1mm",
+   "thread": "M14x1.5",
+   "offset": "+30 to +44",
+   "notes": ""
+  },
+  {
+   "group": "Ford",
+   "vehicle": "Edge",
+   "years": "2015+",
+   "lugPattern": "5x108",
+   "centerBore": "63.4mm",
+   "thread": "M12x1.5",
+   "offset": "+45 to +55",
+   "notes": ""
+  },
+  {
+   "group": "Dodge/RAM",
+   "vehicle": "Ram 1500",
+   "years": "2019+",
+   "lugPattern": "6x139.7",
+   "centerBore": "77.8mm",
+   "thread": "M14x1.5",
+   "offset": "+19",
+   "notes": "Classic/Older 5x139.7"
+  },
+  {
+   "group": "Dodge/RAM",
+   "vehicle": "Charger",
+   "years": "Recent",
+   "lugPattern": "5x115",
+   "centerBore": "71.5mm",
+   "thread": "M14x1.5",
+   "offset": "Varies",
+   "notes": ""
+  },
+  {
+   "group": "Dodge/RAM",
+   "vehicle": "Durango",
+   "years": "2011+",
+   "lugPattern": "5x127",
+   "centerBore": "71.5mm",
+   "thread": "M14x1.5",
+   "offset": "+30 to +50",
+   "notes": ""
+  },
+  {
+   "group": "Dodge/RAM",
+   "vehicle": "Challenger",
+   "years": "Recent",
+   "lugPattern": "5x115",
+   "centerBore": "71.5mm",
+   "thread": "M14x1.5",
+   "offset": "Varies",
+   "notes": ""
+  },
+  {
+   "group": "Dodge/RAM",
+   "vehicle": "Jeep Wrangler (JL)",
+   "years": "2018+",
+   "lugPattern": "5x127",
+   "centerBore": "71.5mm",
+   "thread": "M14x1.5",
+   "offset": "+30 to +45",
+   "notes": ""
+  },
+  {
+   "group": "Toyota / Lexus",
+   "vehicle": "Tacoma",
+   "years": "Recent",
+   "lugPattern": "6x139.7",
+   "centerBore": "106.1mm",
+   "thread": "M12x1.5",
+   "offset": "+5 to +30",
+   "notes": ""
+  },
+  {
+   "group": "Toyota / Lexus",
+   "vehicle": "Camry",
+   "years": "Recent",
+   "lugPattern": "5x114.3",
+   "centerBore": "60.1mm",
+   "thread": "M12x1.5",
+   "offset": "+35 to +45",
+   "notes": ""
+  },
+  {
+   "group": "Toyota / Lexus",
+   "vehicle": "4Runner",
+   "years": "Recent",
+   "lugPattern": "6x139.7",
+   "centerBore": "106.1mm",
+   "thread": "M12x1.5",
+   "offset": "+5 to +25",
+   "notes": ""
+  },
+  {
+   "group": "Toyota / Lexus",
+   "vehicle": "Highlander",
+   "years": "Recent",
+   "lugPattern": "5x114.3",
+   "centerBore": "60.1mm",
+   "thread": "M12x1.5",
+   "offset": "+30 to +40",
+   "notes": ""
+  },
+  {
+   "group": "Toyota / Lexus",
+   "vehicle": "Tundra",
+   "years": "2022+",
+   "lugPattern": "6x139.7",
+   "centerBore": "95.1mm",
+   "thread": "M14x1.5",
+   "offset": "+18 to +60",
+   "notes": "Older 5x150"
+  },
+  {
+   "group": "Honda / Acura",
+   "vehicle": "Civic",
+   "years": "Recent",
+   "lugPattern": "5x114.3",
+   "centerBore": "64.1mm",
+   "thread": "M12x1.5",
+   "offset": "+40 to +50",
+   "notes": "Type R 5x120"
+  },
+  {
+   "group": "Honda / Acura",
+   "vehicle": "Accord",
+   "years": "Recent",
+   "lugPattern": "5x114.3",
+   "centerBore": "64.1mm",
+   "thread": "M12x1.5",
+   "offset": "+40 to +55",
+   "notes": ""
+  },
+  {
+   "group": "Honda / Acura",
+   "vehicle": "CR-V",
+   "years": "Recent",
+   "lugPattern": "5x114.3",
+   "centerBore": "64.1mm",
+   "thread": "M12x1.5",
+   "offset": "+40 to +50",
+   "notes": ""
+  },
+  {
+   "group": "Honda / Acura",
+   "vehicle": "Acura MDX",
+   "years": "Recent",
+   "lugPattern": "5x120",
+   "centerBore": "64.1mm",
+   "thread": "M14x1.5",
+   "offset": "+45 to +55",
+   "notes": ""
+  },
+  {
+   "group": "Honda / Acura",
+   "vehicle": "Pilot",
+   "years": "Recent",
+   "lugPattern": "5x120",
+   "centerBore": "64.1mm",
+   "thread": "M14x1.5",
+   "offset": "+45 to +55",
+   "notes": ""
+  },
+  {
+   "group": "BMW",
+   "vehicle": "3 Series (G20)",
+   "years": "Recent",
+   "lugPattern": "5x112",
+   "centerBore": "66.6mm",
+   "thread": "M14x1.25 Cone",
+   "offset": "+25 to +40",
+   "notes": "Older F30 5x120"
+  },
+  {
+   "group": "BMW",
+   "vehicle": "5 Series (G30)",
+   "years": "Recent",
+   "lugPattern": "5x112",
+   "centerBore": "66.6mm",
+   "thread": "M14x1.25 Cone",
+   "offset": "+25 to +45",
+   "notes": "Older F10 5x120"
+  },
+  {
+   "group": "BMW",
+   "vehicle": "X3 (G01)",
+   "years": "Recent",
+   "lugPattern": "5x112",
+   "centerBore": "66.6mm",
+   "thread": "M14x1.25 Cone",
+   "offset": "+25 to +40",
+   "notes": ""
+  },
+  {
+   "group": "BMW",
+   "vehicle": "X5 (G05)",
+   "years": "Recent",
+   "lugPattern": "5x112",
+   "centerBore": "66.6mm",
+   "thread": "M14x1.25 Cone",
+   "offset": "+30 to +45",
+   "notes": "Older F15 5x120"
+  },
+  {
+   "group": "BMW",
+   "vehicle": "X7 (G07)",
+   "years": "Recent",
+   "lugPattern": "5x112",
+   "centerBore": "66.6mm",
+   "thread": "M14x1.25 Cone",
+   "offset": "+30 to +40",
+   "notes": ""
+  }
+ ],
+ "vendors": [
+  {
+   "vendor": "American Tire Distributors",
+   "brands": "Black Rock, Center Line, Cragar, Dick Cepek, DrifZ, Dropstars, Focal, Gear Off-Road, ICW, Konig, Motiv, OE Performance, Pacer, Platinum, TIS Off-Road, Ultra, Worx Off-Road"
+  },
+  {
+   "vendor": "Direct Line",
+   "brands": "904, DPS, Enkei, F1R, Rohana"
+  },
+  {
+   "vendor": "Elite Wheel Warehouse",
+   "brands": "Amani Forged, Azara, Blade, Cavallo, Modern Concept, OE Revolution, Spec-1, Twisted, Vortex Off-Road, XF Off-Road, Xtreme Off-Road"
+  },
+  {
+   "vendor": "Wheel Pros",
+   "brands": "American Racing, Asanti, Black Rhino, DUB, Fairway, Foose, Fuel Off-Road, KMC, Moto Metal, Motegi, MSA Off-Road, Niche, Petrol, Pro Comp, Replicas, Status, TSW, US Mags, XD"
+  },
+  {
+   "vendor": "Wholesale Wheels",
+   "brands": "LFF, LUX, LUXXX HD, Replica, Venom"
+  }
+ ]
+}

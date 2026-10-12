@@ -1,0 +1,2110 @@
+{
+ "description": "Vehicle fitment records recovered from git history of shanelockhart/Worksheet. NOT the current site data. Unverified; some records conflict across revisions.",
+ "source": "git history (branch main, through commit a638ba2)",
+ "entries": [
+  {
+   "manufacturer": "Chevrolet",
+   "vehicle": "Silverado 1500",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2019-Present",
+     "lugPattern": "6x139.7",
+     "centerBore": "78.1mm",
+     "thread": "M14x1.5",
+     "offset": "+19 to +31",
+     "notes": "Verify specific year/trim.",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "Recent",
+     "lugPattern": "6x139.7",
+     "centerBore": "78.1mm",
+     "thread": "M14x1.5",
+     "offset": "+18 to +31",
+     "notes": "Verify year for changes.",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": [
+    "offset"
+   ]
+  },
+  {
+   "manufacturer": "Chevrolet",
+   "vehicle": "Tahoe",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2021-Present",
+     "lugPattern": "6x139.7",
+     "centerBore": "78.1mm",
+     "thread": "M14x1.5",
+     "offset": "+20 to +30",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "Recent",
+     "lugPattern": "6x139.7",
+     "centerBore": "78.1mm",
+     "thread": "M14x1.5",
+     "offset": "+20 to +30",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Chevrolet",
+   "vehicle": "Equinox",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2018-Present",
+     "lugPattern": "5x115",
+     "centerBore": "70.3mm",
+     "thread": "M12x1.5",
+     "offset": "+40 to +50",
+     "notes": "Older gens vary (5x120, 5x105)",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2018+",
+     "lugPattern": "5x115",
+     "centerBore": "70.3mm",
+     "thread": "M12x1.5",
+     "offset": "+40 to +50",
+     "notes": "Older 5x120/5x105",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Chevrolet",
+   "vehicle": "Suburban",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2021-Present",
+     "lugPattern": "6x139.7",
+     "centerBore": "78.1mm",
+     "thread": "M14x1.5",
+     "offset": "+20 to +30",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "Recent",
+     "lugPattern": "6x139.7",
+     "centerBore": "78.1mm",
+     "thread": "M14x1.5",
+     "offset": "+20 to +30",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Chevrolet",
+   "vehicle": "Colorado",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2015-Present",
+     "lugPattern": "6x120",
+     "centerBore": "66.9mm",
+     "thread": "M12x1.5",
+     "offset": "+28 to +33",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2015+",
+     "lugPattern": "6x120",
+     "centerBore": "66.9mm",
+     "thread": "M12x1.5",
+     "offset": "+28 to +33",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Chevrolet",
+   "vehicle": "Traverse",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2018-Present",
+     "lugPattern": "6x120",
+     "centerBore": "74.1mm",
+     "thread": "M14x1.5",
+     "offset": "+45 to +52",
+     "notes": "Older gen was 6x132",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2018+",
+     "lugPattern": "6x120",
+     "centerBore": "74.1mm",
+     "thread": "M14x1.5",
+     "offset": "+45 to +52",
+     "notes": "Older 6x132",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Chevrolet",
+   "vehicle": "Camaro",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2016-Present",
+     "lugPattern": "5x120",
+     "centerBore": "66.9mm",
+     "thread": "M14x1.5",
+     "offset": "Varies widely",
+     "notes": "Check ZL1/SS specific.",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2016+",
+     "lugPattern": "5x120",
+     "centerBore": "66.9mm",
+     "thread": "M14x1.5",
+     "offset": "Varies",
+     "notes": "Check specific model",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Chevrolet",
+   "vehicle": "Malibu",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2016-Present",
+     "lugPattern": "5x115",
+     "centerBore": "70.3mm",
+     "thread": "M12x1.5",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2016+",
+     "lugPattern": "5x115",
+     "centerBore": "70.3mm",
+     "thread": "M12x1.5",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Chevrolet",
+   "vehicle": "Blazer",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2019+",
+     "lugPattern": "6x120",
+     "centerBore": "74.1mm",
+     "thread": "M14x1.5",
+     "offset": "+45 to +52",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "724239f (2025-05-14)",
+     "revisions": 7
+    },
+    {
+     "years": "2019+",
+     "lugPattern": "6x120",
+     "centerBore": "67.1mm",
+     "thread": "M14x1.5",
+     "offset": "+45 to +52",
+     "notes": "",
+     "firstSeen": "8748417 (2025-05-22)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 6
+    }
+   ],
+   "conflictingFields": [
+    "center bore"
+   ]
+  },
+  {
+   "manufacturer": "Chevrolet",
+   "vehicle": "Trailblazer",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2021+",
+     "lugPattern": "5x115",
+     "centerBore": "70.3mm",
+     "thread": "M12x1.5",
+     "offset": "+40 to +45",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Ford",
+   "vehicle": "F-150",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2015-Present",
+     "lugPattern": "6x135",
+     "centerBore": "87.1mm",
+     "thread": "M14x1.5",
+     "offset": "+30 to +44",
+     "notes": "Raptor different",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2015+",
+     "lugPattern": "6x135",
+     "centerBore": "87.1mm",
+     "thread": "M14x1.5",
+     "offset": "+30 to +44",
+     "notes": "Raptor different",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Ford",
+   "vehicle": "Explorer",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2020-Present",
+     "lugPattern": "5x114.3",
+     "centerBore": "67.1mm",
+     "thread": "M14x1.5",
+     "offset": "+40 to +50",
+     "notes": "Older can be 5x114.3 w/ 70.5mm CB",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2020+",
+     "lugPattern": "5x114.3",
+     "centerBore": "67.1mm",
+     "thread": "M14x1.5",
+     "offset": "+40 to +50",
+     "notes": "Older can be 5x114.3 w/ 70.5mm CB",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Ford",
+   "vehicle": "Mustang",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2015-Present",
+     "lugPattern": "5x114.3",
+     "centerBore": "70.5mm",
+     "thread": "M14x1.5",
+     "offset": "Varies (GT: +35 to +50)",
+     "notes": "Check specific model/trim",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2015+",
+     "lugPattern": "5x114.3",
+     "centerBore": "70.5mm",
+     "thread": "M14x1.5",
+     "offset": "Varies",
+     "notes": "Check specific model",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Ford",
+   "vehicle": "Expedition",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2018-Present",
+     "lugPattern": "6x135",
+     "centerBore": "87.1mm",
+     "thread": "M14x1.5",
+     "offset": "+30 to +44",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2018+",
+     "lugPattern": "6x135",
+     "centerBore": "87.1mm",
+     "thread": "M14x1.5",
+     "offset": "+30 to +44",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Ford",
+   "vehicle": "Edge",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2015-Present",
+     "lugPattern": "5x108",
+     "centerBore": "63.4mm",
+     "thread": "M12x1.5",
+     "offset": "+45 to +55",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2015+",
+     "lugPattern": "5x108",
+     "centerBore": "63.4mm",
+     "thread": "M12x1.5",
+     "offset": "+45 to +55",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Ford",
+   "vehicle": "Ranger",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2019-Present",
+     "lugPattern": "6x139.7",
+     "centerBore": "93.1mm",
+     "thread": "M12x1.5",
+     "offset": "+50 to +55",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2019+",
+     "lugPattern": "6x139.7",
+     "centerBore": "93.1mm",
+     "thread": "M12x1.5",
+     "offset": "+50 to +55",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Ford",
+   "vehicle": "Escape",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2020-Present",
+     "lugPattern": "5x108",
+     "centerBore": "63.4mm",
+     "thread": "M12x1.5",
+     "offset": "+45 to +52",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2020+",
+     "lugPattern": "5x108",
+     "centerBore": "63.4mm",
+     "thread": "M12x1.5",
+     "offset": "+45 to +52",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Ford",
+   "vehicle": "Bronco",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2021-Present",
+     "lugPattern": "6x139.7",
+     "centerBore": "93.1mm",
+     "thread": "M12x1.5",
+     "offset": "Varies widely",
+     "notes": "Bronco Sport is 5x108",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2021+",
+     "lugPattern": "6x139.7",
+     "centerBore": "93.1mm",
+     "thread": "M12x1.5",
+     "offset": "Varies",
+     "notes": "Bronco Sport 5x108",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Ford",
+   "vehicle": "Fusion",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2013-2020",
+     "lugPattern": "5x108",
+     "centerBore": "63.4mm",
+     "thread": "M12x1.5",
+     "offset": "+45 to +55",
+     "notes": "Discontinued",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2013-2020",
+     "lugPattern": "5x108",
+     "centerBore": "63.4mm",
+     "thread": "M12x1.5",
+     "offset": "+45 to +55",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Ford",
+   "vehicle": "Maverick",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2022-Present",
+     "lugPattern": "5x108",
+     "centerBore": "63.4mm",
+     "thread": "M12x1.5",
+     "offset": "+35 to +45",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2022+",
+     "lugPattern": "5x108",
+     "centerBore": "63.4mm",
+     "thread": "M12x1.5",
+     "offset": "+35 to +45",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Dodge/RAM",
+   "vehicle": "Ram 1500",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2019-Present",
+     "lugPattern": "6x139.7",
+     "centerBore": "77.8mm",
+     "thread": "M14x1.5",
+     "offset": "+19",
+     "notes": "Older/Classic 5x139.7",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2019+",
+     "lugPattern": "6x139.7",
+     "centerBore": "77.8mm",
+     "thread": "M14x1.5",
+     "offset": "+19",
+     "notes": "Classic/Older 5x139.7",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Dodge/RAM",
+   "vehicle": "Charger",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2011-Present",
+     "lugPattern": "5x115",
+     "centerBore": "71.5mm",
+     "thread": "M14x1.5",
+     "offset": "Varies (RWD: +15 to +25)",
+     "notes": "AWD different",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "Recent",
+     "lugPattern": "5x115",
+     "centerBore": "71.5mm",
+     "thread": "M14x1.5",
+     "offset": "Varies",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Dodge/RAM",
+   "vehicle": "Durango",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2011-Present",
+     "lugPattern": "5x127",
+     "centerBore": "71.5mm",
+     "thread": "M14x1.5",
+     "offset": "+30 to +50",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2011+",
+     "lugPattern": "5x127",
+     "centerBore": "71.5mm",
+     "thread": "M14x1.5",
+     "offset": "+30 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Dodge/RAM",
+   "vehicle": "Challenger",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2008-Present",
+     "lugPattern": "5x115",
+     "centerBore": "71.5mm",
+     "thread": "M14x1.5",
+     "offset": "Varies (RWD: +15 to +25)",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "Recent",
+     "lugPattern": "5x115",
+     "centerBore": "71.5mm",
+     "thread": "M14x1.5",
+     "offset": "Varies",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Dodge/RAM",
+   "vehicle": "Grand Caravan",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2008-2020",
+     "lugPattern": "5x127",
+     "centerBore": "71.5mm",
+     "thread": "M12x1.5",
+     "offset": "+40",
+     "notes": "Discontinued",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2008-2020",
+     "lugPattern": "5x127",
+     "centerBore": "71.5mm",
+     "thread": "M12x1.5",
+     "offset": "+40",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Dodge/RAM",
+   "vehicle": "Ram 2500/3500",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2019-Present",
+     "lugPattern": "8x165.1",
+     "centerBore": "121.3mm",
+     "thread": "M14x1.5",
+     "offset": "Varies",
+     "notes": "Older years may use 9/16 studs",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "Recent",
+     "lugPattern": "8x165.1",
+     "centerBore": "Varies, e.g. 121.3mm",
+     "thread": "9/16-18 or M14x1.5",
+     "offset": "Varies",
+     "notes": "Verify year/thread/CB",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": [
+    "thread"
+   ]
+  },
+  {
+   "manufacturer": "Dodge/RAM",
+   "vehicle": "Journey",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2009-2020",
+     "lugPattern": "5x127",
+     "centerBore": "71.5mm",
+     "thread": "M12x1.5",
+     "offset": "+40",
+     "notes": "Discontinued",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2009-2020",
+     "lugPattern": "5x127",
+     "centerBore": "71.5mm",
+     "thread": "M12x1.5",
+     "offset": "+40",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Dodge/RAM",
+   "vehicle": "Jeep Wrangler (JL)",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2018+",
+     "lugPattern": "5x127",
+     "centerBore": "71.5mm",
+     "thread": "M14x1.5",
+     "offset": "+30 to +45",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Dodge/RAM",
+   "vehicle": "Jeep Grand Cherokee (WK2)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2011-2021",
+     "lugPattern": "5x127",
+     "centerBore": "71.5mm",
+     "thread": "M14x1.5",
+     "offset": "+35 to +50",
+     "notes": "Newer WL different",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Dodge/RAM",
+   "vehicle": "Ram ProMaster City",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2015-2022",
+     "lugPattern": "5x98",
+     "centerBore": "58.1mm",
+     "thread": "M12x1.25",
+     "offset": "+35 to +40",
+     "notes": "Discontinued",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "Recent",
+     "lugPattern": "5x98",
+     "centerBore": "58.1mm",
+     "thread": "M12x1.25",
+     "offset": "+35 to +40",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Nissan / Infiniti",
+   "vehicle": "Altima",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "66.1mm",
+     "thread": "M12x1.25",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Nissan / Infiniti",
+   "vehicle": "Titan",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "6x139.7",
+     "centerBore": "77.8mm",
+     "thread": "M14x1.5",
+     "offset": "+18 to +25",
+     "notes": "Titan XD has different specs",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "Recent",
+     "lugPattern": "6x139.7",
+     "centerBore": "77.8mm",
+     "thread": "M14x1.5",
+     "offset": "+18 to +25",
+     "notes": "XD model varies",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Nissan / Infiniti",
+   "vehicle": "Infiniti Q50",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "66.1mm",
+     "thread": "M12x1.25",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Nissan / Infiniti",
+   "vehicle": "Infiniti QX80",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "6x139.7",
+     "centerBore": "77.8mm",
+     "thread": "M14x1.5",
+     "offset": "+20 to +30",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Nissan / Infiniti",
+   "vehicle": "Frontier",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2022-Present",
+     "lugPattern": "6x114.3",
+     "centerBore": "66.1mm",
+     "thread": "M12x1.25",
+     "offset": "+30 to +45",
+     "notes": "Older gens vary",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2022+",
+     "lugPattern": "6x114.3",
+     "centerBore": "66.1mm",
+     "thread": "M12x1.25",
+     "offset": "+30 to +45",
+     "notes": "Older was 6x139.7 for some gens",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Nissan / Infiniti",
+   "vehicle": "Pathfinder",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2022-Present",
+     "lugPattern": "5x114.3",
+     "centerBore": "66.1mm",
+     "thread": "M14x1.5",
+     "offset": "+40 to +50",
+     "notes": "Older gens were 6x114.3",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2022+",
+     "lugPattern": "5x114.3",
+     "centerBore": "66.1mm",
+     "thread": "M14x1.5",
+     "offset": "+40 to +50",
+     "notes": "Older gens were 6x114.3",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Nissan / Infiniti",
+   "vehicle": "Maxima",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "66.1mm",
+     "thread": "M12x1.25",
+     "offset": "+45 to +55",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Nissan / Infiniti",
+   "vehicle": "Rogue",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "66.1mm",
+     "thread": "M12x1.25",
+     "offset": "+35 to +45",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Nissan / Infiniti",
+   "vehicle": "Murano",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "66.1mm",
+     "thread": "M12x1.25",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Nissan / Infiniti",
+   "vehicle": "Armada",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "6x139.7",
+     "centerBore": "77.8mm",
+     "thread": "M14x1.5",
+     "offset": "+20 to +30",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Toyota / Lexus",
+   "vehicle": "Tacoma",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "6x139.7",
+     "centerBore": "106.1mm",
+     "thread": "M12x1.5",
+     "offset": "+5 to +30",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 20
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Toyota / Lexus",
+   "vehicle": "Camry",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "60.1mm",
+     "thread": "M12x1.5",
+     "offset": "+35 to +45",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 20
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Toyota / Lexus",
+   "vehicle": "Lexus RX",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "60.1mm",
+     "thread": "M12x1.5",
+     "offset": "+30 to +40",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Toyota / Lexus",
+   "vehicle": "Lexus IS",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "60.1mm",
+     "thread": "M12x1.5",
+     "offset": "+35 to +45",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Toyota / Lexus",
+   "vehicle": "4Runner",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "6x139.7",
+     "centerBore": "106.1mm",
+     "thread": "M12x1.5",
+     "offset": "+5 to +25",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 20
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Toyota / Lexus",
+   "vehicle": "Highlander",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "60.1mm",
+     "thread": "M12x1.5",
+     "offset": "+30 to +40",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 20
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Toyota / Lexus",
+   "vehicle": "Tundra",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "2022-Present",
+     "lugPattern": "6x139.7",
+     "centerBore": "95.1mm",
+     "thread": "M14x1.5",
+     "offset": "+18 to +60",
+     "notes": "Older was 5x150",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2022+",
+     "lugPattern": "6x139.7",
+     "centerBore": "95.1mm",
+     "thread": "M14x1.5",
+     "offset": "+18 to +60",
+     "notes": "Older 5x150",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Toyota / Lexus",
+   "vehicle": "Sequoia",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2023-Present",
+     "lugPattern": "6x139.7",
+     "centerBore": "95.1mm",
+     "thread": "M14x1.5",
+     "offset": "+18 to +60",
+     "notes": "Older was 5x150",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2023+",
+     "lugPattern": "6x139.7",
+     "centerBore": "95.1mm",
+     "thread": "M14x1.5",
+     "offset": "+18 to +60",
+     "notes": "Older 5x150",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Toyota / Lexus",
+   "vehicle": "RAV4",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "60.1mm",
+     "thread": "M12x1.5",
+     "offset": "+30 to +40",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Toyota / Lexus",
+   "vehicle": "Lexus GX",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2024-Present",
+     "lugPattern": "6x139.7",
+     "centerBore": "95.1mm",
+     "thread": "M14x1.5",
+     "offset": "+15 to +25",
+     "notes": "Older was 106.1mm CB",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "Recent",
+     "lugPattern": "6x139.7",
+     "centerBore": "95.1mm",
+     "thread": "M12x1.5",
+     "offset": "+10 to +25",
+     "notes": "Matches new Tundra/Sequoia for CB.",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": [
+    "thread",
+    "offset"
+   ]
+  },
+  {
+   "manufacturer": "Honda / Acura",
+   "vehicle": "Civic",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "64.1mm",
+     "thread": "M12x1.5",
+     "offset": "+40 to +50",
+     "notes": "Type R 5x120",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Honda / Acura",
+   "vehicle": "Accord",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "64.1mm",
+     "thread": "M12x1.5",
+     "offset": "+40 to +55",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 20
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Honda / Acura",
+   "vehicle": "CR-V",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "64.1mm",
+     "thread": "M12x1.5",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 20
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Honda / Acura",
+   "vehicle": "Acura MDX",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x120",
+     "centerBore": "64.1mm",
+     "thread": "M14x1.5",
+     "offset": "+45 to +55",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 20
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Honda / Acura",
+   "vehicle": "Acura TLX",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x120",
+     "centerBore": "64.1mm",
+     "thread": "M14x1.5",
+     "offset": "+45 to +55",
+     "notes": "Older gen was 5x114.3",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "Recent",
+     "lugPattern": "5x120",
+     "centerBore": "64.1mm",
+     "thread": "M14x1.5",
+     "offset": "+45 to +55",
+     "notes": "Older was 5x114.3",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Honda / Acura",
+   "vehicle": "Pilot",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x120",
+     "centerBore": "64.1mm",
+     "thread": "M14x1.5",
+     "offset": "+45 to +55",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 20
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Honda / Acura",
+   "vehicle": "Odyssey",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x120",
+     "centerBore": "64.1mm",
+     "thread": "M14x1.5",
+     "offset": "+45 to +55",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Honda / Acura",
+   "vehicle": "Ridgeline",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x120",
+     "centerBore": "64.1mm",
+     "thread": "M14x1.5",
+     "offset": "+45 to +55",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Honda / Acura",
+   "vehicle": "Acura Integra",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2023-Present",
+     "lugPattern": "5x114.3",
+     "centerBore": "64.1mm",
+     "thread": "M12x1.5",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    },
+    {
+     "years": "2023+",
+     "lugPattern": "5x114.3",
+     "centerBore": "64.1mm",
+     "thread": "M12x1.5",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Honda / Acura",
+   "vehicle": "HR-V",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "64.1mm",
+     "thread": "M12x1.5",
+     "offset": "+45 to +55",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Mercedes-Benz",
+   "vehicle": "C-Class (W205/W206)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.5 Ball",
+     "offset": "+35 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Mercedes-Benz",
+   "vehicle": "E-Class (W213)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.5 Ball",
+     "offset": "+35 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Mercedes-Benz",
+   "vehicle": "S-Class (W222/W223)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.5 Ball",
+     "offset": "+30 to +45",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Mercedes-Benz",
+   "vehicle": "GLC (X253/X254)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.5 Ball",
+     "offset": "+30 to +45",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Mercedes-Benz",
+   "vehicle": "GLE (W166/W167)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M15x1.25 Ball",
+     "offset": "+40 to +55",
+     "notes": "Verify thread M14 or M15",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Mercedes-Benz",
+   "vehicle": "GLS (X166/X167)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M15x1.25 Ball",
+     "offset": "+40 to +55",
+     "notes": "Verify thread M14 or M15",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Mercedes-Benz",
+   "vehicle": "A-Class (W177)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.5 Ball",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Mercedes-Benz",
+   "vehicle": "CLA (C118)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.5 Ball",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Mercedes-Benz",
+   "vehicle": "Sprinter (906/907)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "6x130",
+     "centerBore": "84.1mm",
+     "thread": "M14x1.5 Ball",
+     "offset": "Varies",
+     "notes": "2500 models. 3500 different.",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Mercedes-Benz",
+   "vehicle": "G-Class (W463)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x130",
+     "centerBore": "84.1mm",
+     "thread": "M14x1.5 Ball",
+     "offset": "+20 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "BMW",
+   "vehicle": "3 Series (G20)",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.25 Cone",
+     "offset": "+25 to +40",
+     "notes": "Older F30 5x120",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 20
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "BMW",
+   "vehicle": "5 Series (G30)",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.25 Cone",
+     "offset": "+25 to +45",
+     "notes": "Older F10 5x120",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 17
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "BMW",
+   "vehicle": "X3 (G01)",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.25 Cone",
+     "offset": "+25 to +40",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 20
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "BMW",
+   "vehicle": "X5 (G05)",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.25 Cone",
+     "offset": "+30 to +45",
+     "notes": "Older F15 5x120",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 20
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "BMW",
+   "vehicle": "1 Series (F40)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.25 Cone",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 13
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "BMW",
+   "vehicle": "2 Series GranCoupe (F44)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.25 Cone",
+     "offset": "+40 to +50",
+     "notes": "Coupe (G42) RWD 5x112 but diff offsets",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "BMW",
+   "vehicle": "X1 (U11)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.25 Cone",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "BMW",
+   "vehicle": "7 Series (G70)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.25 Cone",
+     "offset": "+20 to +35",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "BMW",
+   "vehicle": "X7 (G07)",
+   "onCurrentSite": true,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.25 Cone",
+     "offset": "+30 to +40",
+     "notes": "",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "a638ba2 (2025-05-23)",
+     "revisions": 20
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "BMW",
+   "vehicle": "M3/M4 (G80/G82)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.25 Cone",
+     "offset": "Aggressive, F:+20 R:+20",
+     "notes": "Specific M offsets",
+     "firstSeen": "cd89c77 (2025-05-14)",
+     "lastSeen": "bfd61de (2025-05-23)",
+     "revisions": 16
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Chevrolet",
+   "vehicle": "Blazer (New)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2019-Present",
+     "lugPattern": "6x120",
+     "centerBore": "66.9mm",
+     "thread": "M14x1.5",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Chevrolet",
+   "vehicle": "Trailblazer (New)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2021-Present",
+     "lugPattern": "5x115",
+     "centerBore": "70.3mm",
+     "thread": "M12x1.5",
+     "offset": "+40 to +45",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Dodge/RAM",
+   "vehicle": "Jeep Wrangler (JL/JT)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2018-Present",
+     "lugPattern": "5x127",
+     "centerBore": "71.5mm",
+     "thread": "M14x1.5",
+     "offset": "+10 to +45",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Dodge/RAM",
+   "vehicle": "Jeep Grand Cherokee (WL)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "2022-Present",
+     "lugPattern": "5x127",
+     "centerBore": "71.5mm",
+     "thread": "M14x1.5",
+     "offset": "+40 to +55",
+     "notes": "Older WK2 was 5x127, earlier 5x114.3",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Nissan / Infiniti",
+   "vehicle": "Infiniti Q50/Q60",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "66.1mm",
+     "thread": "M12x1.25",
+     "offset": "+40 to +50",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Honda / Acura",
+   "vehicle": "Civic (Non Type-R)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x114.3",
+     "centerBore": "64.1mm",
+     "thread": "M12x1.5",
+     "offset": "+40 to +50",
+     "notes": "Type R is 5x120",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Mercedes-Benz",
+   "vehicle": "E-Class (W213/W214)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.5 Ball",
+     "offset": "+35 to +50",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "Mercedes-Benz",
+   "vehicle": "G-Class (W463/W463A)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x130",
+     "centerBore": "84.1mm",
+     "thread": "M14x1.5 Ball",
+     "offset": "+20 to +50",
+     "notes": "",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "BMW",
+   "vehicle": "5 Series (G30/G60)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.25 Cone",
+     "offset": "+25 to +45",
+     "notes": "Older F10 5x120",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    }
+   ],
+   "conflictingFields": []
+  },
+  {
+   "manufacturer": "BMW",
+   "vehicle": "1 Series (F40/F52)",
+   "onCurrentSite": false,
+   "variants": [
+    {
+     "years": "Recent FWD",
+     "lugPattern": "5x112",
+     "centerBore": "66.6mm",
+     "thread": "M14x1.25 Cone",
+     "offset": "+40 to +50",
+     "notes": "Older RWD different",
+     "firstSeen": "b06c623 (2025-05-14)",
+     "lastSeen": "583fe2f (2025-05-22)",
+     "revisions": 3
+    }
+   ],
+   "conflictingFields": []
+  }
+ ]
+}

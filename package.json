@@ -1,0 +1,20 @@
+{
+  "name": "fitment-expert",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Fitment Expert by Operators Logic: static site + server-side AI chat endpoint (Netlify Functions + Supabase).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "sync": "node scripts/sync-knowledge.mjs",
+    "build": "node scripts/sync-knowledge.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "test": "node --test --test-concurrency=1 tests/*.test.mjs",
+    "live": "node scripts/live-test.mjs flow",
+    "live:errors": "node scripts/live-test.mjs errors",
+    "live:outage": "node scripts/live-test.mjs outage",
+    "live:setup": "npm i --no-save playwright && npx playwright install chromium"
+  }
+}

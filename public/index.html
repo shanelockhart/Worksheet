@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Fitment Expert | Operators Logic</title>
+    <meta name="description" content="Fitment Expert by Operators Logic: vehicle wheel fitment reference, wheel vendor directory, and an AI fitment assistant.">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563eb'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23fff' stroke-width='2.2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23fff'/%3E%3Cpath d='M16 7v6M16 19v6M7 16h6M19 16h6' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Fitment Expert by Operators Logic — restrained blue/slate technical theme */
+:root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface-2: #273449;
+    --border: #334155;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #3b82f6;
+    --accent-strong: #2563eb;
+    --accent-strong-hover: #1d4ed8;
+    --accent-text: #60a5fa;
+    --accent-soft: rgba(59, 130, 246, 0.12);
+    --radius: 10px;
+    --nav-h: 64px;
+    --font: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: calc(var(--nav-h) + 1px + env(safe-area-inset-bottom, 0px));
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 2px;
+}
+
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.icon {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* --- Top bar / brand --- */
+.app-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.94);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+}
+.app-nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 60px;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--text);
+    text-decoration: none;
+}
+.brand-mark {
+    width: 34px;
+    height: 34px;
+    flex: none;
+}
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+.brand-product {
+    font-size: 1rem;
+    font-weight: 700;
+}
+.brand-parent {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+.nav-links {
+    display: none;
+}
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.9rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+.nav-links a:hover {
+    color: var(--text);
+}
+.nav-links a[aria-current="page"] {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+}
+
+/* --- Bottom navigation (phones and tablets) --- */
+.mobile-bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.mobile-bottom-nav a {
+    flex: 1;
+    min-height: var(--nav-h);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+.mobile-bottom-nav a svg {
+    width: 24px;
+    height: 24px;
+}
+.mobile-bottom-nav a[aria-current="page"] {
+    color: var(--accent-text);
+}
+
+/* --- Pages --- */
+.page-content {
+    display: none;
+}
+.page-content.active-page {
+    display: block;
+    margin-bottom: 2rem;
+    animation: fadeInPage 0.25s ease-out;
+}
+@keyframes fadeInPage {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.page-header-generic {
+    padding: 2rem 0 1.5rem;
+    text-align: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+.page-header-generic h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+}
+.page-header-generic h1 span {
+    color: var(--accent-text);
+}
+.page-header-generic p {
+    color: var(--text-muted);
+    max-width: 38rem;
+    margin: 0 auto;
+}
+
+/* --- Home --- */
+.hero-section {
+    text-align: center;
+    padding: 3rem 1rem 2.75rem;
+    background: linear-gradient(180deg, #14213d 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+}
+.hero-content {
+    max-width: 40rem;
+    margin: 0 auto;
+}
+.hero-eyebrow {
+    color: var(--accent-text);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+.hero-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+}
+.hero-title span {
+    color: var(--accent-text);
+}
+.hero-subtitle {
+    color: var(--text-muted);
+    max-width: 32rem;
+    margin: 0 auto 1.75rem;
+}
+.hero-cta-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+.hero-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 230px;
+    min-height: 48px;
+    padding: 0.7rem 1.5rem;
+    border: 1px solid var(--accent-strong);
+    border-radius: 8px;
+    background: var(--accent-strong);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.hero-cta-button:hover {
+    background: var(--accent-strong-hover);
+    border-color: var(--accent-strong-hover);
+}
+.hero-cta-button-alt {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--text);
+}
+.hero-cta-button-alt:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+}
+
+.home-section {
+    padding: 2.5rem 0;
+}
+.home-section + .home-section {
+    border-top: 1px solid var(--border);
+}
+.home-section-title {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+.home-section-title span {
+    color: var(--accent-text);
+}
+.home-section-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    max-width: 44rem;
+    margin: 0 auto 1.75rem;
+}
+
+.home-cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+.home-feature-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 130px;
+    padding: 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.home-feature-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.home-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.75rem;
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent-text);
+}
+.home-card-icon svg {
+    width: 22px;
+    height: 22px;
+}
+.home-feature-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.25rem;
+}
+.home-feature-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* --- Package deals --- */
+.package-deals-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+.package-deal-card {
+    padding: 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+.package-deal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+.package-size {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-text);
+}
+.weekly-rate {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: right;
+}
+.weekly-rate-amount {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+}
+.package-purchase {
+    text-align: center;
+}
+.package-purchase-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+}
+.package-purchase-amount {
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* --- Wheel vendors --- */
+.vendor-cards-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+.vendor-card {
+    padding: 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+.vendor-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.9rem;
+}
+.vendor-name {
+    flex: 1 1 12rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+.vendor-phone {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent-text);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+}
+.vendor-phone:hover {
+    border-color: var(--accent);
+}
+.vendor-brands-label {
+    margin-bottom: 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+.vendor-brands {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    word-break: break-word;
+}
+
+/* --- AI assistant --- */
+.content-section {
+    padding: 1.75rem 0;
+}
+/* --- AI chat --- */
+body.kbd-open .mobile-bottom-nav { display: none; }
+body.kbd-open { padding-bottom: 0; }
+body.kbd-open .chat-card { min-height: 0; }
+body.kbd-open .chat-meta { display: none; }
+body.kbd-open #ai-page .content-section { padding-top: 0.25rem; }
+.chat-card {
+    --chat-h: 72vh;
+    scroll-margin-top: calc(var(--nav-h) + 0.5rem);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    height: var(--chat-h);
+    min-height: 460px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+@supports (height: 1dvh) { .chat-card { --chat-h: 72dvh; } }
+.chat-top {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+}
+.chat-title { font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.chat-title .icon { width: 18px; height: 18px; color: var(--accent-text); flex: none; }
+.chat-allowance { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
+.chat-dots { display: inline-flex; gap: 4px; }
+.chat-dots i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--accent); background: transparent; display: block; }
+.chat-dots i.on { background: var(--accent); }
+.chat-newbtn {
+    flex: none; background: transparent; color: var(--text-muted); border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.3rem 0.65rem; font: inherit; font-size: 0.75rem; cursor: pointer; min-height: 32px;
+}
+.chat-newbtn:hover { color: var(--text); border-color: var(--accent); }
+.chat-log {
+    flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+    padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; scroll-behavior: auto;
+}
+.chat-empty { margin: auto; max-width: 560px; text-align: center; padding: 0.5rem; }
+.chat-empty h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.4rem; }
+.chat-empty p { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 0.9rem; }
+.chat-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+.chat-chip {
+    background: var(--accent-soft); color: var(--accent-text); border: 1px solid var(--border);
+    border-radius: 999px; padding: 0.5rem 0.9rem; font: inherit; font-size: 0.82rem; cursor: pointer; min-height: 40px; text-align: left;
+}
+.chat-chip:hover { border-color: var(--accent); }
+.msg { max-width: 88%; padding: 0.65rem 0.9rem; border-radius: 14px; font-size: 0.92rem; line-height: 1.5; overflow-wrap: anywhere; }
+.msg p + p, .msg p + ul, .msg ul + p { margin-top: 0.55rem; }
+.msg ul { padding-left: 1.15rem; }
+.msg li + li { margin-top: 0.2rem; }
+.msg.user { align-self: flex-end; background: var(--accent-strong); color: #fff; border-bottom-right-radius: 4px; white-space: pre-wrap; }
+.msg.bot, .msg.pending { align-self: flex-start; background: var(--surface-2); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+.msg.err { align-self: flex-start; background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.45); border-bottom-left-radius: 4px; }
+.msg.err button { margin-top: 0.5rem; }
+.tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 0.05rem 0.45rem; border-radius: 6px; margin-right: 0.4rem; vertical-align: 1px; }
+.tag-db { background: rgba(148,163,184,.14); color: #cbd5e1; border: 1px solid rgba(148,163,184,.45); }
+.tag-unv { background: rgba(245,158,11,.14); color: #fcd34d; border: 1px solid rgba(245,158,11,.4); }
+.tag-gen { background: var(--accent-soft); color: var(--accent-text); border: 1px solid rgba(96,165,250,.4); }
+.msg .trunc { display: block; margin-top: 0.5rem; font-size: 0.78rem; color: var(--text-muted); }
+.typing { display: inline-flex; gap: 5px; align-items: center; height: 1.2em; }
+.typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--text-muted); animation: fxdot 1.2s infinite ease-in-out; }
+.typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes fxdot { 0%, 80%, 100% { opacity: .25; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+.chat-notice {
+    flex: none; margin: 0 1rem 0.5rem; padding: 0.55rem 0.8rem; border-radius: 8px; font-size: 0.83rem;
+    background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.45); color: var(--text);
+}
+.chat-notice[hidden] { display: none; }
+.chat-notice strong { font-weight: 600; }
+.chat-form { flex: none; padding: 0.65rem 1rem calc(0.65rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--border); background: var(--surface); }
+.chat-row { display: flex; gap: 0.5rem; align-items: flex-end; }
+.chat-input {
+    flex: 1; min-width: 0; resize: none; max-height: 9.5rem; min-height: 48px; padding: 0.7rem 0.9rem;
+    font: inherit; font-size: 16px; line-height: 1.4; /* 16px prevents iOS zoom-on-focus */
+    color: var(--text); background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px;
+}
+.chat-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+.chat-input:disabled { opacity: .6; }
+.chat-send {
+    flex: none; min-width: 48px; min-height: 48px; padding: 0 1rem; border: 0; border-radius: 10px; cursor: pointer;
+    background: var(--accent-strong); color: #fff; font: inherit; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+}
+.chat-send:hover:not(:disabled) { background: var(--accent-strong-hover); }
+.chat-send:disabled { opacity: .5; cursor: not-allowed; }
+.chat-send .icon { width: 18px; height: 18px; }
+.chat-meta { display: flex; justify-content: space-between; gap: 0.75rem; margin-top: 0.4rem; font-size: 0.72rem; color: var(--text-muted); }
+.chat-count.over { color: #fca5a5; }
+.chat-retry { background: var(--accent-strong); color: #fff; border: 0; border-radius: 8px; padding: 0.45rem 0.9rem; font: inherit; font-size: 0.82rem; font-weight: 600; cursor: pointer; min-height: 36px; }
+.chat-disclaimer { max-width: 860px; margin: 0.75rem auto 0; font-size: 0.78rem; color: var(--text-muted); text-align: center; }
+@media (max-width: 600px) {
+    #ai-page .page-header-generic { display: none; }
+    #ai-page .content-section { padding-top: 0.75rem; padding-bottom: 0; }
+    .chat-card { --chat-h: calc(100vh - var(--nav-h) * 2 - 1.5rem - env(safe-area-inset-bottom, 0px)); border-radius: 8px; min-height: 380px; }
+    @supports (height: 1dvh) { .chat-card { --chat-h: calc(100dvh - var(--nav-h) * 2 - 1.5rem - env(safe-area-inset-bottom, 0px)); } }
+    .chat-disclaimer { margin-bottom: 1rem; }
+    .chat-top { flex-wrap: wrap; padding: 0.5rem 0.75rem; }
+    .chat-log { padding: 0.75rem; }
+    .msg { max-width: 94%; }
+    .chat-form { padding-left: 0.75rem; padding-right: 0.75rem; }
+    .chat-notice { margin-left: 0.75rem; margin-right: 0.75rem; }
+    .chat-send span { display: none; }
+}
+
+/* --- Fitment database --- */
+.fitment-search-container {
+    width: 92%;
+    max-width: 520px;
+    margin: 1.5rem auto 1.25rem;
+}
+.fitment-search-container input[type="text"] {
+    width: 100%;
+    min-height: 50px;
+    padding: 0.8rem 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font: inherit;
+    transition: border-color 0.2s ease;
+}
+.fitment-search-container input[type="text"]:focus {
+    border-color: var(--accent);
+    outline: none;
+}
+.fitment-search-container input[type="text"]::placeholder {
+    color: var(--text-muted);
+}
+
+.manufacturer-cards-container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+.manufacturer-card {
+    display: block;
+    width: 100%;
+    min-height: 110px;
+    padding: 1.1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    color: var(--text);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.manufacturer-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.manufacturer-card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.25rem;
+}
+.manufacturer-card-desc {
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+.manufacturer-card-tag {
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
+    border-radius: 4px;
+    background: var(--accent-soft);
+    color: var(--accent-text);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.manufacturer-card.hidden-card {
+    display: none !important;
+}
+.empty-state {
+    width: 92%;
+    max-width: 520px;
+    margin: 1rem auto;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.fitment-detail-view {
+    padding: 1.5rem 0 1rem;
+}
+.fitment-detail-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+.back-to-list-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--accent-text);
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.back-to-list-btn:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+}
+.back-to-list-btn svg {
+    width: 24px;
+    height: 24px;
+}
+.fitment-detail-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+.fitment-detail-title span {
+    color: var(--accent-text);
+}
+.fitment-table-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+.fitment-vehicle-card {
+    padding: 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+.fitment-vehicle-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.9rem;
+}
+.fitment-vehicle-name {
+    flex: 1;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.fitment-vehicle-years {
+    padding: 0.15rem 0.6rem;
+    border-radius: 4px;
+    background: var(--accent-soft);
+    color: var(--accent-text);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.fitment-specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+.fitment-spec-item {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.fitment-spec-label,
+.fitment-notes-label {
+    margin-bottom: 0.15rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+.fitment-spec-value {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    overflow-wrap: anywhere;
+}
+.fitment-notes {
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--border);
+}
+.fitment-notes-text {
+    font-size: 0.85rem;
+    line-height: 1.45;
+}
+
+/* --- Service info --- */
+.service-note {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+}
+.service-requirements {
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+.service-requirements h2 {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+.service-requirements ul {
+    list-style: none;
+    margin-bottom: 1rem;
+}
+.service-requirements ul li {
+    position: relative;
+    margin-bottom: 0.9rem;
+    padding-left: 1.4rem;
+    line-height: 1.6;
+}
+.service-requirements ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+.service-requirements ul ul {
+    margin: 0.6rem 0 0;
+}
+.service-requirements ul ul li::before {
+    background: var(--text-muted);
+}
+.service-requirements strong {
+    font-weight: 600;
+    color: #fff;
+}
+.important-note {
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+}
+
+/* --- Footer --- */
+footer {
+    margin-top: auto;
+    padding: 1.75rem 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+footer strong {
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* --- 600px and up --- */
+@media (min-width: 600px) {
+    .package-deals-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* --- Tablet (768px and up) --- */
+@media (min-width: 768px) {
+    .page-header-generic h1 { font-size: 2rem; }
+    .hero-title { font-size: 2.9rem; }
+    .hero-cta-group { flex-direction: row; justify-content: center; }
+    .home-cards-container { grid-template-columns: repeat(4, 1fr); }
+    .vendor-cards-container { grid-template-columns: repeat(2, 1fr); }
+    .manufacturer-cards-container { grid-template-columns: repeat(2, 1fr); }
+    .fitment-table-container { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- Desktop (1024px and up) --- */
+@media (min-width: 1024px) {
+    body { padding-bottom: 0; }
+    .mobile-bottom-nav { display: none; }
+    .nav-links { display: flex; gap: 0.25rem; }
+    .package-deals-container { grid-template-columns: repeat(3, 1fr); }
+    .manufacturer-cards-container { grid-template-columns: repeat(3, 1fr); }
+    .chat-card { --chat-h: 74vh; min-height: 560px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+<body>
+
+    <!-- Top bar -->
+    <nav class="app-nav" aria-label="Primary">
+        <div class="container">
+            <a href="#/home" class="brand" data-route="home" aria-label="Fitment Expert by Operators Logic, home">
+                <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#2563eb"/><circle cx="16" cy="16" r="9" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="16" cy="16" r="3" fill="#fff"/><path d="M16 7v6M16 19v6M7 16h6M19 16h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                <span class="brand-text">
+                    <span class="brand-product">Fitment Expert</span>
+                    <span class="brand-parent">by Operators Logic</span>
+                </span>
+            </a>
+            <div class="nav-links">
+                <a href="#/home" data-route="home">Home</a>
+                <a href="#/fitment" data-route="fitment">Fitment Database</a>
+                <a href="#/vendors" data-route="vendors">Wheel Vendors</a>
+                <a href="#/ai" data-route="ai">AI Assistant</a>
+                <a href="#/service" data-route="service">Service Info</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home -->
+    <div id="home-page" class="page-content active-page">
+        <section class="hero-section">
+            <div class="hero-content">
+                <p class="hero-eyebrow">Operators Logic</p>
+                <h1 class="hero-title">Fitment <span>Expert</span></h1>
+                <p class="hero-subtitle">Wheel and tire fitment reference, wheel vendor contacts, and an AI fitment assistant.</p>
+                <div class="hero-cta-group">
+                    <a href="#/fitment" class="hero-cta-button" data-route="fitment">Explore Fitment Database</a>
+                    <a href="#/ai" class="hero-cta-button hero-cta-button-alt" data-route="ai">Ask the AI Assistant</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-section" id="home-quick-links-section">
+            <div class="container">
+                <h2 class="home-section-title">Quick <span>Access</span></h2>
+                <div class="home-cards-container">
+                    <a href="#/fitment" data-route="fitment" class="home-feature-card">
+                        <div class="home-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg></div>
+                        <h3>Fitment Database</h3>
+                        <p>Detailed vehicle fitment specs.</p>
+                    </a>
+                    <a href="#/ai" data-route="ai" class="home-feature-card">
+                        <div class="home-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></div>
+                        <h3>AI Assistant</h3>
+                        <p>Get instant AI-powered fitment advice.</p>
+                    </a>
+                    <a href="#/vendors" data-route="vendors" class="home-feature-card">
+                        <div class="home-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h12a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2V4z"/><path d="M8 8h6M8 12h6M8 16h4"/></svg></div>
+                        <h3>Wheel Vendors</h3>
+                        <p>Vendor contacts and brands.</p>
+                    </a>
+                    <a href="#/service" data-route="service" class="home-feature-card">
+                        <div class="home-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9 14l2 2 4-4"/></svg></div>
+                        <h3>Service Info</h3>
+                        <p>Claim requirements and procedures.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-section" id="home-package-deals-section">
+            <div class="container">
+                <h2 class="home-section-title">Wheel & Tire <span>Package Deals</span></h2>
+                <p class="home-section-subtitle">Weekly rates and purchase programs. Includes TPMS, mount & balance.</p>
+                <div class="package-deals-container">
+                    <div class="package-deal-card">
+                        <div class="package-deal-header">
+                            <div class="package-size">18s</div>
+                            <div class="weekly-rate">
+                                Weekly Rate
+                                <span class="weekly-rate-amount">$65</span>
+                            </div>
+                        </div>
+                        <div class="package-purchase">
+                            <div class="package-purchase-label">Purchase Package (w/ Sensors)</div>
+                            <div class="package-purchase-amount">$2,220</div>
+                        </div>
+                    </div>
+                    <div class="package-deal-card">
+                        <div class="package-deal-header">
+                            <div class="package-size">20s</div>
+                            <div class="weekly-rate">
+                                Weekly Rate
+                                <span class="weekly-rate-amount">$70</span>
+                            </div>
+                        </div>
+                        <div class="package-purchase">
+                            <div class="package-purchase-label">Purchase Package (w/ Sensors)</div>
+                            <div class="package-purchase-amount">$2,620</div>
+                        </div>
+                    </div>
+                    <div class="package-deal-card">
+                        <div class="package-deal-header">
+                            <div class="package-size">22s</div>
+                            <div class="weekly-rate">
+                                Weekly Rate
+                                <span class="weekly-rate-amount">$80</span>
+                            </div>
+                        </div>
+                        <div class="package-purchase">
+                            <div class="package-purchase-label">Purchase Package (w/ Sensors)</div>
+                            <div class="package-purchase-amount">$2,920</div>
+                        </div>
+                    </div>
+                    <div class="package-deal-card">
+                        <div class="package-deal-header">
+                            <div class="package-size">24s</div>
+                            <div class="weekly-rate">
+                                Weekly Rate
+                                <span class="weekly-rate-amount">$95</span>
+                            </div>
+                        </div>
+                        <div class="package-purchase">
+                            <div class="package-purchase-label">Purchase Package (w/ Sensors)</div>
+                            <div class="package-purchase-amount">$3,520</div>
+                        </div>
+                    </div>
+                    <div class="package-deal-card">
+                        <div class="package-deal-header">
+                            <div class="package-size">Off-Road 20</div>
+                            <div class="weekly-rate">
+                                Weekly Rate
+                                <span class="weekly-rate-amount">$99</span>
+                            </div>
+                        </div>
+                        <div class="package-purchase">
+                            <div class="package-purchase-label">Purchase Package (w/ Sensors)</div>
+                            <div class="package-purchase-amount">$3,420</div>
+                        </div>
+                    </div>
+                    <div class="package-deal-card">
+                        <div class="package-deal-header">
+                            <div class="package-size">Off-Road 22</div>
+                            <div class="weekly-rate">
+                                Weekly Rate
+                                <span class="weekly-rate-amount">$105</span>
+                            </div>
+                        </div>
+                        <div class="package-purchase">
+                            <div class="package-purchase-label">Purchase Package (w/ Sensors)</div>
+                            <div class="package-purchase-amount">$3,720</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- AI Assistant -->
+    <div id="ai-page" class="page-content">
+        <header class="page-header-generic">
+            <div class="container">
+                <h1>Fitment Expert <span>AI Assistant</span></h1>
+                <p>Ask about wheel and tire fitment. Every spec is labeled by source. Nothing here is independently verified.</p>
+            </div>
+        </header>
+        <div class="container content-section">
+            <section class="chat-card" id="chat-card" aria-label="Fitment Expert AI Assistant">
+                <div class="chat-top">
+                    <div class="chat-title"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z"/></svg><span>Fitment Expert Assistant</span></div>
+                    <div class="chat-allowance" id="chat-allowance" aria-live="polite"><span class="chat-dots" id="chat-dots" aria-hidden="true"></span><span id="chat-allowance-text">Checking&hellip;</span></div>
+                    <button type="button" class="chat-newbtn" id="chat-new" hidden>New chat</button>
+                </div>
+                <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-label="Conversation">
+                    <div class="chat-empty" id="chat-empty">
+                        <h3>What are you fitting?</h3>
+                        <p>Start with the year, make, model and trim. Add your current wheel or tire size if you know it.</p>
+                        <div class="chat-chips" id="chat-chips">
+                            <button type="button" class="chat-chip">What bolt pattern and center bore does a 2019 Silverado 1500 use?</button>
+                            <button type="button" class="chat-chip">Compare 265/70R17 with 285/70R17</button>
+                            <button type="button" class="chat-chip">What do I need to know before going wider on a Tacoma?</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-notice" id="chat-notice" role="status" hidden></div>
+                <form class="chat-form" id="chat-form" autocomplete="off">
+                    <div class="chat-row">
+                        <textarea class="chat-input" id="chat-input" rows="1" aria-label="Your question" placeholder="Year, make, model, trim, and your question" enterkeyhint="send"></textarea>
+                        <button type="submit" class="chat-send" id="chat-send" aria-label="Send question"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg><span>Send</span></button>
+                    </div>
+                    <div class="chat-meta"><span id="chat-hint">Enter to send, Shift+Enter for a new line</span><span class="chat-count" id="chat-count">0 / 600</span></div>
+                </form>
+            </section>
+            <p class="chat-disclaimer">AI-generated. Database values have no recorded source and are not independently verified. Not a guarantee of fit, price or availability. Confirm with the owner's manual or wheel maker and the shop before ordering.</p>
+        </div>
+    </div>
+
+    <!-- Fitment Database -->
+    <div id="fitment-page" class="page-content">
+        <header class="page-header-generic fitment-page-header">
+            <div class="container">
+                <h1>Vehicle <span>Fitment</span> Database</h1>
+                <p>Quick reference for sales. Select a manufacturer. Values are unsourced reference data, not independently verified; confirm before ordering.</p>
+            </div>
+        </header>
+        <div class="fitment-search-container">
+            <input type="text" id="manufacturer-search-input" placeholder="Search Manufacturers (e.g., Ford)..." aria-label="Search manufacturers" autocomplete="off">
+        </div>
+        <div class="manufacturer-cards-container" id="manufacturer-cards-list">
+            <!-- Manufacturer cards are inserted by JavaScript -->
+        </div>
+        <p class="empty-state" id="manufacturer-empty" hidden>No manufacturers match your search.</p>
+        <div id="fitment-detail-section-wrapper" hidden>
+            <div class="container fitment-detail-view">
+                <header class="fitment-detail-header">
+                    <button type="button" class="back-to-list-btn" id="back-to-mfg-list-btn" aria-label="Back to manufacturer list">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+                    </button>
+                    <h2 class="fitment-detail-title" id="fitment-detail-manufacturer-name"><span>Manufacturer</span> Fitment</h2>
+                </header>
+                <div class="fitment-table-container" id="fitment-detail-table-container">
+                    <!-- Fitment cards are inserted by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wheel Vendors -->
+    <div id="vendors-page" class="page-content">
+        <header class="page-header-generic">
+            <div class="container">
+                <h1>Wheel Vendor <span>Contact List</span></h1>
+                <p>Quick reference for vendor information and brands they carry.</p>
+            </div>
+        </header>
+        <div class="container content-section">
+            <div class="vendor-cards-container" id="vendor-cards-container">
+                <!-- Vendor cards are inserted by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Info -->
+    <div id="service-page" class="page-content">
+        <header class="page-header-generic">
+            <div class="container">
+                <h1>BMS <span>Claim Requirements</span></h1>
+                <p class="service-note">(BMS Requires: 2 Written Forms, one Payment History). Send Email to Logan/Heather.</p>
+            </div>
+        </header>
+        <div class="container content-section">
+            <div class="service-requirements">
+                <h2>Claim Checklist:</h2>
+                <ul>
+                    <li>BMS Waivers fully filled out
+                        <ul><li>Including Tread Depth</li></ul>
+                    </li>
+                    <li>$1,000 Tire & Wheel Guarantee Form</li>
+                    <li>Rental Purchase Agreement
+                        <ul><li><strong>STOCK NUMBERS MUST MATCH INVENTORY REPORT</strong></li></ul>
+                    </li>
+                    <li>Inventory Report
+                        <ul>
+                            <li>NOTATION OF DAMAGED TIRE</li>
+                            <li>Swap/Service needs to be done <strong>after NOT before</strong> printing of Inventory Report</li>
+                        </ul>
+                    </li>
+                    <li>Customer Payment History
+                        <ul><li><strong>MAKE SURE CUSTOMER IS CURRENT</strong></li></ul>
+                    </li>
+                    <li>Photos of damaged tires
+                        <ul><li>IF WE ARE CLAIMING MORE THAN ONE THEY ALL HAVE TO BE IN A PICTURE TOGETHER</li></ul>
+                    </li>
+                </ul>
+                <p class="important-note"><strong>Important: CHECK PAYMENT HISTORY FIRST!</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom navigation (phones and tablets) -->
+    <nav class="mobile-bottom-nav" aria-label="Primary">
+        <a href="#/home" data-route="home"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Home</a>
+        <a href="#/fitment" data-route="fitment"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg>Fitment</a>
+        <a href="#/vendors" data-route="vendors"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h12a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2V4z"/><path d="M8 8h6M8 12h6M8 16h4"/></svg>Vendors</a>
+        <a href="#/ai" data-route="ai"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>Assistant</a>
+        <a href="#/service" data-route="service"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9 14l2 2 4-4"/></svg>Service</a>
+    </nav>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> <strong>Operators Logic</strong> &middot; Fitment Expert</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Data
+    const fitmentData = {
+        chevrolet: {
+            name: "Chevrolet", searchTerms: "chevrolet chevy gm general motors", 
+            description: "Silverado, Tahoe, Equinox, etc.", tag: "US Domestic",
+            vehicles: [
+                { vehicle: "Silverado 1500", years: "Recent", lugPattern: "6x139.7", cb: "78.1mm", thread: "M14x1.5", offset: "+18 to +31", notes: "Verify year for changes." },
+                { vehicle: "Tahoe", years: "Recent", lugPattern: "6x139.7", cb: "78.1mm", thread: "M14x1.5", offset: "+20 to +30", notes: "" },
+                { vehicle: "Equinox", years: "2018+", lugPattern: "5x115", cb: "70.3mm", thread: "M12x1.5", offset: "+40 to +50", notes: "Older 5x120/5x105" },
+                { vehicle: "Suburban", years: "Recent", lugPattern: "6x139.7", cb: "78.1mm", thread: "M14x1.5", offset: "+20 to +30", notes: "" },
+                { vehicle: "Colorado", years: "2015+", lugPattern: "6x120", cb: "66.9mm", thread: "M12x1.5", offset: "+28 to +33", notes: "" }
+            ]
+        },
+        ford: {
+            name: "Ford", searchTerms: "ford", description: "F-150, Explorer, Mustang, etc.", tag: "US Domestic",
+            vehicles: [
+                { vehicle: "F-150", years: "2015+", lugPattern: "6x135", cb: "87.1mm", thread: "M14x1.5", offset: "+30 to +44", notes: "Raptor different" },
+                { vehicle: "Explorer", years: "2020+", lugPattern: "5x114.3", cb: "67.1mm", thread: "M14x1.5", offset: "+40 to +50", notes: "Older can be 5x114.3 w/ 70.5mm CB" },
+                { vehicle: "Mustang", years: "2015+", lugPattern: "5x114.3", cb: "70.5mm", thread: "M14x1.5", offset: "Varies", notes: "Check specific model" },
+                { vehicle: "Expedition", years: "2018+", lugPattern: "6x135", cb: "87.1mm", thread: "M14x1.5", offset: "+30 to +44", notes: "" },
+                { vehicle: "Edge", years: "2015+", lugPattern: "5x108", cb: "63.4mm", thread: "M12x1.5", offset: "+45 to +55", notes: "" }
+            ]
+        },
+        dodge_ram: {
+            name: "Dodge/RAM", searchTerms: "dodge ram chrysler jeep mopar", 
+            description: "Ram 1500, Charger, Durango, etc.", tag: "US Domestic",
+            vehicles: [
+                { vehicle: "Ram 1500", years: "2019+", lugPattern: "6x139.7", cb: "77.8mm", thread: "M14x1.5", offset: "+19", notes: "Classic/Older 5x139.7" },
+                { vehicle: "Charger", years: "Recent", lugPattern: "5x115", cb: "71.5mm", thread: "M14x1.5", offset: "Varies", notes: "" },
+                { vehicle: "Durango", years: "2011+", lugPattern: "5x127", cb: "71.5mm", thread: "M14x1.5", offset: "+30 to +50", notes: "" },
+                { vehicle: "Challenger", years: "Recent", lugPattern: "5x115", cb: "71.5mm", thread: "M14x1.5", offset: "Varies", notes: "" },
+                { vehicle: "Jeep Wrangler (JL)", years: "2018+", lugPattern: "5x127", cb: "71.5mm", thread: "M14x1.5", offset: "+30 to +45", notes: "" }
+            ]
+        },
+        toyota_lexus: {
+            name: "Toyota / Lexus", searchTerms: "toyota lexus scion", 
+            description: "Tacoma, Camry, RX350, IS250, etc.", tag: "Japanese Import",
+            vehicles: [
+                { vehicle: "Tacoma", years: "Recent", lugPattern: "6x139.7", cb: "106.1mm", thread: "M12x1.5", offset: "+5 to +30", notes: "" },
+                { vehicle: "Camry", years: "Recent", lugPattern: "5x114.3", cb: "60.1mm", thread: "M12x1.5", offset: "+35 to +45", notes: "" },
+                { vehicle: "4Runner", years: "Recent", lugPattern: "6x139.7", cb: "106.1mm", thread: "M12x1.5", offset: "+5 to +25", notes: "" },
+                { vehicle: "Highlander", years: "Recent", lugPattern: "5x114.3", cb: "60.1mm", thread: "M12x1.5", offset: "+30 to +40", notes: "" },
+                { vehicle: "Tundra", years: "2022+", lugPattern: "6x139.7", cb: "95.1mm", thread: "M14x1.5", offset: "+18 to +60", notes: "Older 5x150" }
+            ]
+        },
+        honda_acura: {
+            name: "Honda / Acura", searchTerms: "honda acura", 
+            description: "Civic, Accord, CR-V, MDX, TLX, etc.", tag: "Japanese Import",
+            vehicles: [
+                { vehicle: "Civic", years: "Recent", lugPattern: "5x114.3", cb: "64.1mm", thread: "M12x1.5", offset: "+40 to +50", notes: "Type R 5x120" },
+                { vehicle: "Accord", years: "Recent", lugPattern: "5x114.3", cb: "64.1mm", thread: "M12x1.5", offset: "+40 to +55", notes: "" },
+                { vehicle: "CR-V", years: "Recent", lugPattern: "5x114.3", cb: "64.1mm", thread: "M12x1.5", offset: "+40 to +50", notes: "" },
+                { vehicle: "Acura MDX", years: "Recent", lugPattern: "5x120", cb: "64.1mm", thread: "M14x1.5", offset: "+45 to +55", notes: "" },
+                { vehicle: "Pilot", years: "Recent", lugPattern: "5x120", cb: "64.1mm", thread: "M14x1.5", offset: "+45 to +55", notes: "" }
+            ]
+        },
+        bmw: {
+            name: "BMW", searchTerms: "bmw bayerische motoren werke", 
+            description: "3 Series, 5 Series, X3, X5, etc.", tag: "German Import",
+            vehicles: [
+                { vehicle: "3 Series (G20)", years: "Recent", lugPattern: "5x112", cb: "66.6mm", thread: "M14x1.25 Cone", offset: "+25 to +40", notes: "Older F30 5x120" },
+                { vehicle: "5 Series (G30)", years: "Recent", lugPattern: "5x112", cb: "66.6mm", thread: "M14x1.25 Cone", offset: "+25 to +45", notes: "Older F10 5x120" },
+                { vehicle: "X3 (G01)", years: "Recent", lugPattern: "5x112", cb: "66.6mm", thread: "M14x1.25 Cone", offset: "+25 to +40", notes: "" },
+                { vehicle: "X5 (G05)", years: "Recent", lugPattern: "5x112", cb: "66.6mm", thread: "M14x1.25 Cone", offset: "+30 to +45", notes: "Older F15 5x120" },
+                { vehicle: "X7 (G07)", years: "Recent", lugPattern: "5x112", cb: "66.6mm", thread: "M14x1.25 Cone", offset: "+30 to +40", notes: "" }
+            ]
+        }
+    };
+
+    const wheelVendorsData = [
+        { vendor: "American Tire Distributors", number: "800-903-0014", brands: "Black Rock, Center Line, Cragar, Dick Cepek, DrifZ, Dropstars, Focal, Gear Off-Road, ICW, Konig, Motiv, OE Performance, Pacer, Platinum, TIS Off-Road, Ultra, Worx Off-Road" },
+        { vendor: "Direct Line", number: "904-739-1920", brands: "904, DPS, Enkei, F1R, Rohana" },
+        { vendor: "Elite Wheel Warehouse", number: "813-673-8393 ext 115", brands: "Amani Forged, Azara, Blade, Cavallo, Modern Concept, OE Revolution, Spec-1, Twisted, Vortex Off-Road, XF Off-Road, Xtreme Off-Road" },
+        { vendor: "Wheel Pros", number: "504-471-0907", brands: "American Racing, Asanti, Black Rhino, DUB, Fairway, Foose, Fuel Off-Road, KMC, Moto Metal, Motegi, MSA Off-Road, Niche, Petrol, Pro Comp, Replicas, Status, TSW, US Mags, XD" },
+        { vendor: "Wholesale Wheels", number: "469-289-2300", brands: "LFF, LUX, LUXXX HD, Replica, Venom" }
+    ];
+
+
+    const SITE_NAME = 'Fitment Expert | Operators Logic';
+    const routes = {
+        home:    { id: 'home-page',    title: null },
+        fitment: { id: 'fitment-page', title: 'Fitment Database' },
+        vendors: { id: 'vendors-page', title: 'Wheel Vendors' },
+        ai:      { id: 'ai-page',      title: 'AI Assistant' },
+        service: { id: 'service-page', title: 'Service Info' }
+    };
+
+    // DOM Elements
+    const pages = document.querySelectorAll('.page-content');
+    const routeLinks = document.querySelectorAll('a[data-route]');
+    const manufacturerCardsList = document.getElementById('manufacturer-cards-list');
+    const manufacturerSearchInput = document.getElementById('manufacturer-search-input');
+    const manufacturerEmpty = document.getElementById('manufacturer-empty');
+    const fitmentSearchContainer = document.querySelector('.fitment-search-container');
+    const fitmentDetailSectionWrapper = document.getElementById('fitment-detail-section-wrapper');
+    const fitmentDetailManufacturerName = document.getElementById('fitment-detail-manufacturer-name');
+    const fitmentDetailTableContainer = document.getElementById('fitment-detail-table-container');
+    const backToMfgListBtn = document.getElementById('back-to-mfg-list-btn');
+    const currentYearSpan = document.getElementById('current-year');
+    const vendorCardsContainer = document.getElementById('vendor-cards-container');
+
+    // Page switching
+    const setActivePage = (routeKey) => {
+        const pageId = routes[routeKey].id;
+        pages.forEach(page => page.classList.toggle('active-page', page.id === pageId));
+        routeLinks.forEach(link => {
+            if (link.dataset.route === routeKey) {
+                link.setAttribute('aria-current', 'page');
+            } else {
+                link.removeAttribute('aria-current');
+            }
+        });
+    };
+
+    // Manufacturer list
+    const createManufacturerCard = (mfgKey, mfgData) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'manufacturer-card';
+        card.dataset.mfgKey = mfgKey;
+        card.dataset.searchTerms = mfgData.searchTerms ? mfgData.searchTerms.toLowerCase() : '';
+        card.innerHTML = `
+            <h3 class="manufacturer-card-title">${mfgData.name || 'N/A'}</h3>
+            <p class="manufacturer-card-desc">${mfgData.description || ''}</p>
+            <span class="manufacturer-card-tag">${mfgData.tag || ''}</span>
+        `;
+        card.addEventListener('click', () => { location.hash = '#/fitment/' + mfgKey; });
+        return card;
+    };
+
+    const populateManufacturerCards = () => {
+        if (!manufacturerCardsList) return;
+        manufacturerCardsList.innerHTML = '';
+        Object.keys(fitmentData).forEach(key => {
+            manufacturerCardsList.appendChild(createManufacturerCard(key, fitmentData[key]));
+        });
+    };
+
+    const filterManufacturerCards = () => {
+        if (!manufacturerSearchInput || !manufacturerCardsList) return;
+        const searchTerm = manufacturerSearchInput.value.trim().toLowerCase();
+        let visible = 0;
+        manufacturerCardsList.querySelectorAll('.manufacturer-card').forEach(card => {
+            const match = (card.dataset.searchTerms || '').includes(searchTerm);
+            card.classList.toggle('hidden-card', !match);
+            if (match) visible++;
+        });
+        if (manufacturerEmpty) manufacturerEmpty.hidden = visible > 0;
+    };
+
+    // Manufacturer detail
+    const createFitmentCards = (vehicles) => {
+        if (!vehicles || vehicles.length === 0) return '<p>No vehicle data available.</p>';
+
+        return vehicles.map(vehicle => `
+            <div class="fitment-vehicle-card">
+                <div class="fitment-vehicle-header">
+                    <div class="fitment-vehicle-name">${vehicle.vehicle || 'N/A'}</div>
+                    <div class="fitment-vehicle-years">${vehicle.years || 'N/A'}</div>
+                </div>
+                <div class="fitment-specs-grid">
+                    <div class="fitment-spec-item">
+                        <div class="fitment-spec-label">Lug Pattern</div>
+                        <div class="fitment-spec-value">${vehicle.lugPattern || 'N/A'}</div>
+                    </div>
+                    <div class="fitment-spec-item">
+                        <div class="fitment-spec-label">Center Bore</div>
+                        <div class="fitment-spec-value">${vehicle.cb || 'N/A'}</div>
+                    </div>
+                    <div class="fitment-spec-item">
+                        <div class="fitment-spec-label">Thread Size</div>
+                        <div class="fitment-spec-value">${vehicle.thread || 'N/A'}</div>
+                    </div>
+                    <div class="fitment-spec-item">
+                        <div class="fitment-spec-label">Offset (ET)</div>
+                        <div class="fitment-spec-value">${vehicle.offset || 'N/A'}</div>
+                    </div>
+                </div>
+                ${vehicle.notes ? `
+                    <div class="fitment-notes">
+                        <div class="fitment-notes-label">Notes</div>
+                        <div class="fitment-notes-text">${vehicle.notes}</div>
+                    </div>
+                ` : ''}
+            </div>
+        `).join('');
+    };
+
+    const showFitmentDetail = (mfgKey) => {
+        const mfg = fitmentData[mfgKey];
+        if (!mfg) return false;
+        fitmentDetailManufacturerName.innerHTML = `<span>${mfg.name}</span> Fitment`;
+        fitmentDetailTableContainer.innerHTML = createFitmentCards(mfg.vehicles);
+        fitmentSearchContainer.hidden = true;
+        manufacturerCardsList.hidden = true;
+        manufacturerEmpty.hidden = true;
+        fitmentDetailSectionWrapper.hidden = false;
+        return true;
+    };
+
+    const hideFitmentDetail = () => {
+        fitmentDetailSectionWrapper.hidden = true;
+        fitmentSearchContainer.hidden = false;
+        manufacturerCardsList.hidden = false;
+        manufacturerSearchInput.value = '';
+        filterManufacturerCards();
+    };
+
+    // Wheel vendors
+    const phoneHref = (number) => {
+        // "813-673-8393 ext 115" -> tel:8136738393,115 (comma = dial pause before the extension)
+        const parts = number.split(/\s*ext\.?\s*/i);
+        const digits = parts[0].replace(/[^\d]/g, '');
+        const ext = parts[1] ? parts[1].replace(/[^\d]/g, '') : '';
+        return 'tel:' + digits + (ext ? ',' + ext : '');
+    };
+
+    const createVendorCard = (vendor) => `
+        <div class="vendor-card">
+            <div class="vendor-header">
+                <div class="vendor-name">${vendor.vendor}</div>
+                <a href="${phoneHref(vendor.number)}" class="vendor-phone">${vendor.number}</a>
+            </div>
+            <div class="vendor-brands-label">Brands Carried</div>
+            <div class="vendor-brands">${vendor.brands}</div>
+        </div>
+    `;
+
+    const populateVendorCards = () => {
+        if (!vendorCardsContainer) return;
+        vendorCardsContainer.innerHTML = wheelVendorsData.map(createVendorCard).join('');
+    };
+
+    // Routing: #/home, #/fitment, #/fitment/<manufacturer>, #/vendors, #/ai, #/service
+    const render = () => {
+        const [rawRoute = 'home', sub = ''] = location.hash.replace(/^#\/?/, '').split('/');
+        const routeKey = routes[rawRoute] ? rawRoute : 'home';
+        let title = routes[routeKey].title;
+
+        setActivePage(routeKey);
+        if (routeKey === 'fitment') {
+            if (sub && showFitmentDetail(sub)) {
+                title = fitmentData[sub].name + ' Fitment';
+            } else {
+                hideFitmentDetail();
+            }
+        }
+        document.title = title ? title + ' | ' + SITE_NAME : SITE_NAME;
+        window.scrollTo(0, 0);
+    };
+
+    // Event listeners
+    window.addEventListener('hashchange', render);
+    if (manufacturerSearchInput) manufacturerSearchInput.addEventListener('input', filterManufacturerCards);
+    if (backToMfgListBtn) backToMfgListBtn.addEventListener('click', () => { location.hash = '#/fitment'; });
+
+    // Initialization
+    if (currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
+    populateManufacturerCards();
+    populateVendorCards();
+    render();
+});
+</script>
+<script>
+// Fitment Expert chat. Talks only to this site's /api endpoints; no keys or provider details live in the browser.
+(function () {
+    'use strict';
+    var $ = function (id) { return document.getElementById(id); };
+    var card = $('chat-card'); if (!card) return;
+    var log = $('chat-log'), emptyEl = $('chat-empty'), form = $('chat-form'), input = $('chat-input'), send = $('chat-send');
+    var notice = $('chat-notice'), dots = $('chat-dots'), allowText = $('chat-allowance-text'), countEl = $('chat-count'), newBtn = $('chat-new');
+    var STORE_KEY = 'fx_chat_v1';
+    var maxChars = 600, limit = 5, remaining = null, nextAt = null, busy = false, blocked = false, timer = null, history = [], statusLoaded = false;
+
+    function store(op, k, v) { try { if (op === 'get') return window.sessionStorage.getItem(k); if (op === 'set') window.sessionStorage.setItem(k, v); else window.sessionStorage.removeItem(k); } catch (e) { return null; } }
+
+    // ---------- rendering ----------
+    var TAGS = [
+        [/^From our database(?:\s*\(unsourced\))?:\s*/i, 'tag-db', 'Database \u00b7 unsourced'],
+        [/^Unverified(?:\s+archive)?:\s*/i, 'tag-unv', 'Archive \u00b7 unverified'],
+        [/^General guidance:\s*/i, 'tag-gen', 'General']
+    ];
+    function lineInto(el, text) {
+        for (var i = 0; i < TAGS.length; i++) {
+            var m = text.match(TAGS[i][0]);
+            if (m) { var t = document.createElement('span'); t.className = 'tag ' + TAGS[i][1]; t.textContent = TAGS[i][2]; el.appendChild(t); text = text.slice(m[0].length); break; }
+        }
+        el.appendChild(document.createTextNode(text));
+    }
+    function renderBot(el, text) {
+        var blocks = text.replace(/\*\*/g, '').replace(/^#+\s*/gm, '').split(/\n{2,}/);
+        blocks.forEach(function (b) {
+            var lines = b.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+            if (!lines.length) return;
+            var bullets = lines.filter(function (l) { return /^[-*•]\s+/.test(l); });
+            if (bullets.length === lines.length) {
+                var ul = document.createElement('ul');
+                lines.forEach(function (l) { var li = document.createElement('li'); lineInto(li, l.replace(/^[-*•]\s+/, '')); ul.appendChild(li); });
+                el.appendChild(ul);
+            } else {
+                lines.forEach(function (l) { var isB = /^[-*•]\s+/.test(l); var p = document.createElement('p'); lineInto(p, isB ? '• ' + l.replace(/^[-*•]\s+/, '') : l); el.appendChild(p); });
+            }
+        });
+    }
+    function scrollDown() { log.scrollTop = log.scrollHeight; }
+    function hideEmpty() { if (emptyEl && emptyEl.parentNode) emptyEl.parentNode.removeChild(emptyEl); newBtn.hidden = false; }
+    function addMsg(kind, text, opts) {
+        hideEmpty();
+        var el = document.createElement('div'); el.className = 'msg ' + kind;
+        if (kind === 'bot') { renderBot(el, text); if (opts && opts.truncated) { var n = document.createElement('span'); n.className = 'trunc'; n.textContent = 'This answer was cut short. Ask a follow-up to continue.'; el.appendChild(n); } }
+        else el.textContent = text;
+        log.appendChild(el); scrollDown(); return el;
+    }
+    function typingBubble() {
+        hideEmpty();
+        var el = document.createElement('div'); el.className = 'msg pending'; el.setAttribute('aria-label', 'Assistant is typing');
+        var t = document.createElement('span'); t.className = 'typing'; t.innerHTML = '<i></i><i></i><i></i>'; el.appendChild(t);
+        log.appendChild(el); scrollDown(); return el;
+    }
+
+    // ---------- allowance ----------
+    function fmtTime(iso) { var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
+    function fmtWait(ms) {
+        var s = Math.max(0, Math.ceil(ms / 1000)), m = Math.floor(s / 60), h = Math.floor(m / 60);
+        if (h) return h + ' h ' + (m % 60) + ' min';
+        return m ? m + ' min ' + (s % 60) + ' s' : s + ' s';
+    }
+    function drawDots() {
+        dots.textContent = '';
+        for (var i = 0; i < limit; i++) { var d = document.createElement('i'); if (remaining !== null && i < remaining) d.className = 'on'; dots.appendChild(d); }
+    }
+    function setNotice(html) { if (!html) { notice.hidden = true; notice.textContent = ''; return; } notice.hidden = false; notice.textContent = ''; notice.appendChild(html); }
+    function noticeText(strong, rest) { var f = document.createDocumentFragment(); var s = document.createElement('strong'); s.textContent = strong; f.appendChild(s); f.appendChild(document.createTextNode(rest ? ' ' + rest : '')); return f; }
+
+    function applyLimit(l) {
+        if (!l) return;
+        limit = l.limit || limit; remaining = l.remaining; nextAt = l.next_at ? Date.parse(l.next_at) : null;
+        if (l.daily_cap_reached) blocked = 'daily'; else if (blocked === 'daily') blocked = false;
+        drawDots(); tick();
+    }
+    function tick() {
+        clearTimeout(timer);
+        if (blocked === 'down') { allowText.textContent = 'Unavailable'; return; }
+        if (remaining === null) return;
+        if (remaining > 0) {
+            allowText.textContent = remaining + ' of ' + limit + ' question' + (limit === 1 ? '' : 's') + ' left';
+            if (!blocked || blocked === 'limit' || blocked === 'daily') { blocked = false; setNotice(null); }
+            refreshControls(); return;
+        }
+        if (nextAt) {
+            var ms = nextAt - Date.now();
+            if (ms <= 0) { loadStatus(); return; }
+            allowText.textContent = 'No questions left';
+            if (blocked !== 'daily') blocked = 'limit';
+            var msg = blocked === 'daily'
+                ? noticeText('The assistant has reached its daily limit.', 'It opens again at ' + fmtTime(nextAt) + ' (in ' + fmtWait(ms) + ').')
+                : noticeText('You have used all ' + limit + ' questions for this hour.', 'The next one is available at ' + fmtTime(nextAt) + ' (in ' + fmtWait(ms) + ').');
+            setNotice(msg); refreshControls();
+            timer = setTimeout(tick, ms > 60000 ? 1000 : 1000);
+        } else { allowText.textContent = 'No questions left'; refreshControls(); }
+    }
+    function refreshControls() {
+        var off = busy || blocked === 'limit' || blocked === 'daily' || blocked === 'down';
+        input.disabled = blocked === 'down' || blocked === 'limit' || blocked === 'daily';
+        send.disabled = off || !input.value.trim() || input.value.length > maxChars;
+    }
+
+    function loadStatus() {
+        return fetch('/api/status', { credentials: 'same-origin', headers: { accept: 'application/json' } })
+            .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { r: r, j: j }; }); })
+            .then(function (x) {
+                statusLoaded = true;
+                if (x.r.ok && x.j.ok) { maxChars = x.j.input_max_chars || maxChars; input.disabled = false; if (blocked === 'down') blocked = false; applyLimit(x.j); updateCount(); return; }
+                if (x.r.status === 429 && x.j.error) { allowText.textContent = 'Busy'; blocked = 'down'; setNotice(noticeText(x.j.error.message, x.j.error.retry_at ? 'Try again after ' + fmtTime(x.j.error.retry_at) + '.' : '')); refreshControls(); return; }
+                down('The assistant is not available right now. Please try again later.');
+            })
+            .catch(function () { down('Cannot reach the assistant. Check your connection, then reload this page.'); });
+    }
+    function down(msg) { blocked = 'down'; remaining = null; dots.textContent = ''; allowText.textContent = 'Unavailable'; setNotice(noticeText(msg)); refreshControls(); }
+
+    // ---------- sending ----------
+    function persist() { store('set', STORE_KEY, JSON.stringify(history.slice(-30))); }
+    function ask(text, retryEl) {
+        if (busy || blocked === 'limit' || blocked === 'daily' || blocked === 'down') return;
+        text = text.trim(); if (!text || text.length > maxChars) return;
+        busy = true; refreshControls();
+        if (retryEl && retryEl.parentNode) retryEl.parentNode.removeChild(retryEl); else addMsg('user', text);
+        var wait = typingBubble();
+        var payload = history.concat([{ role: 'user', content: text }]).slice(-12);
+        var ctl = new AbortController(), to = setTimeout(function () { ctl.abort(); }, 45000);
+        fetch('/api/chat', { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ messages: payload }), signal: ctl.signal })
+            .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { r: r, j: j }; }); })
+            .then(function (x) {
+                clearTimeout(to); wait.remove();
+                if (x.r.ok && x.j.ok) {
+                    history.push({ role: 'user', content: text }, { role: 'assistant', content: x.j.reply }); persist();
+                    addMsg('bot', x.j.reply, { truncated: x.j.truncated }); applyLimit(x.j.limit); return;
+                }
+                var err = x.j.error || {}; if (x.j.limit) applyLimit(x.j.limit);
+                if (x.r.status === 429) { addErr(err.message || 'You have reached a limit.', null); if (!x.j.limit) { remaining = 0; nextAt = err.retry_at ? Date.parse(err.retry_at) : null; blocked = err.code === 'daily_cap' ? 'daily' : 'limit'; tick(); } return; }
+                if (x.r.status === 400) { addErr(err.message || 'That question could not be sent.', null); return; }
+                if (x.r.status === 403 || x.r.status === 401) { addErr('Your session expired. Reload the page and try again.', null); return; }
+                addErr(err.message || 'Something went wrong. Your question was not counted.', text);
+            })
+            .catch(function (e) {
+                clearTimeout(to); wait.remove();
+                addErr(e && e.name === 'AbortError' ? 'The assistant took too long to answer. Your question was not counted.' : 'Cannot reach the assistant. Check your connection. If it did go through, it will show in the count above.', text);
+                loadStatus();
+            })
+            .then(function () { busy = false; refreshControls(); scrollDown(); });
+    }
+    function addErr(message, retryText) {
+        var el = document.createElement('div'); el.className = 'msg err'; el.setAttribute('role', 'alert');
+        var p = document.createElement('p'); p.textContent = message; el.appendChild(p);
+        if (retryText) { var b = document.createElement('button'); b.type = 'button'; b.className = 'chat-retry'; b.textContent = 'Try again'; b.addEventListener('click', function () { ask(retryText, el); }); el.appendChild(b); }
+        log.appendChild(el); scrollDown();
+    }
+
+    // ---------- input ----------
+    function updateCount() {
+        countEl.textContent = input.value.length + ' / ' + maxChars; countEl.classList.toggle('over', input.value.length > maxChars);
+        input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 152) + 'px'; refreshControls();
+    }
+    input.addEventListener('input', updateCount);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); form.requestSubmit(); } });
+    form.addEventListener('submit', function (e) { e.preventDefault(); var t = input.value; if (!t.trim()) return; input.value = ''; updateCount(); ask(t); });
+    document.getElementById('chat-chips').addEventListener('click', function (e) { var c = e.target.closest('.chat-chip'); if (c && !busy) { ask(c.textContent); } });
+    newBtn.addEventListener('click', function () {
+        history = []; store('del', STORE_KEY); log.textContent = ''; log.appendChild(emptyEl); newBtn.hidden = true; input.focus();
+    });
+
+    // Mobile keyboards: keep the chat card inside the visible area.
+    if (window.visualViewport) {
+        var fit = function () {
+            var vv = window.visualViewport;
+            var kbd = document.activeElement === input && (vv.height < 560 || vv.height < window.innerHeight - 120);
+            document.body.classList.toggle('kbd-open', kbd);
+            if (kbd) {
+                card.style.removeProperty('--chat-h');
+                card.scrollIntoView({ block: 'start' });          // honours scroll-margin-top, so the card sits just under the header
+                var top = Math.max(card.getBoundingClientRect().top, 0);
+                card.style.setProperty('--chat-h', Math.max(240, vv.offsetTop + vv.height - top - 8) + 'px');
+                scrollDown();
+            } else card.style.removeProperty('--chat-h');
+        };
+        window.visualViewport.addEventListener('resize', fit);
+        input.addEventListener('focus', function () { setTimeout(fit, 120); setTimeout(fit, 400); });
+        input.addEventListener('blur', function () { card.style.removeProperty('--chat-h'); document.body.classList.remove('kbd-open'); });
+        window.addEventListener('resize', fit);
+    }
+
+    // ---------- start ----------
+    try {
+        var saved = JSON.parse(store('get', STORE_KEY) || '[]');
+        if (Array.isArray(saved) && saved.length) { history = saved; saved.forEach(function (m) { addMsg(m.role === 'user' ? 'user' : 'bot', m.content); }); }
+    } catch (e) { /* ignore */ }
+    function onRoute() { if (/^#\/?ai/.test(location.hash) && (!statusLoaded || blocked === 'down')) { loadStatus(); } else if (/^#\/?ai/.test(location.hash)) { tick(); } }
+    window.addEventListener('hashchange', onRoute); onRoute();
+    drawDots(); updateCount();
+})();
+</script>
+
+</body>
+</html>
